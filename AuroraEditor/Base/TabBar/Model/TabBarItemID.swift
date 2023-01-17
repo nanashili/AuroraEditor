@@ -23,6 +23,8 @@ public enum TabBarItemID: Codable, Identifiable, Hashable {
             return branch
         case .actionsWorkflow(let workflow):
             return workflow
+        case .workspaceTrust(let workspaceTrust):
+            return workspaceTrust
         }
     }
 
@@ -40,6 +42,8 @@ public enum TabBarItemID: Codable, Identifiable, Hashable {
             return "auroraeditor://branch/\(branch)"
         case .actionsWorkflow(let workflow):
             return "auroraeditor://workflow/\(workflow)"
+        case .workspaceTrust(let workspaceTrust):
+            return "auroraeditor://\(workspaceTrust)"
         }
     }
 
@@ -57,4 +61,6 @@ public enum TabBarItemID: Codable, Identifiable, Hashable {
     case branchHistory(String)
 
     case actionsWorkflow(String)
+
+    case workspaceTrust(String)
 }

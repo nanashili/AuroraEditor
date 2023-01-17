@@ -81,6 +81,10 @@ struct WorkspaceView: View {
                 WorkflowRunsView(workspace: workspace,
                                  workflowId: String(actionsWorkflowTab.id))
             }
+        case .workspaceTrust:
+            if let workspaceTrustTab =  workspace.selectionState.selected as? WorkspaceTrust {
+                WorkspaceTrustView(workspace: workspace)
+            }
         }
     }
 
@@ -236,6 +240,9 @@ struct WorkspaceView: View {
                              commitHash: workspace.data.commitHash)
 
         }
+        .sheet(isPresented: .constant(false)) {
+            WorkspaceTrustConfirmationDialog()
+        }
         .sheet(isPresented: $sheetIsOpened) {
             HStack {
                 Text("") // Title, if any at some point.
@@ -243,8 +250,11 @@ struct WorkspaceView: View {
                 Button("Dismiss") {
                     sheetIsOpened.toggle()
                 }
-            }.padding([.leading, .top, .trailing], 5)
+            }
+            .padding([.leading, .top, .trailing], 5)
+
             Divider()
+
             extensionView.padding(.bottom, 5)
         }
     }

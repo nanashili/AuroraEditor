@@ -42,6 +42,8 @@ public struct AppPreferences: Codable {
 
     public var updates: UpdatePreferences = .init()
 
+    public var editor: EditorPreferences = .init()
+
     /// Default initializer
     public init() {}
 
@@ -57,5 +59,7 @@ public struct AppPreferences: Codable {
                                                            forKey: .sourceControl) ?? .init()
         self.updates = try container.decodeIfPresent(UpdatePreferences.self,
                                                      forKey: .updates) ?? .init()
+        self.editor = try container.decodeIfPresent(EditorPreferences.self,
+                                                     forKey: .editor) ?? .init()
     }
 }

@@ -17,6 +17,14 @@ struct ExploreExtensionsView: View {
 
     var body: some View {
         VStack {
+            Text("Your current workspace is in an untrusted enviroment, therefore some extensions might not work.")
+                .padding(.horizontal, 5)
+                .multilineTextAlignment(.center)
+                .foregroundColor(.secondary)
+                .font(.subheadline)
+
+            Divider()
+
             switch extensionsModel.state {
             case .loading:
                 VStack {
@@ -26,14 +34,15 @@ struct ExploreExtensionsView: View {
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             case .success:
-                    if extensionsModel.extensions.isEmpty {
-                        VStack {
-                            Text("No Installed Extensions")
-                                .font(.system(size: 16))
-                                .foregroundColor(.secondary)
-                        }
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    } else {
+                if extensionsModel.extensions.isEmpty {
+                    VStack {
+                        Text("No Installed Extensions")
+                            .font(.system(size: 16))
+                            .foregroundColor(.secondary)
+                    }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                } else {
+                    VStack {
                         List {
                             ForEach(extensionsModel.extensions, id: \.self) { plugin in
                                 Button {
@@ -48,8 +57,9 @@ struct ExploreExtensionsView: View {
                                 .buttonStyle(.plain)
                             }
                         }
-                    .listStyle(.sidebar)
-                    .listRowInsets(.init())
+                        .listStyle(.sidebar)
+                        .listRowInsets(.init())
+                    }
                 }
 
             case .error:

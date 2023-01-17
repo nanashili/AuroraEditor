@@ -37,6 +37,8 @@ class AuroraDataStorage: ObservableObject {
     var showBranchCreationSheet: Bool = false                       { didSet { update() } }
     @Published
     var showTagCreationSheet: Bool = false                          { didSet { update() } }
+    @Published
+    var showWorkspaceTrustDialog: Bool = false                      { didSet { update() } }
 
     // Git data for the editor
     @Published

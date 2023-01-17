@@ -43,6 +43,8 @@ struct WorkspaceSelectionState: Codable {
 
     var openedActionsWorkflow: [Workflow] = []
 
+    var openedWorkspaceTrust: [WorkspaceTrust] = []
+
     enum CodingKeys: String, CodingKey {
         case selectedId,
              openedTabs,
@@ -50,7 +52,8 @@ struct WorkspaceSelectionState: Codable {
              openedExtensions,
              openedWebTabs,
              projectCommitHistory,
-             branchCommitHistory
+             branchCommitHistory,
+             workspaceTrust
     }
 
     init() {
@@ -63,6 +66,7 @@ struct WorkspaceSelectionState: Codable {
         temporaryTab = try container.decode(TabBarItemID?.self, forKey: .temporaryTab)
         openedExtensions = try container.decode([Plugin].self, forKey: .openedExtensions)
         openedWebTabs = try container.decode([WebTab].self, forKey: .openedWebTabs)
+        openedWorkspaceTrust = try container.decode([WorkspaceTrust].self, forKey: .workspaceTrust)
     }
 
     func encode(to encoder: Encoder) throws {
@@ -72,6 +76,7 @@ struct WorkspaceSelectionState: Codable {
         try container.encode(temporaryTab, forKey: .temporaryTab)
         try container.encode(openedExtensions, forKey: .openedExtensions)
         try container.encode(openedWebTabs, forKey: .openedWebTabs)
+        try container.encode(openedWorkspaceTrust, forKey: .workspaceTrust)
     }
 
     /// Returns TabBarItemRepresentable by its identifier
@@ -104,6 +109,10 @@ struct WorkspaceSelectionState: Codable {
             }
         case .actionsWorkflow:
             return self.openedActionsWorkflow.first { item in
+                item.tabID == id
+            }
+        case .workspaceTrust:
+            return self.openedWorkspaceTrust.first { item in
                 item.tabID == id
             }
         }

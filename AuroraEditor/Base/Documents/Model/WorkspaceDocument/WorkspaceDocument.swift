@@ -12,7 +12,8 @@ import Combine
 import AEExtensionKit
 
 @objc(WorkspaceDocument)
-class WorkspaceDocument: NSDocument, ObservableObject, NSToolbarDelegate {
+class WorkspaceDocument: NSDocument, ObservableObject, NSToolbarDelegate, IWorkspaceContextService {
+
     /// The FileSystemClient instance that manages the project's file system
     var fileSystemClient: FileSystemClient?
 
@@ -209,5 +210,16 @@ class WorkspaceDocument: NSDocument, ObservableObject, NSToolbarDelegate {
 
         super.close()
         Log.info("Closed document \(self)")
+    }
+
+    // MARK: - Public Mehtods
+    public func getWorkbenchState() -> WorkbenchState {
+        if self.fileSystemClient?.folderURL != nil {
+            if self.fileSystemClient?.folderURL != nil {
+                return WorkbenchState.folder
+            }
+            return WorkbenchState.workspace
+        }
+        return WorkbenchState.empty
     }
 }

@@ -38,6 +38,10 @@ extension WorkspaceDocument {
             case .actionsWorkflow:
                 guard let actionsWorkflowTab = item as? Workflow else { return }
                 self.openActionsWorkflow(item: actionsWorkflowTab)
+            case .workspaceTrust:
+                guard let workspaceTrustTab = item as? WorkspaceTrust else { return }
+                self.openWorkspaceTrustTab(item: workspaceTrustTab)
+
             }
         }
         updateNewlyOpenedTabs(item: item)
@@ -127,6 +131,10 @@ extension WorkspaceDocument {
         selectionState.openedActionsWorkflow.append(item)
     }
 
+    private func openWorkspaceTrustTab(item: WorkspaceTrust) {
+        selectionState.openedWorkspaceTrust.append(item)
+    }
+
     // MARK: Close Tabs
 
     /// Closes single tab
@@ -166,6 +174,9 @@ extension WorkspaceDocument {
         case .actionsWorkflow:
             guard let item = selectionState.getItemByTab(id: id) as? Workflow else { return }
             closeActionsWorkflowTab(item: item)
+        case .workspaceTrust:
+            guard let item = selectionState.getItemByTab(id: id) as? WorkspaceTrust else { return }
+            closeWorkspaceTrustTab(item: item)
         }
 
         if selectionState.openedTabs.isEmpty {
@@ -242,6 +253,10 @@ extension WorkspaceDocument {
             guard let item = selectionState.getItemByTab(id: id)
                     as? Workflow else { return }
             closeActionsWorkflowTab(item: item)
+        case .workspaceTrust:
+            guard let item = selectionState.getItemByTab(id: id)
+                    as? WorkspaceTrust else { return }
+            closeWorkspaceTrustTab(item: item)
         }
 
         guard let openFileItemIdx = selectionState
@@ -285,6 +300,11 @@ extension WorkspaceDocument {
     private func closeActionsWorkflowTab(item: Workflow) {
         guard let idx = selectionState.openedActionsWorkflow.firstIndex(of: item) else { return }
         selectionState.openedActionsWorkflow.remove(at: idx)
+    }
+
+    private func closeWorkspaceTrustTab(item: WorkspaceTrust) {
+        guard let idx = selectionState.openedWorkspaceTrust.firstIndex(of: item) else { return }
+        selectionState.openedWorkspaceTrust.remove(at: idx)
     }
 
     /// Makes the temporary tab permanent when a file save or edit happens.
