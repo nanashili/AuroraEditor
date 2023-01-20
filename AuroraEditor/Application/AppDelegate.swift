@@ -41,6 +41,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, ObservableObject {
 
     var cancellable = Set<AnyCancellable>()
 
+    // swiftlint:disable:next function_body_length
     func applicationDidFinishLaunching(_ notification: Notification) {
 
         AuroraCrashlytics.add(delegate: self)
@@ -49,41 +50,47 @@ final class AppDelegate: NSObject, NSApplicationDelegate, ObservableObject {
         checkForFilesToOpen()
 
         DispatchQueue.main.async {
-            if NSApp.windows.isEmpty {
-                if let projects = UserDefaults.standard.array(forKey: AppDelegate.recoverWorkspacesKey) as? [String],
-                   !projects.isEmpty {
-                    projects.forEach { path in
-                        Log.info(#function, "Reopening \(path)")
+            Log.debug("Is first time use: \(EditorSetupService().isFirstTimeUse())")
+            if EditorSetupService().isFirstTimeUse() {
+                self.openSetup(self)
+            } else {
+                if NSApp.windows.isEmpty {
+                    // swiftlint:disable:next line_length
+                    if let projects = UserDefaults.standard.array(forKey: AppDelegate.recoverWorkspacesKey) as? [String],
+                       !projects.isEmpty {
+                        projects.forEach { path in
+                            Log.info(#function, "Reopening \(path)")
+                            let url = URL(fileURLWithPath: path)
+                            AuroraEditorDocumentController.shared.reopenDocument(
+                                for: url,
+                                withContentsOf: url,
+                                display: true) { document, _, _ in
+                                    Log.info("applicationDidFinishLaunching(): projects: Opened \(url.absoluteString)")
+                                    document?.windowControllers.first?.synchronizeWindowTitleWithDocumentName()
+                            }
+                        }
+
+                        Log.info("No need to open Welcome Screen (projects)")
+                    } else {
+                        self.handleOpen()
+                    }
+                }
+
+                for index in 0..<CommandLine.arguments.count {
+                    if CommandLine.arguments[index] == "--open" && (index + 1) < CommandLine.arguments.count {
+                        let path = CommandLine.arguments[index+1]
                         let url = URL(fileURLWithPath: path)
+
                         AuroraEditorDocumentController.shared.reopenDocument(
                             for: url,
                             withContentsOf: url,
                             display: true) { document, _, _ in
-                                Log.info("applicationDidFinishLaunching(): projects: Opened \(url.absoluteString)")
+                                Log.info("applicationDidFinishLaunching(): commandline: Opened \(url.absoluteString)")
                                 document?.windowControllers.first?.synchronizeWindowTitleWithDocumentName()
                         }
+
+                        Log.info("No need to open Welcome Screen (commandline)")
                     }
-
-                    Log.info("No need to open Welcome Screen (projects)")
-                } else {
-                    self.handleOpen()
-                }
-            }
-
-            for index in 0..<CommandLine.arguments.count {
-                if CommandLine.arguments[index] == "--open" && (index + 1) < CommandLine.arguments.count {
-                    let path = CommandLine.arguments[index+1]
-                    let url = URL(fileURLWithPath: path)
-
-                    AuroraEditorDocumentController.shared.reopenDocument(
-                        for: url,
-                        withContentsOf: url,
-                        display: true) { document, _, _ in
-                            Log.info("applicationDidFinishLaunching(): commandline: Opened \(url.absoluteString)")
-                            document?.windowControllers.first?.synchronizeWindowTitleWithDocumentName()
-                    }
-
-                    Log.info("No need to open Welcome Screen (commandline)")
                 }
             }
         }
@@ -171,6 +178,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate, ObservableObject {
         if AppDelegate.tryFocusWindow(of: WelcomeWindowView.self) { return }
 
         WelcomeWindowView.openWelcomeWindow()
+    }
+
+    @IBAction func openSetup(_ sender: Any) {
+        if AppDelegate.tryFocusWindow(of: WelcomeWindowView.self) { return }
+
+        EditorSetupService().openSetupWindow()
     }
 
     @IBAction func openAbout(_ sender: Any) {

@@ -126,6 +126,12 @@ public struct GeneralPreferencesView: View {
                     Divider()
                     shellCommandSection
                         .padding(.vertical, 5)
+
+                    #if DEBUG
+                    Divider()
+                    enableEditorSetup
+                        .padding(.vertical, 5)
+                    #endif
                 }
                 .padding(.bottom)
             }

@@ -298,4 +298,19 @@ extension GeneralPreferencesView {
         .padding(.vertical, 7)
         .padding(.horizontal)
     }
+
+    var enableEditorSetup: some View {
+        HStack {
+            Text("Re-Enable Editor Setup")
+            Spacer()
+            Button(action: {
+                EditorSetupService().updateEditorUsage(value: false)
+            }, label: {
+                Text("Enable")
+                    .padding(.horizontal, 10)
+            })
+            .buttonStyle(.bordered)
+        }
+        .padding(.horizontal)
+    }
 }
