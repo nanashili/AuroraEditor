@@ -59,7 +59,7 @@ struct WorkspaceTrustManagementService: IWorkspaceTrustManagementService {
         return state
     }
 
-    private func doGetUriTrustInfo(url: URL) -> IWorkspaceTrustUriInfo {
+    private func doGetUrlTrustInfo(url: URL) -> IWorkspaceTrustUriInfo {
         if WorkspaceTrustEnablementService().isWorkspaceTrustEnabled() {
             return IWorkspaceTrustUriInfo(uri: url,
                                           trusted: true)
@@ -71,6 +71,7 @@ struct WorkspaceTrustManagementService: IWorkspaceTrustManagementService {
         var resultURL = url
 
         for trustInfo in trustStateInfo.uriTrustInfo {
+            // swiftlint:disable:next for_where
             if url == trustInfo.uri {
                 let path = trustInfo.uri.absoluteString
                 if path.count > maxLength {
@@ -90,6 +91,7 @@ struct WorkspaceTrustManagementService: IWorkspaceTrustManagementService {
         var changed = false
 
         for url in urls {
+            // swiftlint:disable:next for_where
             if trusted {
                 var foundItem = trustStateInfo.uriTrustInfo.contains { trustInfo in
                     trustInfo.uri == url
@@ -124,20 +126,6 @@ struct WorkspaceTrustManagementService: IWorkspaceTrustManagementService {
         }
 
         return false
-    }
-
-    private func doGetUrlTrustInfo(url: URL) -> IWorkspaceTrustUriInfo {
-        let resultState: Bool = false
-        let maxLength: Int = -1
-
-        let resultUrl = url
-
-        for trustInfo in trustStateInfo.uriTrustInfo {
-
-        }
-
-        return IWorkspaceTrustUriInfo(uri: URL(string: "")!,
-                                      trusted: false)
     }
 
     private func isTrusted(value: Bool) {

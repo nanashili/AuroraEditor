@@ -37,7 +37,7 @@ struct WorkspaceTrustEnableView: View {
 
                 VStack(alignment: .leading) {
                     Text("Workspace Trust")
-                        .font(.system(size: 13))
+                        .font(.system(size: 13, weight: .medium))
 
                     // swiftlint:disable:next line_length
                     Text("Workspace Trust provides an extra layer of security when working with \nunfamiliar code, by preventing automatic code execution of any code in your \nworkspace if the workspace is open in Restricted Mode. [Learn more...](https://auroraeditor.com/faq/workspace-trust)")
@@ -61,7 +61,6 @@ struct WorkspaceTrustEnableView: View {
                         Text("Turn On...")
                     } else {
                         Text("Turn Off...")
-                            .foregroundColor(.red)
                     }
                 }
             }

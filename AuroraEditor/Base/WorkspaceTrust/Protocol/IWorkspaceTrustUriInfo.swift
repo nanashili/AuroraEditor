@@ -8,7 +8,7 @@
 
 import Foundation
 
-class IWorkspaceTrustUriInfo {
+public class IWorkspaceTrustUriInfo: Codable {
     var uri: URL
     var trusted: Bool
 

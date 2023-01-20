@@ -11,28 +11,19 @@ import SwiftUI
 struct WorkspaceTrustActiveView: View {
 
     @State
-    private var trustNotificationState: TrustNotification = .untilDismissed
-
-    @State
-    private var trustEmptyWindow: Bool = false
-
-    @State
-    private var trustUntrustedFiles: TrustUntrustedFiles = .open
-
-    @State
-    private var trustStartupPrompt: TrustStartupPrompt = .once
+    private var prefs: AppPreferencesModel = .shared
 
     var body: some View {
         Form {
             Section {
                 VStack(alignment: .leading) {
                     HStack {
-                        Text("Trust Notifications")
+                        Text("Show Trust Notifications")
                             .font(.subheadline)
                         Spacer()
                         Picker("Trust Notifications",
-                               selection: $trustNotificationState) {
-                            ForEach(TrustNotification.allCases, id: \.self) {
+                               selection: $prefs.preferences.privacySecurity.trustNotification) {
+                            ForEach(TrustNotifications.allCases, id: \.self) {
                                 Text($0.rawValue)
                                     .font(.subheadline)
                                     .tag($0)
@@ -46,23 +37,12 @@ struct WorkspaceTrustActiveView: View {
                     Divider()
 
                     HStack {
-                        Text("Trust Empty Window")
-                            .font(.subheadline)
-                        Spacer()
-                        Toggle("", isOn: $trustEmptyWindow)
-                            .toggleStyle(.switch)
-                            .labelsHidden()
-                    }
-
-                    Divider()
-
-                    HStack {
-                        Text("Trust Untrusted Files")
+                        Text("Untrusted File Action")
                             .font(.subheadline)
                         Spacer()
                         Picker("Trust Untrusted Files",
-                               selection: $trustUntrustedFiles) {
-                            ForEach(TrustUntrustedFiles.allCases, id: \.self) {
+                               selection: $prefs.preferences.privacySecurity.untrustedFileAction) {
+                            ForEach(UntrustedFileAction.allCases, id: \.self) {
                                 Text($0.rawValue)
                                     .font(.subheadline)
                                     .tag($0)
@@ -76,12 +56,12 @@ struct WorkspaceTrustActiveView: View {
                     Divider()
 
                     HStack {
-                        Text("Trust Startup Prompt")
+                        Text("Trust Window on Startup Action")
                             .font(.subheadline)
                         Spacer()
                         Picker("Trust Startup Prompt",
-                               selection: $trustStartupPrompt) {
-                            ForEach(TrustStartupPrompt.allCases, id: \.self) {
+                               selection: $prefs.preferences.privacySecurity.startupAction) {
+                            ForEach(StartupAction.allCases, id: \.self) {
                                 Text($0.rawValue)
                                     .font(.subheadline)
                                     .tag($0)
@@ -90,28 +70,21 @@ struct WorkspaceTrustActiveView: View {
                         .font(.subheadline)
                         .labelsHidden()
                         .frame(width: 160)
+                    }
+
+                    Divider()
+
+                    HStack {
+                        Text("Trust Empty Windows")
+                            .font(.subheadline)
+                        Spacer()
+                        Toggle("", isOn: $prefs.preferences.privacySecurity.trustEmptyWorkspace)
+                            .toggleStyle(.switch)
+                            .labelsHidden()
                     }
                 }
             }
         }
-    }
-
-    private enum TrustNotification: String, CaseIterable {
-        case always = "Always"
-        case untilDismissed = "Until Dismissed"
-        case never = "Never"
-    }
-
-    private enum TrustUntrustedFiles: String, CaseIterable {
-        case promt = "Prompt"
-        case open = "Open"
-        case openNewWindow = "Open New Window"
-    }
-
-    private enum TrustStartupPrompt: String, CaseIterable {
-        case always = "Always"
-        case once = "Once"
-        case never = "Never"
     }
 }
 
