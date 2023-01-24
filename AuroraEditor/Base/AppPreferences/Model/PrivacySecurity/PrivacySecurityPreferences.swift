@@ -1,6 +1,6 @@
 //
 //  PrivacySecurityPreferences.swift
-//  AuroraEditor
+//  Aurora Editor
 //
 //  Created by Nanashi Li on 2023/01/18.
 //  Copyright © 2023 Aurora Company. All rights reserved.

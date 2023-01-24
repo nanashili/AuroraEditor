@@ -52,9 +52,6 @@
 		2032B51028A256F50089EBB6 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2032B50F28A256F50089EBB6 /* Array.swift */; };
 		2032B51328A26B390089EBB6 /* AboutWindowHostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2032B51228A26B390089EBB6 /* AboutWindowHostingController.swift */; };
 		2036DD5528DB3DB5003BECB7 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2036DD5428DB3DB5003BECB7 /* Queue.swift */; };
-		20425E48297EE74D0022FE5A /* sort-Xcode-project-file.pl in Resources */ = {isa = PBXBuildFile; fileRef = 20425E47297EE74D0022FE5A /* sort-Xcode-project-file.pl */; };
-		20425E4A297EED860022FE5A /* ClearDerivedData.sh in Resources */ = {isa = PBXBuildFile; fileRef = 20425E49297EED860022FE5A /* ClearDerivedData.sh */; };
-		20425E4C297EEE350022FE5A /* unused_strings.py in Resources */ = {isa = PBXBuildFile; fileRef = 20425E4B297EEE350022FE5A /* unused_strings.py */; };
 		20439038290D27DB00126A3F /* WorkspaceErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20439037290D27DB00126A3F /* WorkspaceErrors.swift */; };
 		2043903C290D385600126A3F /* ExploreExtensionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2043903B290D385600126A3F /* ExploreExtensionsView.swift */; };
 		2043903E290D38D700126A3F /* ExploreItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2043903D290D38D700126A3F /* ExploreItemView.swift */; };
@@ -62,13 +59,8 @@
 		204F7BB528D7906A00F49092 /* WorkflowWrapperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204F7BB428D7906A00F49092 /* WorkflowWrapperView.swift */; };
 		204F7BB728D7907A00F49092 /* WorkflowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204F7BB628D7907A00F49092 /* WorkflowViewController.swift */; };
 		204F7BB928D7908700F49092 /* WorkflowTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204F7BB828D7908700F49092 /* WorkflowTableViewCell.swift */; };
-		205AB5C7297719BA004713EC /* WorkspaceTrustRequestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205AB5C6297719BA004713EC /* WorkspaceTrustRequestService.swift */; };
 		206729AF28AE69DC00EB0957 /* PreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206729AE28AE69DC00EB0957 /* PreferencesView.swift */; };
 		206729B228AE6AC900EB0957 /* GroupBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206729B128AE6AC900EB0957 /* GroupBox.swift */; };
-		20696FAC2962BE6000D8E224 /* PrivacyAndSecurityPreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20696FAB2962BE6000D8E224 /* PrivacyAndSecurityPreferencesView.swift */; };
-		20696FAE2962BEF700D8E224 /* WorkspaceTrustEnableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20696FAD2962BEF700D8E224 /* WorkspaceTrustEnableView.swift */; };
-		20696FB22962C9E800D8E224 /* LazyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20696FB12962C9E800D8E224 /* LazyView.swift */; };
-		206A9BF62978612B00252FC9 /* PrivacySecurityPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206A9BF52978612B00252FC9 /* PrivacySecurityPreferences.swift */; };
 		206B128128DF7311002CDE51 /* EmptyEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206B128028DF7311002CDE51 /* EmptyEditorView.swift */; };
 		206B128628DF77AD002CDE51 /* CodeEditor+Position.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206B128528DF77AD002CDE51 /* CodeEditor+Position.swift */; };
 		206B128828DF77E3002CDE51 /* CodeEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206B128728DF77E3002CDE51 /* CodeEditorView.swift */; };
@@ -95,11 +87,6 @@
 		207D295D28CCE72F00D31530 /* RenameBranchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207D295C28CCE72F00D31530 /* RenameBranchView.swift */; };
 		2086334F28A530AF00E29A22 /* CommitChangesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2086334E28A530AF00E29A22 /* CommitChangesView.swift */; };
 		2089C57128F015A900FE2155 /* HighlightThemeTrieElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2089C57028F015A900FE2155 /* HighlightThemeTrieElement.swift */; };
-		208B3D4B294F820500B1AE14 /* WorkspaceTrustView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 208B3D4A294F820500B1AE14 /* WorkspaceTrustView.swift */; };
-		208B3D4D294F821900B1AE14 /* WorkspaceTrustListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 208B3D4C294F821900B1AE14 /* WorkspaceTrustListItemView.swift */; };
-		208B3D4F294F823900B1AE14 /* WorkspaceTrustedFolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 208B3D4E294F823900B1AE14 /* WorkspaceTrustedFolderView.swift */; };
-		208B3D51294F825100B1AE14 /* WorkspaceRestrictedFolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 208B3D50294F825100B1AE14 /* WorkspaceRestrictedFolderView.swift */; };
-		208B3D53294F920200B1AE14 /* WorkspaceTrust.swift in Sources */ = {isa = PBXBuildFile; fileRef = 208B3D52294F920200B1AE14 /* WorkspaceTrust.swift */; };
 		2093CC90289A9FEE003A88DD /* StatusBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D83722289A7ACD00D91D05 /* StatusBar.swift */; };
 		2093CC91289A9FF5003A88DD /* StatusBarIndentSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D83726289A7ACD00D91D05 /* StatusBarIndentSelector.swift */; };
 		2093CC92289A9FF5003A88DD /* StatusBarEncodingSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D83727289A7ACD00D91D05 /* StatusBarEncodingSelector.swift */; };
@@ -314,9 +301,27 @@
 		209DAF3328E64A5500E31109 /* JavaScriptReact.tmLanguage.json in Resources */ = {isa = PBXBuildFile; fileRef = 209DAF3228E64A5500E31109 /* JavaScriptReact.tmLanguage.json */; };
 		209DAF3528E64A9F00E31109 /* php.tmLanguage.json in Resources */ = {isa = PBXBuildFile; fileRef = 209DAF3428E64A9F00E31109 /* php.tmLanguage.json */; };
 		209DAF3728E64AE800E31109 /* ruby.tmLanguage.json in Resources */ = {isa = PBXBuildFile; fileRef = 209DAF3628E64AE800E31109 /* ruby.tmLanguage.json */; };
-		20B09A332962F51300A2D122 /* WorkspaceTrustActiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B09A322962F51300A2D122 /* WorkspaceTrustActiveView.swift */; };
-		20B09A3729632F3C00A2D122 /* TrustInfoDatabase.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 20B09A3529632F3C00A2D122 /* TrustInfoDatabase.xcdatamodeld */; };
-		20B09A392963329500A2D122 /* WorkspaceTrustConfirmationDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B09A382963329500A2D122 /* WorkspaceTrustConfirmationDialog.swift */; };
+		20A0CA4D297FC6B000DA933B /* WorkspaceTrustConfirmationDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A0CA48297FC6B000DA933B /* WorkspaceTrustConfirmationDialog.swift */; };
+		20A0CA4E297FC6B000DA933B /* WorkspaceTrustedFolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A0CA49297FC6B000DA933B /* WorkspaceTrustedFolderView.swift */; };
+		20A0CA4F297FC6B000DA933B /* WorkspaceRestrictedFolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A0CA4A297FC6B000DA933B /* WorkspaceRestrictedFolderView.swift */; };
+		20A0CA50297FC6B000DA933B /* WorkspaceTrustListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A0CA4B297FC6B000DA933B /* WorkspaceTrustListItemView.swift */; };
+		20A0CA51297FC6B000DA933B /* WorkspaceTrustView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A0CA4C297FC6B000DA933B /* WorkspaceTrustView.swift */; };
+		20A0CA55297FC6B900DA933B /* WorkspaceTrustManagementService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A0CA52297FC6B900DA933B /* WorkspaceTrustManagementService.swift */; };
+		20A0CA56297FC6B900DA933B /* WorkspaceTrustRequestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A0CA53297FC6B900DA933B /* WorkspaceTrustRequestService.swift */; };
+		20A0CA57297FC6B900DA933B /* WorkspaceTrustEnablementService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A0CA54297FC6B900DA933B /* WorkspaceTrustEnablementService.swift */; };
+		20A0CA5E297FC6C300DA933B /* IWorkspaceTrustTransitionParticipant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A0CA58297FC6C300DA933B /* IWorkspaceTrustTransitionParticipant.swift */; };
+		20A0CA5F297FC6C300DA933B /* IWorkspaceTrustManagementService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A0CA59297FC6C300DA933B /* IWorkspaceTrustManagementService.swift */; };
+		20A0CA60297FC6C300DA933B /* IWorkspaceTrustInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A0CA5A297FC6C300DA933B /* IWorkspaceTrustInfo.swift */; };
+		20A0CA61297FC6C300DA933B /* IWorkspaceTrustEnablementService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A0CA5B297FC6C300DA933B /* IWorkspaceTrustEnablementService.swift */; };
+		20A0CA62297FC6C300DA933B /* IWorkspaceTrustRequestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A0CA5C297FC6C300DA933B /* IWorkspaceTrustRequestService.swift */; };
+		20A0CA63297FC6C300DA933B /* IWorkspaceTrustUriInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A0CA5D297FC6C300DA933B /* IWorkspaceTrustUriInfo.swift */; };
+		20A0CA65297FC6C800DA933B /* WorkspaceTrust.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A0CA64297FC6C800DA933B /* WorkspaceTrust.swift */; };
+		20A0CA69297FC8C400DA933B /* IWorkspaceContextService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A0CA68297FC8C400DA933B /* IWorkspaceContextService.swift */; };
+		20A0CA6F297FCBC800DA933B /* PrivacySecurityPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A0CA6E297FCBC800DA933B /* PrivacySecurityPreferences.swift */; };
+		20A0CA72297FCC0800DA933B /* EditorPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A0CA71297FCC0800DA933B /* EditorPreferences.swift */; };
+		20A0CA76297FCC5000DA933B /* PrivacyAndSecurityPreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A0CA75297FCC5000DA933B /* PrivacyAndSecurityPreferencesView.swift */; };
+		20A0CA78297FCC6300DA933B /* WorkspaceTrustActiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A0CA77297FCC6300DA933B /* WorkspaceTrustActiveView.swift */; };
+		20A0CA7A297FCC7100DA933B /* WorkspaceTrustEnableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A0CA79297FCC7100DA933B /* WorkspaceTrustEnableView.swift */; };
 		20B5BD9C28B11C6200B2A02F /* WelcomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B5BD9B28B11C6200B2A02F /* WelcomeModel.swift */; };
 		20B5BDA128B130EA00B2A02F /* DropProposalPositionCalculations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B5BDA028B130EA00B2A02F /* DropProposalPositionCalculations.swift */; };
 		20B5BDA328B130F000B2A02F /* SplitEditorDropProposalPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B5BDA228B130F000B2A02F /* SplitEditorDropProposalPosition.swift */; };
@@ -325,16 +330,6 @@
 		20B5BDA928B130FF00B2A02F /* SplitViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B5BDA828B130FF00B2A02F /* SplitViewModifier.swift */; };
 		20B6A1FE28AFE107004EC8D7 /* SettingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B6A1FD28AFE107004EC8D7 /* SettingItem.swift */; };
 		20B6A20028AFE124004EC8D7 /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B6A1FF28AFE124004EC8D7 /* SettingsModel.swift */; };
-		20BD094929518B58006103CA /* IWorkspaceTrustUriInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20BD094829518B58006103CA /* IWorkspaceTrustUriInfo.swift */; };
-		20BD094B29518B9F006103CA /* IWorkspaceTrustTransitionParticipant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20BD094A29518B9F006103CA /* IWorkspaceTrustTransitionParticipant.swift */; };
-		20BD094D29518BD5006103CA /* IWorkspaceTrustRequestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20BD094C29518BD5006103CA /* IWorkspaceTrustRequestService.swift */; };
-		20BD094F29518D25006103CA /* IWorkspaceTrustManagementService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20BD094E29518D25006103CA /* IWorkspaceTrustManagementService.swift */; };
-		20BD095129518EBA006103CA /* IWorkspaceTrustInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20BD095029518EBA006103CA /* IWorkspaceTrustInfo.swift */; };
-		20BD0954295190E9006103CA /* WorkspaceTrustManagementService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20BD0953295190E9006103CA /* WorkspaceTrustManagementService.swift */; };
-		20BD095629519A29006103CA /* WorkspaceTrustEnablementService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20BD095529519A29006103CA /* WorkspaceTrustEnablementService.swift */; };
-		20BD095829519A7A006103CA /* IWorkspaceTrustEnablementService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20BD095729519A7A006103CA /* IWorkspaceTrustEnablementService.swift */; };
-		20BD095B29519B65006103CA /* EditorPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20BD095A29519B65006103CA /* EditorPreferences.swift */; };
-		20BD095E2951A7F1006103CA /* IWorkspaceContextService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20BD095D2951A7F1006103CA /* IWorkspaceContextService.swift */; };
 		20BE727528D0761200EEDE5F /* ActionsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20BE727428D0761200EEDE5F /* ActionsListView.swift */; };
 		20BE727D28D07FF200EEDE5F /* ActionsPopoverCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20BE727C28D07FF200EEDE5F /* ActionsPopoverCellView.swift */; };
 		20BE728328D083D800EEDE5F /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20BE728228D083D800EEDE5F /* HTTPMethod.swift */; };
@@ -673,13 +668,8 @@
 		204F7BB428D7906A00F49092 /* WorkflowWrapperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkflowWrapperView.swift; sourceTree = "<group>"; };
 		204F7BB628D7907A00F49092 /* WorkflowViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkflowViewController.swift; sourceTree = "<group>"; };
 		204F7BB828D7908700F49092 /* WorkflowTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkflowTableViewCell.swift; sourceTree = "<group>"; };
-		205AB5C6297719BA004713EC /* WorkspaceTrustRequestService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceTrustRequestService.swift; sourceTree = "<group>"; };
 		206729AE28AE69DC00EB0957 /* PreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesView.swift; sourceTree = "<group>"; };
 		206729B128AE6AC900EB0957 /* GroupBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupBox.swift; sourceTree = "<group>"; };
-		20696FAB2962BE6000D8E224 /* PrivacyAndSecurityPreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyAndSecurityPreferencesView.swift; sourceTree = "<group>"; };
-		20696FAD2962BEF700D8E224 /* WorkspaceTrustEnableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceTrustEnableView.swift; sourceTree = "<group>"; };
-		20696FB12962C9E800D8E224 /* LazyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazyView.swift; sourceTree = "<group>"; };
-		206A9BF52978612B00252FC9 /* PrivacySecurityPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacySecurityPreferences.swift; sourceTree = "<group>"; };
 		206B128028DF7311002CDE51 /* EmptyEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyEditorView.swift; sourceTree = "<group>"; };
 		206B128528DF77AD002CDE51 /* CodeEditor+Position.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CodeEditor+Position.swift"; sourceTree = "<group>"; };
 		206B128728DF77E3002CDE51 /* CodeEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeEditorView.swift; sourceTree = "<group>"; };
@@ -706,11 +696,6 @@
 		207D295C28CCE72F00D31530 /* RenameBranchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenameBranchView.swift; sourceTree = "<group>"; };
 		2086334E28A530AF00E29A22 /* CommitChangesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommitChangesView.swift; sourceTree = "<group>"; };
 		2089C57028F015A900FE2155 /* HighlightThemeTrieElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightThemeTrieElement.swift; sourceTree = "<group>"; };
-		208B3D4A294F820500B1AE14 /* WorkspaceTrustView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceTrustView.swift; sourceTree = "<group>"; };
-		208B3D4C294F821900B1AE14 /* WorkspaceTrustListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceTrustListItemView.swift; sourceTree = "<group>"; };
-		208B3D4E294F823900B1AE14 /* WorkspaceTrustedFolderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceTrustedFolderView.swift; sourceTree = "<group>"; };
-		208B3D50294F825100B1AE14 /* WorkspaceRestrictedFolderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceRestrictedFolderView.swift; sourceTree = "<group>"; };
-		208B3D52294F920200B1AE14 /* WorkspaceTrust.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceTrust.swift; sourceTree = "<group>"; };
 		2093CDE3289AA881003A88DD /* IgnoredFiles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IgnoredFiles.swift; sourceTree = "<group>"; };
 		2096A82328CF76D400F6ED39 /* CreateNewBranchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewBranchView.swift; sourceTree = "<group>"; };
 		209D024A289ABC340082441F /* Package.resolved */ = {isa = PBXFileReference; lastKnownFileType = text; name = Package.resolved; path = ../Package.resolved; sourceTree = "<group>"; };
@@ -731,9 +716,27 @@
 		209DAF3228E64A5500E31109 /* JavaScriptReact.tmLanguage.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = JavaScriptReact.tmLanguage.json; sourceTree = "<group>"; };
 		209DAF3428E64A9F00E31109 /* php.tmLanguage.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = php.tmLanguage.json; sourceTree = "<group>"; };
 		209DAF3628E64AE800E31109 /* ruby.tmLanguage.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ruby.tmLanguage.json; sourceTree = "<group>"; };
-		20B09A322962F51300A2D122 /* WorkspaceTrustActiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceTrustActiveView.swift; sourceTree = "<group>"; };
-		20B09A3629632F3C00A2D122 /* TrustInfoModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TrustInfoModel.xcdatamodel; sourceTree = "<group>"; };
-		20B09A382963329500A2D122 /* WorkspaceTrustConfirmationDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceTrustConfirmationDialog.swift; sourceTree = "<group>"; };
+		20A0CA48297FC6B000DA933B /* WorkspaceTrustConfirmationDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceTrustConfirmationDialog.swift; sourceTree = "<group>"; };
+		20A0CA49297FC6B000DA933B /* WorkspaceTrustedFolderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceTrustedFolderView.swift; sourceTree = "<group>"; };
+		20A0CA4A297FC6B000DA933B /* WorkspaceRestrictedFolderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceRestrictedFolderView.swift; sourceTree = "<group>"; };
+		20A0CA4B297FC6B000DA933B /* WorkspaceTrustListItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceTrustListItemView.swift; sourceTree = "<group>"; };
+		20A0CA4C297FC6B000DA933B /* WorkspaceTrustView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceTrustView.swift; sourceTree = "<group>"; };
+		20A0CA52297FC6B900DA933B /* WorkspaceTrustManagementService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceTrustManagementService.swift; sourceTree = "<group>"; };
+		20A0CA53297FC6B900DA933B /* WorkspaceTrustRequestService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceTrustRequestService.swift; sourceTree = "<group>"; };
+		20A0CA54297FC6B900DA933B /* WorkspaceTrustEnablementService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceTrustEnablementService.swift; sourceTree = "<group>"; };
+		20A0CA58297FC6C300DA933B /* IWorkspaceTrustTransitionParticipant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IWorkspaceTrustTransitionParticipant.swift; sourceTree = "<group>"; };
+		20A0CA59297FC6C300DA933B /* IWorkspaceTrustManagementService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IWorkspaceTrustManagementService.swift; sourceTree = "<group>"; };
+		20A0CA5A297FC6C300DA933B /* IWorkspaceTrustInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IWorkspaceTrustInfo.swift; sourceTree = "<group>"; };
+		20A0CA5B297FC6C300DA933B /* IWorkspaceTrustEnablementService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IWorkspaceTrustEnablementService.swift; sourceTree = "<group>"; };
+		20A0CA5C297FC6C300DA933B /* IWorkspaceTrustRequestService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IWorkspaceTrustRequestService.swift; sourceTree = "<group>"; };
+		20A0CA5D297FC6C300DA933B /* IWorkspaceTrustUriInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IWorkspaceTrustUriInfo.swift; sourceTree = "<group>"; };
+		20A0CA64297FC6C800DA933B /* WorkspaceTrust.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceTrust.swift; sourceTree = "<group>"; };
+		20A0CA68297FC8C400DA933B /* IWorkspaceContextService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IWorkspaceContextService.swift; sourceTree = "<group>"; };
+		20A0CA6E297FCBC800DA933B /* PrivacySecurityPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacySecurityPreferences.swift; sourceTree = "<group>"; };
+		20A0CA71297FCC0800DA933B /* EditorPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorPreferences.swift; sourceTree = "<group>"; };
+		20A0CA75297FCC5000DA933B /* PrivacyAndSecurityPreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyAndSecurityPreferencesView.swift; sourceTree = "<group>"; };
+		20A0CA77297FCC6300DA933B /* WorkspaceTrustActiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceTrustActiveView.swift; sourceTree = "<group>"; };
+		20A0CA79297FCC7100DA933B /* WorkspaceTrustEnableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceTrustEnableView.swift; sourceTree = "<group>"; };
 		20B5BD9B28B11C6200B2A02F /* WelcomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeModel.swift; sourceTree = "<group>"; };
 		20B5BDA028B130EA00B2A02F /* DropProposalPositionCalculations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropProposalPositionCalculations.swift; sourceTree = "<group>"; };
 		20B5BDA228B130F000B2A02F /* SplitEditorDropProposalPosition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplitEditorDropProposalPosition.swift; sourceTree = "<group>"; };
@@ -742,16 +745,6 @@
 		20B5BDA828B130FF00B2A02F /* SplitViewModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplitViewModifier.swift; sourceTree = "<group>"; };
 		20B6A1FD28AFE107004EC8D7 /* SettingItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingItem.swift; sourceTree = "<group>"; };
 		20B6A1FF28AFE124004EC8D7 /* SettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModel.swift; sourceTree = "<group>"; };
-		20BD094829518B58006103CA /* IWorkspaceTrustUriInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IWorkspaceTrustUriInfo.swift; sourceTree = "<group>"; };
-		20BD094A29518B9F006103CA /* IWorkspaceTrustTransitionParticipant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IWorkspaceTrustTransitionParticipant.swift; sourceTree = "<group>"; };
-		20BD094C29518BD5006103CA /* IWorkspaceTrustRequestService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IWorkspaceTrustRequestService.swift; sourceTree = "<group>"; };
-		20BD094E29518D25006103CA /* IWorkspaceTrustManagementService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IWorkspaceTrustManagementService.swift; sourceTree = "<group>"; };
-		20BD095029518EBA006103CA /* IWorkspaceTrustInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IWorkspaceTrustInfo.swift; sourceTree = "<group>"; };
-		20BD0953295190E9006103CA /* WorkspaceTrustManagementService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceTrustManagementService.swift; sourceTree = "<group>"; };
-		20BD095529519A29006103CA /* WorkspaceTrustEnablementService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceTrustEnablementService.swift; sourceTree = "<group>"; };
-		20BD095729519A7A006103CA /* IWorkspaceTrustEnablementService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IWorkspaceTrustEnablementService.swift; sourceTree = "<group>"; };
-		20BD095A29519B65006103CA /* EditorPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorPreferences.swift; sourceTree = "<group>"; };
-		20BD095D2951A7F1006103CA /* IWorkspaceContextService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IWorkspaceContextService.swift; sourceTree = "<group>"; };
 		20BE727428D0761200EEDE5F /* ActionsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionsListView.swift; sourceTree = "<group>"; };
 		20BE727C28D07FF200EEDE5F /* ActionsPopoverCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionsPopoverCellView.swift; sourceTree = "<group>"; };
 		20BE728228D083D800EEDE5F /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
@@ -1211,8 +1204,8 @@
 		043C321227E31FE8006AE443 /* Documents */ = {
 			isa = PBXGroup;
 			children = (
-				20BD095C2951A7C8006103CA /* Protocols */,
 				200FB696289D112C006E12D4 /* Model */,
+				20A0CA67297FC8AE00DA933B /* Protocols */,
 				200FB695289D1125006E12D4 /* UI */,
 			);
 			path = Documents;
@@ -1355,8 +1348,8 @@
 		20425E46297EE7270022FE5A /* Tools */ = {
 			isa = PBXGroup;
 			children = (
-				20425E47297EE74D0022FE5A /* sort-Xcode-project-file.pl */,
 				20425E49297EED860022FE5A /* ClearDerivedData.sh */,
+				20425E47297EE74D0022FE5A /* sort-Xcode-project-file.pl */,
 				20425E4B297EEE350022FE5A /* unused_strings.py */,
 				20425E55297F03230022FE5A /* xstrings.swift */,
 			);
@@ -1396,23 +1389,6 @@
 				204F7BB428D7906A00F49092 /* WorkflowWrapperView.swift */,
 			);
 			path = Workflow;
-			sourceTree = "<group>";
-		};
-		20696FA82962BE1400D8E224 /* Privacy and Security Preferences */ = {
-			isa = PBXGroup;
-			children = (
-				20696FAB2962BE6000D8E224 /* PrivacyAndSecurityPreferencesView.swift */,
-				20B09A312962F4F100A2D122 /* WorkspaceTrust */,
-			);
-			path = "Privacy and Security Preferences";
-			sourceTree = "<group>";
-		};
-		206A9BF4297860FD00252FC9 /* PrivacySecurity */ = {
-			isa = PBXGroup;
-			children = (
-				206A9BF52978612B00252FC9 /* PrivacySecurityPreferences.swift */,
-			);
-			path = PrivacySecurity;
 			sourceTree = "<group>";
 		};
 		206B128428DF779C002CDE51 /* Extensions */ = {
@@ -1574,38 +1550,6 @@
 			path = Rename;
 			sourceTree = "<group>";
 		};
-		208B3D47294F81D700B1AE14 /* WorkspaceTrust */ = {
-			isa = PBXGroup;
-			children = (
-				20B09A3429632F1700A2D122 /* Database */,
-				20BD0952295190E1006103CA /* Services */,
-				20BD094729518A56006103CA /* Protocol */,
-				208B3D49294F81F000B1AE14 /* UI */,
-				208B3D48294F81E200B1AE14 /* Modal */,
-			);
-			path = WorkspaceTrust;
-			sourceTree = "<group>";
-		};
-		208B3D48294F81E200B1AE14 /* Modal */ = {
-			isa = PBXGroup;
-			children = (
-				208B3D52294F920200B1AE14 /* WorkspaceTrust.swift */,
-			);
-			path = Modal;
-			sourceTree = "<group>";
-		};
-		208B3D49294F81F000B1AE14 /* UI */ = {
-			isa = PBXGroup;
-			children = (
-				208B3D4A294F820500B1AE14 /* WorkspaceTrustView.swift */,
-				208B3D4C294F821900B1AE14 /* WorkspaceTrustListItemView.swift */,
-				208B3D4E294F823900B1AE14 /* WorkspaceTrustedFolderView.swift */,
-				208B3D50294F825100B1AE14 /* WorkspaceRestrictedFolderView.swift */,
-				20B09A382963329500A2D122 /* WorkspaceTrustConfirmationDialog.swift */,
-			);
-			path = UI;
-			sourceTree = "<group>";
-		};
 		2093292228D9DE0800F91C82 /* Styles */ = {
 			isa = PBXGroup;
 			children = (
@@ -1644,6 +1588,102 @@
 			path = ../../Resources;
 			sourceTree = "<group>";
 		};
+		20A0CA33297FC55900DA933B /* WorkspaceTrust */ = {
+			isa = PBXGroup;
+			children = (
+				20A0CA44297FC67E00DA933B /* Modal */,
+				20A0CA45297FC69500DA933B /* Protocol */,
+				20A0CA46297FC69C00DA933B /* Services */,
+				20A0CA47297FC6A300DA933B /* UI */,
+			);
+			path = WorkspaceTrust;
+			sourceTree = "<group>";
+		};
+		20A0CA44297FC67E00DA933B /* Modal */ = {
+			isa = PBXGroup;
+			children = (
+				20A0CA64297FC6C800DA933B /* WorkspaceTrust.swift */,
+			);
+			path = Modal;
+			sourceTree = "<group>";
+		};
+		20A0CA45297FC69500DA933B /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				20A0CA5B297FC6C300DA933B /* IWorkspaceTrustEnablementService.swift */,
+				20A0CA5A297FC6C300DA933B /* IWorkspaceTrustInfo.swift */,
+				20A0CA59297FC6C300DA933B /* IWorkspaceTrustManagementService.swift */,
+				20A0CA5C297FC6C300DA933B /* IWorkspaceTrustRequestService.swift */,
+				20A0CA58297FC6C300DA933B /* IWorkspaceTrustTransitionParticipant.swift */,
+				20A0CA5D297FC6C300DA933B /* IWorkspaceTrustUriInfo.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		20A0CA46297FC69C00DA933B /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				20A0CA54297FC6B900DA933B /* WorkspaceTrustEnablementService.swift */,
+				20A0CA52297FC6B900DA933B /* WorkspaceTrustManagementService.swift */,
+				20A0CA53297FC6B900DA933B /* WorkspaceTrustRequestService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		20A0CA47297FC6A300DA933B /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				20A0CA4A297FC6B000DA933B /* WorkspaceRestrictedFolderView.swift */,
+				20A0CA48297FC6B000DA933B /* WorkspaceTrustConfirmationDialog.swift */,
+				20A0CA49297FC6B000DA933B /* WorkspaceTrustedFolderView.swift */,
+				20A0CA4B297FC6B000DA933B /* WorkspaceTrustListItemView.swift */,
+				20A0CA4C297FC6B000DA933B /* WorkspaceTrustView.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		20A0CA67297FC8AE00DA933B /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				20A0CA68297FC8C400DA933B /* IWorkspaceContextService.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		20A0CA6D297FCBBC00DA933B /* PrivacySecurity */ = {
+			isa = PBXGroup;
+			children = (
+				20A0CA6E297FCBC800DA933B /* PrivacySecurityPreferences.swift */,
+			);
+			path = PrivacySecurity;
+			sourceTree = "<group>";
+		};
+		20A0CA70297FCBE300DA933B /* Editor */ = {
+			isa = PBXGroup;
+			children = (
+				20A0CA71297FCC0800DA933B /* EditorPreferences.swift */,
+			);
+			path = Editor;
+			sourceTree = "<group>";
+		};
+		20A0CA73297FCC3500DA933B /* Privacy and Security Preferences */ = {
+			isa = PBXGroup;
+			children = (
+				20A0CA74297FCC4300DA933B /* WorkspaceTrust */,
+				20A0CA75297FCC5000DA933B /* PrivacyAndSecurityPreferencesView.swift */,
+			);
+			path = "Privacy and Security Preferences";
+			sourceTree = "<group>";
+		};
+		20A0CA74297FCC4300DA933B /* WorkspaceTrust */ = {
+			isa = PBXGroup;
+			children = (
+				20A0CA77297FCC6300DA933B /* WorkspaceTrustActiveView.swift */,
+				20A0CA79297FCC7100DA933B /* WorkspaceTrustEnableView.swift */,
+			);
+			path = WorkspaceTrust;
+			sourceTree = "<group>";
+		};
 		20B5BD9728B11AA500B2A02F /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -1678,45 +1718,6 @@
 				93DD4FF228AFD0F100B664D4 /* PreferencesWindowController.swift */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		20BD094729518A56006103CA /* Protocol */ = {
-			isa = PBXGroup;
-			children = (
-				20BD094829518B58006103CA /* IWorkspaceTrustUriInfo.swift */,
-				20BD094A29518B9F006103CA /* IWorkspaceTrustTransitionParticipant.swift */,
-				20BD094C29518BD5006103CA /* IWorkspaceTrustRequestService.swift */,
-				20BD094E29518D25006103CA /* IWorkspaceTrustManagementService.swift */,
-				20BD095029518EBA006103CA /* IWorkspaceTrustInfo.swift */,
-				20BD095729519A7A006103CA /* IWorkspaceTrustEnablementService.swift */,
-			);
-			path = Protocol;
-			sourceTree = "<group>";
-		};
-		20BD0952295190E1006103CA /* Services */ = {
-			isa = PBXGroup;
-			children = (
-				20BD0953295190E9006103CA /* WorkspaceTrustManagementService.swift */,
-				20BD095529519A29006103CA /* WorkspaceTrustEnablementService.swift */,
-				205AB5C6297719BA004713EC /* WorkspaceTrustRequestService.swift */,
-			);
-			path = Services;
-			sourceTree = "<group>";
-		};
-		20BD095929519B4A006103CA /* Editor */ = {
-			isa = PBXGroup;
-			children = (
-				20BD095A29519B65006103CA /* EditorPreferences.swift */,
-			);
-			path = Editor;
-			sourceTree = "<group>";
-		};
-		20BD095C2951A7C8006103CA /* Protocols */ = {
-			isa = PBXGroup;
-			children = (
-				20BD095D2951A7F1006103CA /* IWorkspaceContextService.swift */,
-			);
-			path = Protocols;
 			sourceTree = "<group>";
 		};
 		20BE727328D0758E00EEDE5F /* Actions */ = {
@@ -1898,6 +1899,7 @@
 				2077162A287C86410069C68E /* Toolbar */,
 				20752E3928CA4C1100935487 /* Version Control */,
 				20D83810289A7ACD00D91D05 /* WelcomeModule */,
+				20A0CA33297FC55900DA933B /* WorkspaceTrust */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -2092,6 +2094,7 @@
 			children = (
 				20D837E5289A7ACD00D91D05 /* AccountsPreferences */,
 				20D837CE289A7ACD00D91D05 /* GeneralPreferences */,
+				20A0CA73297FCC3500DA933B /* Privacy and Security Preferences */,
 				20D837D2289A7ACD00D91D05 /* SourceControlPreferences */,
 				20D837D0289A7ACD00D91D05 /* TerminalPreferences */,
 				20D837D9289A7ACD00D91D05 /* TextEditingPreferences */,
@@ -2225,7 +2228,9 @@
 			isa = PBXGroup;
 			children = (
 				20D83806289A7ACD00D91D05 /* Accounts */,
+				20A0CA70297FCBE300DA933B /* Editor */,
 				20D837FF289A7ACD00D91D05 /* General */,
+				20A0CA6D297FCBBC00DA933B /* PrivacySecurity */,
 				20D837FC289A7ACD00D91D05 /* Source Control */,
 				20D83803289A7ACD00D91D05 /* Terminal */,
 				20D83801289A7ACD00D91D05 /* Text Editing */,
@@ -3950,6 +3955,7 @@
 				20CABA39290BF5A2004753A8 /* EditorAccountModel.swift in Sources */,
 				9362B21428EC730D00523626 /* EditorColors.swift in Sources */,
 				2BD5CF1E28D602CE00F95E5A /* EditorLocation.swift in Sources */,
+				20A0CA72297FCC0800DA933B /* EditorPreferences.swift in Sources */,
 				931B0E1228F2ACEC0036FD5F /* EditorThemeAttributeView.swift in Sources */,
 				2093CDB0289AA185003A88DD /* EditorThemeView.swift in Sources */,
 				2093CD6C289AA0FC003A88DD /* EffectView.swift in Sources */,
@@ -4073,6 +4079,13 @@
 				2093CD51289AA0AE003A88DD /* IssueArea.swift in Sources */,
 				2093CD24289AA084003A88DD /* IssueRouter.swift in Sources */,
 				2B04574B28E6FFE300024F2D /* ItalicThemeAttribute.swift in Sources */,
+				20A0CA69297FC8C400DA933B /* IWorkspaceContextService.swift in Sources */,
+				20A0CA61297FC6C300DA933B /* IWorkspaceTrustEnablementService.swift in Sources */,
+				20A0CA60297FC6C300DA933B /* IWorkspaceTrustInfo.swift in Sources */,
+				20A0CA5F297FC6C300DA933B /* IWorkspaceTrustManagementService.swift in Sources */,
+				20A0CA62297FC6C300DA933B /* IWorkspaceTrustRequestService.swift in Sources */,
+				20A0CA5E297FC6C300DA933B /* IWorkspaceTrustTransitionParticipant.swift in Sources */,
+				20A0CA63297FC6C300DA933B /* IWorkspaceTrustUriInfo.swift in Sources */,
 				2093CD4C289AA0A2003A88DD /* JSONPostRouter.swift in Sources */,
 				2B04574D28E6FFE300024F2D /* KernThemeAttribute.swift in Sources */,
 				20EBB50D280C383700F3A5DA /* LanguageType.swift in Sources */,
@@ -4143,6 +4156,8 @@
 				2093CD73289AA0FF003A88DD /* PressActionsModifier.swift in Sources */,
 				2093CD26289AA084003A88DD /* PreviewHeader.swift in Sources */,
 				2093CDAF289AA185003A88DD /* PreviewThemeView.swift in Sources */,
+				20A0CA76297FCC5000DA933B /* PrivacyAndSecurityPreferencesView.swift in Sources */,
+				20A0CA6F297FCBC800DA933B /* PrivacySecurityPreferences.swift in Sources */,
 				2093CD3F289AA095003A88DD /* Project.swift in Sources */,
 				2093CD45289AA095003A88DD /* ProjectAccess.swift in Sources */,
 				20752E4128CA4C6500935487 /* ProjectCommitHistory.swift in Sources */,
@@ -4325,6 +4340,17 @@
 				043C321627E3201F006AE443 /* WorkspaceDocument.swift in Sources */,
 				20439038290D27DB00126A3F /* WorkspaceErrors.swift in Sources */,
 				20F8379028C7B45700EAE842 /* WorkspaceExtension.swift in Sources */,
+				20A0CA4F297FC6B000DA933B /* WorkspaceRestrictedFolderView.swift in Sources */,
+				20A0CA65297FC6C800DA933B /* WorkspaceTrust.swift in Sources */,
+				20A0CA78297FCC6300DA933B /* WorkspaceTrustActiveView.swift in Sources */,
+				20A0CA4D297FC6B000DA933B /* WorkspaceTrustConfirmationDialog.swift in Sources */,
+				20A0CA4E297FC6B000DA933B /* WorkspaceTrustedFolderView.swift in Sources */,
+				20A0CA57297FC6B900DA933B /* WorkspaceTrustEnablementService.swift in Sources */,
+				20A0CA7A297FCC7100DA933B /* WorkspaceTrustEnableView.swift in Sources */,
+				20A0CA50297FC6B000DA933B /* WorkspaceTrustListItemView.swift in Sources */,
+				20A0CA55297FC6B900DA933B /* WorkspaceTrustManagementService.swift in Sources */,
+				20A0CA56297FC6B900DA933B /* WorkspaceTrustRequestService.swift in Sources */,
+				20A0CA51297FC6B000DA933B /* WorkspaceTrustView.swift in Sources */,
 				04540D5E27DD08C300E91B77 /* WorkspaceView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4844,19 +4870,6 @@
 			productName = AEExtensionKit;
 		};
 /* End XCSwiftPackageProductDependency section */
-
-/* Begin XCVersionGroup section */
-		20B09A3529632F3C00A2D122 /* TrustInfoDatabase.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				20B09A3629632F3C00A2D122 /* TrustInfoModel.xcdatamodel */,
-			);
-			currentVersion = 20B09A3629632F3C00A2D122 /* TrustInfoModel.xcdatamodel */;
-			path = TrustInfoDatabase.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = B658FB2427DA9E0F00EA4DBD /* Project object */;
 }

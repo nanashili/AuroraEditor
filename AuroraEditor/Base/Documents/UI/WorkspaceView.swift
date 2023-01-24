@@ -83,7 +83,7 @@ struct WorkspaceView: View {
                                  workflowId: String(actionsWorkflowTab.id))
             }
         case .workspaceTrust:
-            if let workspaceTrustTab =  workspace.selectionState.selected as? WorkspaceTrust {
+            if let workspaceTrustTab = workspace.selectionState.selected as? WorkspaceTrust {
                 WorkspaceTrustView(workspace: workspace)
             }
         }
