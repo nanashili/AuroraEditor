@@ -1,8 +1,9 @@
 //
 //  GitlabAccount.swift
-//  AuroraEditorModules/GitAccounts
+//  Aurora Editor
 //
 //  Created by Wesley de Groot on 02/04/2022.
+//  Copyright © 2023 Aurora Company. All rights reserved.
 //
 
 import Foundation

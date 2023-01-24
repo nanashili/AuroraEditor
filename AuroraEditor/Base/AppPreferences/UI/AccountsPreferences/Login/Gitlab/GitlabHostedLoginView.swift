@@ -1,8 +1,9 @@
 //
 //  GitlabHostedLoginView.swift
-//  AuroraEditorModules/AppPreferences
+//  Aurora Editor
 //
 //  Created by Nanashi Li on 2022/04/21.
+//  Copyright © 2023 Aurora Company. All rights reserved.
 //
 
 import SwiftUI

@@ -1,8 +1,9 @@
 //
 //  NoCommitHistoryView.swift
-//  AuroraEditor
+//  Aurora Editor
 //
 //  Created by Nanashi Li on 2022/04/19.
+//  Copyright © 2023 Aurora Company. All rights reserved.
 //
 
 import SwiftUI

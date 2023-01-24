@@ -1,9 +1,9 @@
 //
 //  CreateNewTagView.swift
-//  AuroraEditor
+//  Aurora Editor
 //
 //  Created by Nanashi Li on 2022/12/05.
-//  Copyright © 2022 Aurora Company. All rights reserved.
+//  Copyright © 2023 Aurora Company. All rights reserved.
 //
 
 import SwiftUI
@@ -62,9 +62,11 @@ struct CreateNewTagView: View {
                             Log.debug(commitHash)
 
                             // Create a tag
-                            try createTag(directoryURL: workspace.workspaceURL(),
-                                          name: tagName,
-                                          targetCommitSha: commitHash)
+                            try createTag(
+                                directoryURL: workspace.workspaceURL(),
+                                name: tagName,
+                                targetCommitSha: commitHash
+                            )
 
                             dismiss()
                         } catch {

@@ -1,8 +1,9 @@
 //
-//  AuroraEditorDocumentController.swift
-//  AuroraEditor
+//  Aurora EditorDocumentController.swift
+//  Aurora Editor
 //
 //  Created by Pavel Kasila on 17.03.22.
+//  Copyright © 2023 Aurora Company. All rights reserved.
 //
 
 import Cocoa
@@ -53,7 +54,7 @@ extension NSDocumentController {
         dialog.canChooseDirectories = true
 
         dialog.begin { result in
-            if result ==  NSApplication.ModalResponse.OK, let url = dialog.url {
+            if result == NSApplication.ModalResponse.OK, let url = dialog.url {
                 self.openDocument(withContentsOf: url, display: true) { document, documentWasAlreadyOpen, error in
                     if let error = error {
                         NSAlert(error: error).runModal()

@@ -1,8 +1,9 @@
 //
 //  TabBarItem.swift
-//  AuroraEditor
+//  Aurora Editor
 //
 //  Created by Lukas Pistrol on 17.03.22.
+//  Copyright © 2023 Aurora Company. All rights reserved.
 //
 
 import SwiftUI

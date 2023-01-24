@@ -1,9 +1,9 @@
 //
 //  ProjectNavigatorOutlineDelegate.swift
-//  AuroraEditor
+//  Aurora Editor
 //
 //  Created by TAY KAI QUAN on 9/9/22.
-//  Copyright © 2022 Aurora Company. All rights reserved.
+//  Copyright © 2023 Aurora Company. All rights reserved.
 //
 
 import SwiftUI
@@ -12,7 +12,8 @@ import SwiftUI
 
 extension ProjectNavigatorViewController: NSOutlineViewDelegate {
     func outlineView(_ outlineView: NSOutlineView,
-                     shouldShowCellExpansionFor tableColumn: NSTableColumn?, item: Any) -> Bool {
+                     shouldShowCellExpansionFor tableColumn: NSTableColumn?,
+                     item: Any) -> Bool {
         true
     }
 

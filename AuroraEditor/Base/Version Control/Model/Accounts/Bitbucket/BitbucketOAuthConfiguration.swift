@@ -1,8 +1,9 @@
 //
 //  BitbucketOAuthConfiguration.swift
-//  AuroraEditorModules/GitAccounts
+//  Aurora Editor
 //
 //  Created by Nanashi Li on 2022/03/31.
+//  Copyright © 2023 Aurora Company. All rights reserved.
 //
 
 import Foundation
@@ -16,8 +17,11 @@ public struct BitbucketOAuthConfiguration: GitConfiguration {
     public let webEndpoint: String
     public let errorDomain = "com.auroraeditor.models.accounts.bitbucket"
 
-    public init(_ url: String = bitbucketBaseURL, webURL: String = bitbucketWebURL,
-                token: String, secret: String, scopes: [String]) {
+    public init(_ url: String = bitbucketBaseURL,
+                webURL: String = bitbucketWebURL,
+                token: String,
+                secret: String,
+                scopes: [String]) {
         apiEndpoint = url
         webEndpoint = webURL
         self.token = token

@@ -1,9 +1,9 @@
 //
 //  CommandPaletteView.swift
-//  AuroraEditor
+//  Aurora Editor
 //
 //  Created by TAY KAI QUAN on 2/9/22.
-//  Copyright © 2022 Aurora Company. All rights reserved.
+//  Copyright © 2023 Aurora Company. All rights reserved.
 //
 
 import SwiftUI
@@ -62,7 +62,7 @@ struct CommandPaletteView: View {
             self.selectedCommand = state.commands[newIndex]
         } else {
             // if theres no selected command, just select the first or last item depending on direction
-            selectedCommand = state.commands[ offset < 0 ? state.commands.count-1 : 0]
+            selectedCommand = state.commands[ offset < 0 ? state.commands.count - 1 : 0]
         }
     }
 

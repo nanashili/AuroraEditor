@@ -1,8 +1,9 @@
 //
 //  FileSystemClient.swift
-//  AuroraEditor
+//  Aurora Editor
 //
 //  Created by TAY KAI QUAN on 13/8/22.
+//  Copyright © 2023 Aurora Company. All rights reserved.
 //
 
 import Combine

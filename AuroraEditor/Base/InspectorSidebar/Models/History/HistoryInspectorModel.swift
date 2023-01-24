@@ -1,8 +1,9 @@
 //
 //  HistoryInspectorModel.swift
-//  AuroraEditor
+//  Aurora Editor
 //
 //  Created by Nanashi Li on 2022/04/18.
+//  Copyright © 2023 Aurora Company. All rights reserved.
 //
 
 import Foundation
@@ -39,7 +40,7 @@ public final class HistoryInspectorModel: ObservableObject {
     public init(workspaceURL: URL, fileURL: String) {
         self.workspaceURL = workspaceURL
         self.fileURL = fileURL
-        gitClient = GitClient.init(
+        gitClient = GitClient(
             directoryURL: workspaceURL,
             shellClient: sharedShellClient.shellClient
         )

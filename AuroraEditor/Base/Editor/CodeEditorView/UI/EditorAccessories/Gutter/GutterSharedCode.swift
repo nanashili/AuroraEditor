@@ -1,9 +1,9 @@
 //
 //  GutterSharedCode.swift
-//  AuroraEditor
+//  Aurora Editor
 //
 //  Created by Nanashi Li on 2022/09/24.
-//  Copyright © 2022 Aurora Company. All rights reserved.
+//  Copyright © 2023 Aurora Company. All rights reserved.
 //
 
 import AppKit
@@ -39,7 +39,7 @@ extension GutterView {
         if charRange.location >= string.length {    // special case: insertion point on trailing empty line
                                                     // or beyond the end of the string (just deleted last trailing line)
             let fragRect = layoutManager.extraLineFragmentRect
-            textRect = CGRect(x: fragRect.minX, y: fragRect.minY, width: fragRect.width, height: fragRect.height*2)
+            textRect = CGRect(x: fragRect.minX, y: fragRect.minY, width: fragRect.width, height: fragRect.height * 2)
         } else {
             // We call `paragraphRange(for:_)` safely by boxing `charRange` to the allowed range.
             let extendedCharRange = string.paragraphRange(

@@ -1,8 +1,9 @@
 //
 //  NotificationManager.swift
-//  
+//  Aurora Editor
 //
 //  Created by Nanashi Li on 2022/07/12.
+//  Copyright © 2023 Aurora Company. All rights reserved.
 //
 
 import Foundation
@@ -39,8 +40,7 @@ public class NotificationManager: ObservableObject {
 
     public func showInformationMessage(_ mes: String) {
         DispatchQueue.main.async {
-            self.banners.append(
-                BannerModule.init(data: NotificationData.init(title: mes,
+            self.banners.append(BannerModule(data: NotificationData(title: mes,
                                                               priority: .info,
                                                               style: .basic)))
         }
@@ -48,8 +48,7 @@ public class NotificationManager: ObservableObject {
 
     public func showWarningMessage(_ mes: String) {
         DispatchQueue.main.async {
-            self.banners.append(
-                BannerModule.init(data: NotificationData.init(title: mes,
+            self.banners.append(BannerModule(data: NotificationData(title: mes,
                                                               priority: .warning,
                                                               style: .basic))
             )
@@ -58,8 +57,7 @@ public class NotificationManager: ObservableObject {
 
     public func showErrorMessage(_ mes: String) {
         DispatchQueue.main.async {
-            self.banners.append(
-                BannerModule.init(data: NotificationData.init(title: mes,
+            self.banners.append(BannerModule(data: NotificationData(title: mes,
                                                               priority: .error,
                                                               style: .basic)))
         }

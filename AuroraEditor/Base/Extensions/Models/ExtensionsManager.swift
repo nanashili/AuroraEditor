@@ -1,8 +1,9 @@
 //
 //  ExtensionsManager.swift
-//  AuroraEditorModules/ExtensionStore
+//  Aurora Editor
 //
 //  Created by Pavel Kasila on 7.04.22.
+//  Copyright © 2023 Aurora Company. All rights reserved.
 //
 
 import Foundation
@@ -78,7 +79,7 @@ public final class ExtensionsManager {
                 Log.info("Loading \(file)")
                 if let builder = self.loadBundle(path: file) {
                     loadedExtensions[file] = builder.init().build(
-                        withAPI: AuroraEditorAPI.init(extensionId: "0", workspace: .init())
+                        withAPI: AuroraEditorAPI(extensionId: "0", workspace: .init())
                     )
 
                     loadedExtensions[file]?.respond(

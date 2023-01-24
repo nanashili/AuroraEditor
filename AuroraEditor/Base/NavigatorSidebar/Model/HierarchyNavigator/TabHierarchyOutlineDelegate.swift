@@ -1,16 +1,17 @@
 //
 //  TabHierarchyOutlineDelegate.swift
-//  AuroraEditor
+//  Aurora Editor
 //
 //  Created by TAY KAI QUAN on 14/9/22.
-//  Copyright © 2022 Aurora Company. All rights reserved.
+//  Copyright © 2023 Aurora Company. All rights reserved.
 //
 
 import SwiftUI
 
 extension TabHierarchyViewController: NSOutlineViewDelegate {
     func outlineView(_ outlineView: NSOutlineView,
-                     shouldShowCellExpansionFor tableColumn: NSTableColumn?, item: Any) -> Bool {
+                     shouldShowCellExpansionFor tableColumn: NSTableColumn?,
+                     item: Any) -> Bool {
         true
     }
 

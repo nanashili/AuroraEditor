@@ -1,8 +1,9 @@
 //
 //  SidebarSearch.swift
-//  AuroraEditor
+//  Aurora Editor
 //
 //  Created by Ziyuan Zhao on 2022/3/20.
+//  Copyright © 2023 Aurora Company. All rights reserved.
 //
 
 import SwiftUI

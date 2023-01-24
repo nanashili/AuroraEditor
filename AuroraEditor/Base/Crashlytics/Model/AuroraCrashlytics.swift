@@ -1,8 +1,9 @@
 //
 //  AuroraCrashlytics.swift
-//  
+//  Aurora Editor
 //
 //  Created by Nanashi Li on 2022/07/30.
+//  Copyright © 2023 Aurora Company. All rights reserved.
 //
 
 import Foundation
@@ -80,7 +81,7 @@ public class AuroraCrashlytics: NSObject {
         self.delegates = self.delegates.filter {
             // filter null weak delegate
             return $0.delegate != nil
-            }.filter {
+        }.filter {
                 // filter the delegate from parameter
                 return $0.delegate?.hash != delegate.hash
         }

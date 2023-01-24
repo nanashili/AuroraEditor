@@ -1,8 +1,9 @@
 //
 //  ExtensionInstallationViewModel.swift
-//  AuroraEditor
+//  Aurora Editor
 //
 //  Created by Pavel Kasila on 8.04.22.
+//  Copyright © 2023 Aurora Company. All rights reserved.
 //
 
 import Foundation
@@ -40,7 +41,7 @@ final class ExtensionInstallationViewModel: ObservableObject {
                     guard let extensions = try decoder.decode([Plugin]?.self, from: data) else {
                         Log.debug(
                             "Error: Unable to decode",
-                            String.init(data: data, encoding: .utf8) ?? ""
+                            String(data: data, encoding: .utf8) ?? ""
                         )
                         DispatchQueue.main.async {
                             self.state = .error

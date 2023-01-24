@@ -1,8 +1,9 @@
 //
 //  ExtensionNavigatorData.swift
-//  AuroraEditor
+//  Aurora Editor
 //
 //  Created by Pavel Kasila on 7.04.22.
+//  Copyright © 2023 Aurora Company. All rights reserved.
 //
 
 import Foundation

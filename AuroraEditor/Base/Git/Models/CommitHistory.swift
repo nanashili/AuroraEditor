@@ -1,8 +1,9 @@
 //
 //  CommitHistory.swift
-//  AuroraEditorModules/Git
+//  Aurora Editor
 //
 //  Created by Marco Carnevali on 27/03/22.
+//  Copyright © 2023 Aurora Company. All rights reserved.
 //
 
 import Foundation.NSDate
@@ -43,7 +44,7 @@ public struct CommitHistory: Equatable, Hashable, Identifiable {
         var formattedRemote = remote
         if formattedRemote.absoluteString.starts(with: "git@") {
             let parts = formattedRemote.absoluteString.components(separatedBy: ":")
-            formattedRemote = URL.init(fileURLWithPath: "\(domain)/\(parts[parts.count - 1])")
+            formattedRemote = URL(fileURLWithPath: "\(domain)/\(parts[parts.count - 1])")
         }
 
         return formattedRemote.deletingPathExtension().appendingPathComponent("commit")

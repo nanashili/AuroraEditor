@@ -1,8 +1,9 @@
 //
 //  WorkspaceView.swift
-//  CodeEdit
+//  Aurora Editor
 //
 //  Created by Austin Condiff on 3/10/22.
+//  Copyright © 2023 Aurora Company. All rights reserved.
 //
 
 import SwiftUI

@@ -1,8 +1,9 @@
 //
 //  SettingsTextEditor.swift
-//  
+//  Aurora Editor
 //
 //  Created by Andrey Plotnikov on 07.05.2022.
+//  Copyright © 2023 Aurora Company. All rights reserved.
 //
 
 import Foundation

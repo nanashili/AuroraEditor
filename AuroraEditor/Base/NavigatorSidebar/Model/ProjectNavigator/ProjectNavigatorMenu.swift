@@ -1,8 +1,9 @@
 //
 //  ProjectNavigatorMenu.swift
-//  AuroraEditor
+//  Aurora Editor
 //
-//  Created by TAY KAI QUAN on 14/8/22
+//  Created by TAY KAI QUAN on 14/8/22.
+//  Copyright © 2023 Aurora Company. All rights reserved.
 //
 
 import SwiftUI
@@ -244,7 +245,7 @@ final class ProjectNavigatorMenu: NSMenu {
     @objc
     private func delete() {
         let deleteConfirmation = NSAlert()
-        let message = "\(item!.fileName)\(item!.isFolder ? " and its children" :"")"
+        let message = "\(item!.fileName)\(item!.isFolder ? " and its children" : "")"
         deleteConfirmation.messageText = "Do you want to move \(message) to the bin?"
         deleteConfirmation.alertStyle = .critical
         deleteConfirmation.addButton(withTitle: "Delete")

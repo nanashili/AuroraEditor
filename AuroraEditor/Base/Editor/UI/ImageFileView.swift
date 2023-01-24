@@ -1,8 +1,9 @@
 //
 //  ImageFileView.swift
-//  AuroraEditorModules/CodeFile
+//  Aurora Editor
 //
 //  Created by Nanashi Li on 2022/04/16.
+//  Copyright © 2023 Aurora Company. All rights reserved.
 //
 
 import SwiftUI

@@ -1,8 +1,9 @@
 //
 //  ScrollView.swift
-//  
+//  Aurora Editor
 //
 //  Created by Manuel M T Chakravarty on 27/11/2021.
+//  Copyright © 2023 Aurora Company. All rights reserved.
 //
 
 import SwiftUI

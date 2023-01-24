@@ -1,8 +1,9 @@
 //
-//  AuroraEditororAppDelegate.swift
-//  AuroraEditor
+//  AppDelegate.swift
+//  Aurora Editor
 //
-//  Created by Pavel Kasila on 12.03.22.
+//  Created by Pavel Kasila on 12/03/2022.
+//  Copyright © 2023 Aurora Company. All rights reserved.
 //
 
 import SwiftUI
@@ -64,7 +65,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, ObservableObject {
 
             for index in 0..<CommandLine.arguments.count {
                 if CommandLine.arguments[index] == "--open" && (index + 1) < CommandLine.arguments.count {
-                    let path = CommandLine.arguments[index+1]
+                    let path = CommandLine.arguments[index + 1]
                     let url = URL(fileURLWithPath: path)
 
                     AuroraEditorDocumentController.shared.reopenDocument(
@@ -165,16 +166,20 @@ final class AppDelegate: NSObject, NSApplicationDelegate, ObservableObject {
         WelcomeWindowView.openWelcomeWindow()
     }
 
-    @IBAction func openAbout(_ sender: Any) {
-        if AppDelegate.tryFocusWindow(of: AboutView.self) { return }
-
-        AboutView().showWindow(width: 530, height: 260)
+    @IBAction public func openAbout(_ sender: Any) {
+        AppDelegate.openAboutWindow()
     }
 
     @IBAction func openFeedback(_ sender: Any) {
         if AppDelegate.tryFocusWindow(of: FeedbackView.self) { return }
 
         FeedbackView().showWindow()
+    }
+
+    /// Open about window
+    static func openAboutWindow() {
+        if tryFocusWindow(of: AboutView.self) { return }
+        AboutView().showWindow()
     }
 
     /// Tries to focus a window with specified view content type.
@@ -190,14 +195,14 @@ final class AppDelegate: NSObject, NSApplicationDelegate, ObservableObject {
 
     // MARK: - Open With AuroraEditor (Extension) functions
     private func checkForFilesToOpen() {
-        guard let defaults = UserDefaults.init(
+        guard let defaults = UserDefaults(
             suiteName: "com.auroraeditor.shared"
         ) else {
             Log.error("Failed to get/init shared defaults")
             return
         }
 
-        // Register enableOpenInCE (enable Open In AuroraEditor
+        // Register enableOpenInAE (enable Open In AuroraEditor
         defaults.register(defaults: ["enableOpenInAE": true])
 
         if let filesToOpen = defaults.string(forKey: "openInAEFiles") {
@@ -211,7 +216,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, ObservableObject {
                     display: true) { document, _, _ in
                         Log.info("checkForFilesToOpen(): Opened \(fileURL.absoluteString)")
                         document?.windowControllers.first?.synchronizeWindowTitleWithDocumentName()
-                    }
+                }
             }
 
             defaults.removeObject(forKey: "openInAEFiles")

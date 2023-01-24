@@ -1,8 +1,9 @@
 //
 //  LSPClient.swift
-//  AuroraEditorModules/LSP
+//  Aurora Editor
 //
 //  Created by Pavel Kasila on 16.04.22.
+//  Copyright © 2023 Aurora Company. All rights reserved.
 //
 
 import Foundation

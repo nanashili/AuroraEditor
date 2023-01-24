@@ -1,8 +1,9 @@
 //
 //  InspectorSidebar.swift
-//  AuroraEditor
+//  Aurora Editor
 //
 //  Created by Austin Condiff on 3/21/22.
+//  Copyright © 2023 Aurora Company. All rights reserved.
 //
 
 import SwiftUI

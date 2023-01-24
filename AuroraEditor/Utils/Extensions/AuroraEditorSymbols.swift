@@ -1,7 +1,9 @@
 //
-// AuroraEditorSymbols.swift
+//  AuroraEditorSymbols.swift
+//  Aurora Editor
 //
-// Created by Lukas Pistrol on 18.04.22.
+//  Created by Lukas Pistrol on 18.04.22.
+//  Copyright © 2023 Aurora Company. All rights reserved.
 //
 
 import SwiftUI

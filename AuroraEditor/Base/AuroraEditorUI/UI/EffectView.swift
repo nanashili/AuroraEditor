@@ -1,8 +1,9 @@
 //
 //  BlurView.swift
-//  AuroraEditorModules/AuroraEditorUI
+//  Aurora Editor
 //
 //  Created by Rehatbir Singh on 15/03/2022.
+//  Copyright © 2023 Aurora Company. All rights reserved.
 //
 
 import SwiftUI

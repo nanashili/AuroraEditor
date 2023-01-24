@@ -1,8 +1,9 @@
 //
 //  QuickHelpInspector.swift
-//  AuroraEditor
+//  Aurora Editor
 //
 //  Created by Nanashi Li on 2022/03/24.
+//  Copyright © 2023 Aurora Company. All rights reserved.
 //
 import SwiftUI
 

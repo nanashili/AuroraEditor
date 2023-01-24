@@ -1,9 +1,10 @@
 //
 //  IProgress.swift
-//  AuroraEditor
+//  Aurora Editor
 //
-//  Created by Nanashi Li on 2022/08/13.
-//  Copyright © 2022 Aurora Company. All rights reserved.
+//  Created by Nana on 3/10/21.
+//  Copyright © 2023 Aurora Company. All rights reserved.
+//
 //  This source code is restricted for Aurora Editor usage only.
 //
 
@@ -173,8 +174,12 @@ class MultiCommitOperationProgress: IMultiCommitOperationProgress {
     var title: String?
     var description: String?
 
-    init(currentCommitSummary: String, position: Int, totalCommitCount: Int,
-         value: Int, title: String? = nil, description: String? = nil) {
+    init(currentCommitSummary: String,
+         position: Int,
+         totalCommitCount: Int,
+         value: Int,
+         title: String? = nil,
+         description: String? = nil) {
         self.currentCommitSummary = currentCommitSummary
         self.position = position
         self.totalCommitCount = totalCommitCount

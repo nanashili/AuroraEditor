@@ -1,8 +1,9 @@
 //
 //  Pattern.swift
-//  
+//  Aurora Editor
 //
 //  Created by Matthew Davidson on 28/11/19.
+//  Copyright © 2023 Aurora Company. All rights reserved.
 //
 
 import Foundation

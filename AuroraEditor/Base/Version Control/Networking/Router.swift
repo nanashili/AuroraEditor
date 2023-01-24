@@ -1,9 +1,11 @@
 //
 //  Router.swift
-//  AuroraEditorModules/GitAccounts
+//  Aurora Editor
 //
 //  Created by Nanashi Li on 2022/03/31.
+//  Copyright © 2023 Aurora Company. All rights reserved.
 //
+
 // This file should be strictly just be used for Accounts since it's not
 // built for any other networking except those of git accounts
 
@@ -294,7 +296,8 @@ public extension Router {
     /// - Returns: URLSessionDataTaskProtocol
     func load<T: Codable>(
         _ session: GitURLSession = URLSession.shared,
-        decoder: JSONDecoder = JSONDecoder(), expectedResultType _: T.Type,
+        decoder: JSONDecoder = JSONDecoder(),
+        expectedResultType _: T.Type,
         completion: @escaping (_ json: T?, _ error: Error?) -> Void) -> URLSessionDataTaskProtocol? {
 
         guard let request = request() else {

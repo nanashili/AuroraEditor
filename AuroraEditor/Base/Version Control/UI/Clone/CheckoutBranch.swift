@@ -1,8 +1,9 @@
 //
 //  CheckoutBranch.swift
-//  AuroraEditorModules/Git
+//  Aurora Editor
 //
 //  Created by Aleksi Puttonen on 18.4.2022.
+//  Copyright © 2023 Aurora Company. All rights reserved.
 //
 
 import Foundation
@@ -16,7 +17,7 @@ public extension CheckoutBranchView {
             return [""]
         }
         do {
-            let branches = try GitClient.init(
+            let branches = try GitClient(
                 directoryURL: url,
                 shellClient: shellClient
             ).getGitBranches(allBranches: true)
@@ -35,7 +36,7 @@ public extension CheckoutBranchView {
         }
         do {
             if let url = URL(string: repoPath) {
-                try GitClient.init(directoryURL: url,
+                try GitClient(directoryURL: url,
                                    shellClient: shellClient).checkoutBranch(name: parsedBranch)
                 isPresented = false
             }

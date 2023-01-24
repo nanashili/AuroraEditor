@@ -1,8 +1,9 @@
 //
 //  HelpButton.swift
-//  AuroraEditorModules/AuroraEditorUI
+//  Aurora Editor
 //
 //  Created by Lukas Pistrol on 30.03.22.
+//  Copyright © 2023 Aurora Company. All rights reserved.
 //
 
 import SwiftUI

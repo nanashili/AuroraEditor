@@ -1,8 +1,9 @@
 //
 //  BreadcrumbsComponent.swift
-//  AuroraEditorModules/Breadcrumbs
+//  Aurora Editor
 //
 //  Created by Lukas Pistrol on 18.03.22.
+//  Copyright © 2023 Aurora Company. All rights reserved.
 //
 
 import SwiftUI
@@ -39,7 +40,7 @@ public struct BreadcrumbsComponent: View {
         ? .accentColor
         : (
             fileItem.isFolder
-            ? Color(hex: colorScheme == .dark ? "#61b6df" :"#27b9ff")
+            ? Color(hex: colorScheme == .dark ? "#61b6df" : "#27b9ff")
             : fileItem.iconColor
         )
     }

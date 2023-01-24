@@ -1,9 +1,9 @@
 //
 //  StatusItem.swift
-//  AuroraEditor
+//  Aurora Editor
 //
 //  Created by TAY KAI QUAN on 4/9/22.
-//  Copyright © 2022 Aurora Company. All rights reserved.
+//  Copyright © 2023 Aurora Company. All rights reserved.
 //
 
 import Foundation
@@ -109,8 +109,7 @@ extension AppDelegate {
 
     @objc
     func about(_ sender: Any?) {
-        if AppDelegate.tryFocusWindow(of: AboutView.self) { return }
-        AboutView().showWindow(width: 530, height: 260)
+        AppDelegate.openAboutWindow()
     }
 
     @objc

@@ -1,8 +1,9 @@
 //
 //  Date.swift
-//  AuroraEditorModules/AuroraEditorUtils
+//  Aurora Editor
 //
 //  Created by Lukas Pistrol on 20.04.22.
+//  Copyright © 2023 Aurora Company. All rights reserved.
 //
 
 import Foundation

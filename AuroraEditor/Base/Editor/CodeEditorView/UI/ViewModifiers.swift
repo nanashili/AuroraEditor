@@ -1,8 +1,9 @@
 //
 //  ViewModifers.swift
-//  
+//  Aurora Editor
 //
 //  Created by Manuel M T Chakravarty on 27/03/2021.
+//  Copyright © 2023 Aurora Company. All rights reserved.
 //
 //  This file contains general purpose view modifiers.
 

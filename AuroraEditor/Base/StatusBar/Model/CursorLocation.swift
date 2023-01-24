@@ -1,8 +1,9 @@
 //
 //  CursorLocation.swift
-//  AuroraEditorModules/StatusBar
+//  Aurora Editor
 //
 //  Created by Lukas Pistrol on 11.05.22.
+//  Copyright © 2023 Aurora Company. All rights reserved.
 //
 
 import Foundation

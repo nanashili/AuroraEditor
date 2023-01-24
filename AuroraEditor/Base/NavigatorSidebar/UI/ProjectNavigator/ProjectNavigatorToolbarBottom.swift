@@ -1,8 +1,9 @@
 //
 //  ProjectNavigatorToolbarBottom.swift
-//  AuroraEditor
+//  Aurora Editor
 //
 //  Created by TAY KAI QUAN on 23/7/22.
+//  Copyright © 2023 Aurora Company. All rights reserved.
 //
 
 import SwiftUI

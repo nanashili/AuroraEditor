@@ -1,8 +1,9 @@
 //
 //  GithubConfiguration.swift
-//  AuroraEditorModules/GitAccounts
+//  Aurora Editor
 //
 //  Created by Nanashi Li on 2022/03/31.
+//  Copyright © 2023 Aurora Company. All rights reserved.
 //
 
 import Foundation
@@ -54,8 +55,12 @@ public struct OAuthConfiguration: GitConfiguration {
         return previewCustomHeaders
     }
 
-    public init(_ url: String = githubBaseURL, webURL: String = githubWebURL,
-                token: String, secret: String, scopes: [String], previewHeaders: [PreviewHeader] = []) {
+    public init(_ url: String = githubBaseURL,
+                webURL: String = githubWebURL,
+                token: String,
+                secret: String,
+                scopes: [String],
+                previewHeaders: [PreviewHeader] = []) {
 
         apiEndpoint = url
         webEndpoint = webURL

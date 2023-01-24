@@ -1,8 +1,9 @@
 //
 //  Parser.swift
-//  
+//  Aurora Editor
 //
 //  Created by Matthew Davidson on 30/12/19.
+//  Copyright © 2023 Aurora Company. All rights reserved.
 //
 
 import Foundation
@@ -43,7 +44,7 @@ public class Parser { // swiftlint:disable:this type_body_length
                                   tokens: inout [Token]) {
         // Apply capture groups
         for (index, captureRange) in captures(pattern: pattern, str: line,
-                                              in: NSRange(location: loc, length: endLoc-loc)).enumerated() {
+                                              in: NSRange(location: loc, length: endLoc - loc)).enumerated() {
             guard index < capturesToApply.count else {
                 // No capture defined for this (or further) capture(/s).
                 break
@@ -168,7 +169,7 @@ public class Parser { // swiftlint:disable:this type_body_length
             // in a BeginEndRule and reached the end of its scope.
             if let endPattern = state.currentScope?.end {
                 if let newPos = matches(pattern: endPattern, str: line,
-                                        in: NSRange(location: loc, length: endLoc-loc)) {
+                                        in: NSRange(location: loc, length: endLoc - loc)) {
                     // Pop off state.
                     let last = state.scopes.removeLast()
 
@@ -233,7 +234,7 @@ public class Parser { // swiftlint:disable:this type_body_length
                 // Apply the match rule
                 if let rule = rule as? MatchRule {
                     if let newPos = matches(pattern: rule.match, str: line,
-                                            in: NSRange(location: loc, length: endLoc-loc)) {
+                                            in: NSRange(location: loc, length: endLoc - loc)) {
                         // Set matched flag
                         matched = true
                         // Create a new scope
@@ -280,7 +281,7 @@ public class Parser { // swiftlint:disable:this type_body_length
                 // Apply the begin end rule
                 else if let rule = rule as? BeginEndRule {
                     if let newPos = matches(pattern: rule.begin, str: line,
-                                            in: NSRange(location: loc, length: endLoc-loc)),
+                                            in: NSRange(location: loc, length: endLoc - loc)),
                        newPos > loc {
                         // Set matched flag
                         matched = true

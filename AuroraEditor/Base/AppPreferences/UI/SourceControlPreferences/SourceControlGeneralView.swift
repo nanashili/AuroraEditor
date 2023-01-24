@@ -1,8 +1,9 @@
 //
 //  SourceControlGeneralView.swift
-//  AuroraEditorModules/AppPreferences
+//  Aurora Editor
 //
 //  Created by Nanshi Li on 2022/04/01.
+//  Copyright © 2023 Aurora Company. All rights reserved.
 //
 
 import SwiftUI
@@ -136,9 +137,8 @@ struct SourceControlGeneralView: View {
                 }
                 .padding(.vertical, 5)
                 .padding(.horizontal)
-            }
+                Divider()
 
-            GroupBox {
                 HStack(alignment: .top) {
                     Text("Comparison View")
                     Spacer()
@@ -154,9 +154,8 @@ struct SourceControlGeneralView: View {
                 }
                 .padding(.vertical, 5)
                 .padding(.horizontal)
-            }
+                Divider()
 
-            GroupBox {
                 HStack(alignment: .top) {
                     Text("Source Control Navigator")
                     Spacer()
@@ -172,9 +171,8 @@ struct SourceControlGeneralView: View {
                 }
                 .padding(.vertical, 5)
                 .padding(.horizontal)
-            }
+                Divider()
 
-            GroupBox {
                 VStack(alignment: .leading) {
                     HStack(alignment: .top) {
                         Text("Default Branch Name")

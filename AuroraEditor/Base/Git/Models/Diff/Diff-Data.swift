@@ -1,9 +1,9 @@
 //
 //  Diff-Data.swift
-//  AuroraEditor
+//  Aurora Editor
 //
 //  Created by Nanashi Li on 2022/08/29.
-//  Copyright © 2022 Aurora Company. All rights reserved.
+//  Copyright © 2023 Aurora Company. All rights reserved.
 //
 
 import Foundation
@@ -76,7 +76,8 @@ class ITextDiffData {
     /// Whether or not the diff has invisible bidi characters
     var hasHiddenBidiChars: Bool
 
-    init(text: String, hunks: [DiffHunk],
+    init(text: String,
+         hunks: [DiffHunk],
          lineEndingsChange: LineEndingsChange? = nil,
          maxLineNumber: Int,
          hasHiddenBidiChars: Bool) {

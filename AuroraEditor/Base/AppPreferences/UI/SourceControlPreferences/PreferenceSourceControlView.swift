@@ -1,8 +1,9 @@
 //
 //  PreferenceSourceControlView.swift
-//  AuroraEditorModules/AppPreferences
+//  Aurora Editor
 //
 //  Created by Nanshi Li on 2022/04/01.
+//  Copyright © 2023 Aurora Company. All rights reserved.
 //
 
 import SwiftUI

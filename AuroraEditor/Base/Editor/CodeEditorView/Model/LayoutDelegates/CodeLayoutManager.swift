@@ -1,9 +1,9 @@
 //
 //  CodeLayoutManager.swift
-//  AuroraEditor
+//  Aurora Editor
 //
 //  Created by TAY KAI QUAN on 18/9/22.
-//  Copyright © 2022 Aurora Company. All rights reserved.
+//  Copyright © 2023 Aurora Company. All rights reserved.
 //
 
 import AppKit
@@ -90,7 +90,7 @@ class CodeLayoutManager: NSLayoutManager {
                     let leftInset: CGFloat = -1
                     let rightInset: CGFloat = -1
                     rectArray[rectIndex] = rectArray[rectIndex].insetBy(dx: leftInset + rightInset, dy: 0)
-                    rectArray[rectIndex] = rectArray[rectIndex].offsetBy(dx: (leftInset - rightInset)/2, dy: 0)
+                    rectArray[rectIndex] = rectArray[rectIndex].offsetBy(dx: (leftInset - rightInset) / 2, dy: 0)
                 }
 
                 self.fillRoundedBackgroundRectArray(rectArray,

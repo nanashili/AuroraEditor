@@ -1,8 +1,9 @@
 //
 //  NavigatorSidebar.swift
-//  AuroraEditor
+//  Aurora Editor
 //
 //  Created by Lukas Pistrol on 25.03.22.
+//  Copyright © 2023 Aurora Company. All rights reserved.
 //
 
 import SwiftUI

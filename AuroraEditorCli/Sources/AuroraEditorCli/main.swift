@@ -1,8 +1,9 @@
 //
-//  AuroraEditorCli.swift
-//  
+//  main.swift
+//  Aurora Editor
 //
 //  Created by Ben Koska on 14.06.22.
+//  Copyright © 2023 Aurora Company. All rights reserved.
 //
 
 import Foundation

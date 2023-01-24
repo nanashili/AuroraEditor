@@ -1,8 +1,9 @@
 //
 //  StatusBarClearButton.swift
-//  AuroraEditorModules/StatusBar
+//  Aurora Editor
 //
 //  Created by Stef Kors on 12/04/2022.
+//  Copyright © 2023 Aurora Company. All rights reserved.
 //
 
 import SwiftUI

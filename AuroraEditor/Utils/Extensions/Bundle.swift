@@ -1,8 +1,9 @@
 //
 //  Bundle.swift
-//  AuroraEditorModules/AuroraEditorUtils
+//  Aurora Editor
 //
 //  Created by Lukas Pistrol on 01.05.22.
+//  Copyright © 2023 Aurora Company. All rights reserved.
 //
 
 import Foundation
@@ -22,7 +23,7 @@ public extension Bundle {
     /// Returns the main bundle's commitHash string if available (e.g. 7dbca499d2ae5e4a6d674c6cb498a862e930f4c3)
     static var commitHash: String? {
         guard let path = Bundle.main.url(forResource: "", withExtension: "githash"),
-              let data = try? Data.init(contentsOf: path),
+              let data = try? Data(contentsOf: path),
               let commit = String(data: data, encoding: .utf8) else {
             Log.error("Failed to get latest commit data.")
             return nil

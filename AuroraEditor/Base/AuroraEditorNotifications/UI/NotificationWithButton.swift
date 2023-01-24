@@ -1,8 +1,9 @@
 //
 //  NotificationWithButton.swift
-//  
+//  Aurora Editor
 //
 //  Created by Nanashi Li on 2022/07/12.
+//  Copyright © 2023 Aurora Company. All rights reserved.
 //
 
 import SwiftUI
