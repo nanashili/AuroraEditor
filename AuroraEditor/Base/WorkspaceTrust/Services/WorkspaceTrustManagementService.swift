@@ -11,6 +11,8 @@ import Foundation
 struct WorkspaceTrustManagementService: IWorkspaceTrustManagementService {
     var serviceBrand: Any?
 
+    private let prefs: AppPreferencesModel = .shared
+
     private var canonicalUrisResolved: Bool = false
     private var workspace: WorkspaceDocument = WorkspaceDocument()
     private var isTrusted: Bool = false
@@ -25,7 +27,11 @@ struct WorkspaceTrustManagementService: IWorkspaceTrustManagementService {
         return self.currentWorkspaceUrl().absoluteURL
     }
 
-    private func saveTrustInfo() async {}
+    private func saveTrustInfo() async {
+        prefs.preferences.privacySecurity.trustedWorkspaces.append(trustStateInfo)
+
+        await updateWorkspaceTrust()
+    }
 
     private func getWorkspaceUrls() -> [URL] {
         []
@@ -36,10 +42,22 @@ struct WorkspaceTrustManagementService: IWorkspaceTrustManagementService {
             return true
         }
 
-        return false
+        if isEmptyWorkspace() {
+            return prefs.preferences.privacySecurity.trustEmptyWorkspace
+        }
+
+        return getUrlsTrust(urls: getWorkspaceUrls())
     }
 
-    private func updateWorkspaceTrust(trusted: Bool?) async {}
+    private func updateWorkspaceTrust(trusted: Bool? = nil) async {
+        if !WorkspaceTrustEnablementService().isWorkspaceTrustEnabled() {
+            return
+        }
+
+        if isWorkspaceTrusted() == trusted {
+            return
+        }
+    }
 
     private func currentWorkspaceUrl() -> URL {
         return workspace.fileSystemClient?.folderURL ?? URL(string: "")!
@@ -169,12 +187,12 @@ struct WorkspaceTrustManagementService: IWorkspaceTrustManagementService {
         return false
     }
 
-    func setParentFolderTrust(trusted: Bool) {
+    func setParentFolderTrust(trusted: Bool) async {
         if canSetParentFolderTrust() {
             let workspaceUri = workspace.workspaceURL()
             let parentFolder = workspaceUri
 
-            setURLTrust(url: [parentFolder],
+            await setURLTrust(url: [parentFolder],
                         trusted: trusted)
         }
     }
@@ -204,9 +222,9 @@ struct WorkspaceTrustManagementService: IWorkspaceTrustManagementService {
         return false
     }
 
-    public func setWorkspaceTrust(trusted: Bool) {
+    public func setWorkspaceTrust(trusted: Bool) async {
         let workspaceFolders = getWorkspaceUrls()
-        setURLTrust(url: workspaceFolders,
+        await setURLTrust(url: workspaceFolders,
                     trusted: true)
     }
 
@@ -220,7 +238,11 @@ struct WorkspaceTrustManagementService: IWorkspaceTrustManagementService {
         return doGetUrlTrustInfo(url: url)
     }
 
-    func setURLTrust(url: [URL], trusted: Bool) {}
+    func setURLTrust(url: [URL], trusted: Bool) async {
+        await doSetUrlsTrust(urls: url.map { url in
+            getCanonicalUrl()
+        }, trusted: trusted)
+    }
 
     func getTrustedUris() -> [URL] {
         return trustStateInfo.uriTrustInfo.map { info in

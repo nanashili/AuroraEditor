@@ -150,6 +150,9 @@ struct WorkspaceView: View {
                 using: { _ in self.isFullscreen = false }
             )
 
+            // swiftlint:disable:next redundant_discardable_let
+            let _ = WorkspaceTrustRequestService().requestWorkspaceTrust(workspace: workspace)
+
             workspace.broadcaster.broadcaster.sink { command in
                 if command.name == "openSettings" {
                     workspace.windowController?.openSettings()
@@ -241,7 +244,7 @@ struct WorkspaceView: View {
                              commitHash: workspace.data.commitHash)
 
         }
-        .sheet(isPresented: .constant(false)) {
+        .sheet(isPresented: $workspace.data.showWorkspaceTrustDialog) {
             WorkspaceTrustConfirmationDialog()
         }
         .sheet(isPresented: $sheetIsOpened) {

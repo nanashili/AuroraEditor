@@ -13,7 +13,7 @@ protocol IWorkspaceTrustRequestService {
                                        saveResponse: Bool?)
     func requestOpenFilesTrust(openFiles: [URL]) -> WorkspaceTrustUriResponse
     func completeWorkspaceTrustRequest(trusted: Bool?)
-    func requestWorkspaceTrust(options: WorkspaceTrustUriResponse?) -> Bool
+    func requestWorkspaceTrust(workspace: WorkspaceDocument) -> Bool
 }
 
 enum WorkspaceTrustUriResponse: Int {

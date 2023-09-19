@@ -8,7 +8,7 @@
 
 import Foundation
 
-class IWorkspaceTrustInfo {
+public class IWorkspaceTrustInfo: Codable {
     var uriTrustInfo: [IWorkspaceTrustUriInfo]
 
     init(uriTrustInfo: [IWorkspaceTrustUriInfo]) {

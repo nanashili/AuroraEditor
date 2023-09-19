@@ -10,8 +10,6 @@ import Foundation
 
 class WorkspaceTrustRequestService: IWorkspaceTrustRequestService {
 
-    private var workspace: WorkspaceDocument = WorkspaceDocument()
-
     func completeOpenFilesTrustRequest(result: WorkspaceTrustUriResponse, saveResponse: Bool?) {
         // Set acceptsOutOfWorkspaceFiles
         if result == WorkspaceTrustUriResponse.open {
@@ -54,7 +52,7 @@ class WorkspaceTrustRequestService: IWorkspaceTrustRequestService {
         WorkspaceTrustManagementService().setWorkspaceTrust(trusted: trusted ?? false)
     }
 
-    func requestWorkspaceTrust(options: WorkspaceTrustUriResponse?) -> Bool {
+    func requestWorkspaceTrust(workspace: WorkspaceDocument) -> Bool {
         // Trusted workspace
         if WorkspaceTrustManagementService().isWorkspaceTrusted() {
             return WorkspaceTrustManagementService().isWorkspaceTrusted()

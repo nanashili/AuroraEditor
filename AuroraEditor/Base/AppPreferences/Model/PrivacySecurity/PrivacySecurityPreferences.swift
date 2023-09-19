@@ -21,7 +21,7 @@ public extension AppPreferences {
 
         public var trustEmptyWorkspace: Bool = false
 
-        public var trustedWorkspaces: [IWorkspaceTrustUriInfo] = []
+        public var trustedWorkspaces: [IWorkspaceTrustInfo] = []
 
         /// Default initializer
         public init() {}
@@ -37,7 +37,7 @@ public extension AppPreferences {
                                                                forKey: .startupAction) ?? .once
             self.trustEmptyWorkspace = try container.decodeIfPresent(Bool.self,
                                                                forKey: .trustEmptyWorkspace) ?? false
-            self.trustedWorkspaces = try container.decodeIfPresent([IWorkspaceTrustUriInfo].self,
+            self.trustedWorkspaces = try container.decodeIfPresent([IWorkspaceTrustInfo].self,
                                                                    forKey: .trustedWorkspaces) ?? []
         }
     }
