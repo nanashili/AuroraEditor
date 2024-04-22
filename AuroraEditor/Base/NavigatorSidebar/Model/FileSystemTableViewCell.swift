@@ -39,13 +39,6 @@ class FileSystemTableViewCell: StandardTableViewCell {
 
     func addIcon(item: FileItem) {
         var imageName = item.systemImage
-        if item.watcherCode == nil {
-            imageName = "exclamationmark.arrow.triangle.2.circlepath"
-        }
-        if item.watcher == nil && !item.activateWatcher() {
-            // watcher failed to activate
-            imageName = "eye.trianglebadge.exclamationmark"
-        }
         let image = NSImage(systemSymbolName: imageName, accessibilityDescription: nil)!
         fileItem = item
         icon.image = image
@@ -122,8 +115,12 @@ extension FileSystemTableViewCell: NSTextFieldDelegate {
     func controlTextDidEndEditing(_ obj: Notification) {
         label.backgroundColor = validateFileName(for: label?.stringValue ?? "") ? .none : errorRed
         if validateFileName(for: label?.stringValue ?? "") {
-            fileItem.move(to: fileItem.url.deletingLastPathComponent()
-                .appendingPathComponent(label?.stringValue ?? ""))
+            do {
+                try fileItem.move(to: fileItem.url.deletingLastPathComponent()
+                    .appendingPathComponent(label?.stringValue ?? ""))
+            } catch {
+                Log.error("Failure to move file/folder \(error.localizedDescription)")
+            }
         } else {
             label?.stringValue = fileItem.fileName
         }

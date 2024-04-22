@@ -2,109 +2,220 @@
 //  FileSystemClient+FileIndex.swift
 //  Aurora Editor
 //
-//  Created by TAY KAI QUAN on 13/8/22.
+//  Created by Nanashi Li on 20/4/24.
 //  Copyright © 2023 Aurora Company. All rights reserved.
 //
 import Combine
 import Foundation
+import Darwin
+
+enum FileSystemError: Error {
+    case unableToOpenDirectory(URL)
+    case failedToLoadDirectory(URL, Error)
+}
 
 extension FileSystemClient {
 
-    /// Recursive loading of files into `FileItem`s
+    /// Loads files from a specified URL into `FileItem`s, accounting for concurrency and ignored paths.
     /// - Parameter url: The URL of the directory to load the items of
     /// - Returns: `[FileItem]` representing the contents of the directory
     func loadFiles(fromURL url: URL) throws -> [FileItem] {
-        let directoryContents = try fileManager.contentsOfDirectory(at: url.resolvingSymlinksInPath(),
-                                                                    includingPropertiesForKeys: nil)
         var items: [FileItem] = []
-        for itemURL in directoryContents {
-            // Skip file if it is in ignore list
-            guard !ignoredFilesAndFolders.contains(itemURL.lastPathComponent) else { continue }
+        guard let dir = opendir(url.path) else {
+            let errorMessage = String(cString: strerror(errno))
+            throw NSError(domain: "FileSystemClientError", code: 1001,
+                          userInfo: [NSLocalizedDescriptionKey: "Unable to open directory at URL: \(url)"])
+        }
+        defer { closedir(dir) }
 
-            var isDir: ObjCBool = false
+        while let entry = readdir(dir) {
+            let dName = entry.pointee.d_name
+            let fileName = withUnsafePointer(to: dName) { (ptr) -> String? in
+                    // Convert to a pointer to CChar or UInt8
+                let charPtr = UnsafeRawPointer(ptr).assumingMemoryBound(to: CChar.self)
+                return String(validatingUTF8: charPtr)
+            }
 
-            if fileManager.fileExists(atPath: itemURL.path, isDirectory: &isDir) {
-                var subItems: [FileItem]?
+            guard let validFileName = fileName else {
+                Log.warning("Failed to decode filename.")
+                continue
+            }
 
-                if isDir.boolValue {
-                    // Recursively fetch subdirectories and files if the path points to a directory
-                    subItems = try loadFiles(fromURL: itemURL)
+            if validFileName == "." || validFileName == ".." {
+                continue
+            }
+
+            let itemURL = url.appendingPathComponent(validFileName)
+            if entry.pointee.d_type == DT_DIR { // DT_DIR is the directory type
+                do {
+                    let subItems = try loadFiles(fromURL: itemURL)
+                    items.append(FileItem(url: itemURL, children: subItems, fileSystemClient: nil))
+                } catch {
+                    Log.error("Failed to load directory \(itemURL): \(error)")
+                    continue
                 }
-
-                let newFileItem = FileItem(url: itemURL,
-                                           children: subItems?.sortItems(foldersOnTop: true),
-                                           fileSystemClient: self)
-                // note: watcher code will be applied after the workspaceItem is created
-                newFileItem.watcherCode = { sourceFileItem in
-                    self.reloadFromWatcher(sourceFileItem: sourceFileItem)
-                }
-                subItems?.forEach { $0.parent = newFileItem }
-                items.append(newFileItem)
-                flattenedFileItems[newFileItem.id] = newFileItem
+            } else if entry.pointee.d_type == DT_REG { // DT_REG is the regular file type
+                items.append(FileItem(url: itemURL, children: nil, fileSystemClient: nil))
             }
         }
-
         return items
     }
 
-    /// Recursive function similar to `loadFiles`, but creates or deletes children of the
-    /// `FileItem` so that they are accurate with the file system, instead of creating an
-    /// entirely new `FileItem`, to prevent the `OutlineView` from going crazy with folding.
-    /// - Parameter fileItem: The `FileItem` to correct the children of
-    @discardableResult
-    func rebuildFiles(fromItem fileItem: FileItem) throws -> Bool {
+    /// Processes a single file item URL by checking its directory status
+    /// and recursively loading sub-items if necessary.
+    private func processFileItem(_ itemURL: URL) throws -> [FileItem] {
+        let resourceKeys: Set<URLResourceKey> = [.isDirectoryKey, .isAliasFileKey]
+        let resourceValues = try itemURL.resourceValues(forKeys: resourceKeys)
+
+        if resourceValues.isAliasFile == true {
+            return []
+        }
+
+        if resourceValues.isDirectory == true {
+            return [FileItem(url: itemURL, children: try { [weak self] in
+                try self?.loadFiles(fromURL: itemURL) ?? []
+            }())]
+        } else {
+            return [FileItem(url: itemURL, children: nil, fileSystemClient: self)]
+        }
+    }
+
+    /// Recursively updates `FileItem` children to match the actual file system, adding or deleting as necessary.
+    /// - Parameter fileItem: The `FileItem` to update
+    /// - Returns: Boolean indicating if any changes were made
+    /// Recursively updates `FileItem` children to match the actual file system, adding or deleting as necessary.
+    func rebuildFiles(fromItem fileItem: FileItem,
+                      event: DispatchSource.FileSystemEvent) throws -> Bool {
         var didChangeSomething = false
 
-        // get the actual directory children
-        let directoryContentsUrls = try fileManager.contentsOfDirectory(at: fileItem.url.resolvingSymlinksInPath(),
-                                                                        includingPropertiesForKeys: nil)
+        // Fetch the actual directory children
+        let directoryContentsUrls = try fetchDirectoryContents(fileItem: fileItem)
+        let existingUrls = Set(directoryContentsUrls)
 
-        // test for deleted children, and remove them from the index
-        for oldContent in fileItem.children ?? [] where !directoryContentsUrls.contains(oldContent.url) {
-            if let removeAt = fileItem.children?.firstIndex(of: oldContent) {
-                fileItem.children?[removeAt].watcher?.cancel()
-                fileItem.children?.remove(at: removeAt)
-                flattenedFileItems.removeValue(forKey: oldContent.id)
-                didChangeSomething = true
+        // Handle deletions
+        didChangeSomething = handleDeletions(for: fileItem,
+                                             withExistingUrls: existingUrls) || didChangeSomething
+
+        // Handle additions and updates
+        didChangeSomething = handleAdditions(for: fileItem,
+                                             withExistingUrls: existingUrls) || didChangeSomething
+
+        // Recursive update for children
+        for child in fileItem.children ?? [] {
+            if child.isFolder { // swiftlint:disable:this for_where
+                // Ensure recursive updates propagate down to all child folders
+                let childDidChange = try rebuildFiles(fromItem: child, event: event)
+                didChangeSomething = childDidChange || didChangeSomething
             }
         }
-
-        // test for new children, and index them using loadFiles
-        for newContent in directoryContentsUrls {
-            guard !ignoredFilesAndFolders.contains(newContent.lastPathComponent) else { continue }
-
-            // if the child has already been indexed, continue to the next item.
-            guard !(fileItem.children?.map({ $0.url }).contains(newContent) ?? false) else { continue }
-
-            var isDir: ObjCBool = false
-            if fileManager.fileExists(atPath: newContent.path, isDirectory: &isDir) {
-                var subItems: [FileItem]?
-
-                if isDir.boolValue { subItems = try loadFiles(fromURL: newContent) }
-
-                let newFileItem = FileItem(url: newContent,
-                                           children: subItems?.sortItems(foldersOnTop: true),
-                                           fileSystemClient: self)
-                newFileItem.watcherCode = { sourceFileItem in
-                    self.reloadFromWatcher(sourceFileItem: sourceFileItem)
-                }
-                subItems?.forEach { $0.parent = newFileItem }
-                newFileItem.parent = fileItem
-                flattenedFileItems[newFileItem.id] = newFileItem
-                fileItem.children?.append(newFileItem)
-                didChangeSomething = true
-            }
-        }
-
-        fileItem.children = fileItem.children?.sortItems(foldersOnTop: true)
-        fileItem.children?.forEach({
-            if $0.isFolder {
-                let childChanged = try? rebuildFiles(fromItem: $0)
-                didChangeSomething = (childChanged ?? false) ? true : didChangeSomething
-            }
-            flattenedFileItems[$0.id] = $0
-        })
 
         return didChangeSomething
+    }
+
+    /// Fetches and returns the contents of a directory from a FileItem's URL, standardized.
+    private func fetchDirectoryContents(fileItem: FileItem) throws -> [URL] {
+        try fileManager.contentsOfDirectory(at: fileItem.url.resolvingSymlinksInPath(),
+                                            includingPropertiesForKeys: nil).map { $0.standardized }
+    }
+
+    /// Handles the deletion of `FileItem` children that no longer exist in the file system.
+    private func handleDeletions(for fileItem: FileItem,
+                                 withExistingUrls existingUrls: Set<URL>) -> Bool {
+        guard var children = fileItem.children else {
+            return false // No children, no deletions
+        }
+
+        let indicesToRemove = children.enumerated()
+            .filter { !existingUrls.contains($0.element.url.standardized) }
+            .map { $0.offset }
+
+        let didRemoveItems = !indicesToRemove.isEmpty
+
+        // Remove items from the end to avoid shifting
+        for index in indicesToRemove.reversed() {
+            let removedChild = children.remove(at: index)
+            flattenedFileItems.removeValue(forKey: removedChild.id)
+        }
+
+        // Update the children array only if changes were made
+        if didRemoveItems {
+            fileItem.children = children
+        }
+
+        return didRemoveItems
+    }
+
+    /// Handles the addition of new `FileItem` children based on the actual contents of the file system.
+    private func handleAdditions(for fileItem: FileItem, // swiftlint:disable:this function_body_length
+                                 withExistingUrls existingUrls: Set<URL>) -> Bool {
+        guard var children = fileItem.children else {
+            let addedItems = existingUrls
+                .filter { !ignoredFilesAndFolders.contains($0.lastPathComponent) }
+                .compactMap { existingUrl -> FileItem? in
+                    var isDir: ObjCBool = false
+                    guard fileManager.fileExists(atPath: existingUrl.path, isDirectory: &isDir) else {
+                        return nil
+                    }
+
+                    let subItems: [FileItem]?
+                    if isDir.boolValue {
+                        do {
+                            subItems = try loadFiles(fromURL: existingUrl)
+                        } catch {
+                            return nil
+                        }
+                    } else {
+                        subItems = nil
+                    }
+
+                    let newFileItem = FileItem(url: existingUrl,
+                                               children: subItems,
+                                               fileSystemClient: self)
+                    subItems?.forEach { $0.parent = newFileItem }
+                    newFileItem.parent = fileItem
+                    flattenedFileItems[newFileItem.id] = newFileItem
+
+                    return newFileItem
+                }
+
+            fileItem.children = addedItems
+            return !addedItems.isEmpty
+        }
+
+        let existingChildrenUrls = Set(children.map { $0.url.standardized })
+        let newUrls = existingUrls.subtracting(existingChildrenUrls)
+
+        let newChildren: [FileItem] = newUrls.compactMap { existingUrl -> FileItem? in
+            var isDir: ObjCBool = false
+            guard fileManager.fileExists(atPath: existingUrl.path, isDirectory: &isDir) else {
+                return nil
+            }
+
+            let subItems: [FileItem]?
+            if isDir.boolValue {
+                do {
+                    subItems = try loadFiles(fromURL: existingUrl)
+                } catch {
+                    return nil
+                }
+            } else {
+                subItems = nil
+            }
+
+            let newFileItem = FileItem(url: existingUrl,
+                                       children: subItems,
+                                       fileSystemClient: self)
+            subItems?.forEach { $0.parent = newFileItem }
+            newFileItem.parent = fileItem
+
+            return newFileItem
+        }
+
+        if !newChildren.isEmpty {
+            children.append(contentsOf: newChildren)
+            fileItem.children = children
+        }
+
+        return !newChildren.isEmpty
     }
 }

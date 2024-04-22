@@ -34,36 +34,8 @@ public extension FileSystemClient {
 
         public var fileIdentifier = UUID().uuidString
 
-        public var watcher: DispatchSourceFileSystemObject?
-        public var watcherCode: ((FileItem) -> Void)?
-
         public var gitStatus: GitType?
         public var fileSystemClient: FileSystemClient?
-
-        public func activateWatcher() -> Bool {
-            // check that there is watcher code and that opening the file succeeded
-            guard let watcherCode = watcherCode else { return false }
-            let descriptor = open(self.url.path, O_EVTONLY)
-            guard descriptor > 0 else { return false }
-
-            // create the source
-            let source = DispatchSource.makeFileSystemObjectSource(
-                fileDescriptor: descriptor,
-                eventMask: .write,
-                queue: DispatchQueue.global()
-            )
-            if descriptor > 2000 {
-                Log.info("Watcher \(descriptor) used up on \(self.url.path)")
-            }
-            source.setEventHandler { watcherCode(self) }
-            source.setCancelHandler { close(descriptor) }
-            source.resume()
-            self.watcher = source
-
-            // TODO: reindex the current item, because the files in the item may have changed
-            // since the initial load on startup.
-            return true
-        }
 
         public init(url: URL,
                     children: [FileItem]? = nil,
@@ -180,7 +152,7 @@ public extension FileSystemClient {
             if self.parent == nil {
                 return "square.dashed.inset.filled"
             }
-            if self.fileName == ".codeedit" {
+            if self.fileName == ".aeconfig" {
                 return "folder.fill.badge.gearshape"
             }
             return children.isEmpty ? "folder" : "folder.fill"
@@ -221,19 +193,21 @@ public extension FileSystemClient {
         public func flattenedChildren(depth: Int, ignoringFolders: Bool) -> [FileItem] {
             guard depth > 0 else { return [] }
             guard isFolder else { return [self] }
-            var childItems: [FileItem] = ignoringFolders ? [] : [self]
-            children?.forEach { child in
-                childItems.append(contentsOf: child.flattenedChildren(depth: depth - 1,
-                    ignoringFolders: ignoringFolders))
-            }
-            return childItems
+
+            let initialItems: [FileItem] = ignoringFolders ? (isFolder ? [] : [self]) : [self]
+            return children?.reduce(initialItems) { result, child in
+                result + child.flattenedChildren(depth: depth - 1, ignoringFolders: ignoringFolders)
+            } ?? initialItems
         }
 
         public func flattenedSiblings(height: Int, ignoringFolders: Bool) -> [FileItem] {
             var topmostParent = self
             for _ in 0..<height {
-                guard let parent = topmostParent.parent else { break }
-                topmostParent = parent
+                if let parent = topmostParent.parent {
+                    topmostParent = parent
+                } else {
+                    break
+                }
             }
             return topmostParent.flattenedChildren(depth: height, ignoringFolders: ignoringFolders)
         }

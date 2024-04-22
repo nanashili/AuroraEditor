@@ -55,6 +55,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, ObservableObject {
                !projects.isEmpty {
                 projects.forEach { path in
                     let url = URL(fileURLWithPath: path)
+
                     // Reopen documents associated with the projects.
                     AuroraEditorDocumentController.shared.reopenDocument(
                         for: url,
@@ -74,15 +75,15 @@ final class AppDelegate: NSObject, NSApplicationDelegate, ObservableObject {
                 if CommandLine.arguments[index] == "--open" && (index + 1) < CommandLine.arguments.count {
                     let path = CommandLine.arguments[index + 1]
                     let url = URL(fileURLWithPath: path)
-
                     AuroraEditorDocumentController.shared.reopenDocument(
                         for: url,
                         withContentsOf: url,
                         display: true) { document, _, _ in
                             Log.info("Opened file via command line: \(url.absoluteString)")
                             document?.windowControllers.first?.synchronizeWindowTitleWithDocumentName()
+
+                            Log.info("No need to open the Welcome Screen (command line)")
                     }
-                    Log.info("No need to open the Welcome Screen (command line)")
                 }
             }
         }

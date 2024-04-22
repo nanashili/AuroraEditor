@@ -86,26 +86,31 @@ public final class SourceControlModel: ObservableObject {
 
     @discardableResult
     public func reloadChangedFiles() -> [FileItem] {
-        guard isReloading == false else { return [] }
+        guard !isReloading else { return [] }
+        isReloading = true
         do {
-            isReloading = true
             let newChanged = try gitClient.getChangedFiles()
-            DispatchQueue.main.async { self.state = .success }
             let difference = newChanged.map({ $0.url }).difference(from: changed.map({ $0.url }))
             var differentFiles = newChanged.filter { difference.contains($0.url) }
             differentFiles += changed.filter { difference.contains($0.url) }
-            DispatchQueue.main.async {
-                if !differentFiles.isEmpty { self.changed = newChanged }
+
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                if !differentFiles.isEmpty {
+                    self.changed = newChanged
+                }
+                self.state = .success
                 self.isReloading = false
             }
             return differentFiles
         } catch {
-            isReloading = false
-            DispatchQueue.main.async {
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
                 self.changed = []
-                self.state = .success
+                self.state = .error
+                self.isReloading = false
             }
+            return []
         }
-        return []
     }
 }

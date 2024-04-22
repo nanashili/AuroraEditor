@@ -22,6 +22,7 @@ final class ProjectNavigatorViewController: NSViewController {
     var outlineView: NSOutlineView!
 
     var cancelables: Set<AnyCancellable> = .init()
+    var expandedItemIDs: Set<String> = []
 
     /// Gets the folder structure
     ///
@@ -82,8 +83,8 @@ final class ProjectNavigatorViewController: NSViewController {
         outlineView.registerForDraggedTypes([dragType])
 
         outlineView.expandItem(outlineView.item(atRow: 0))
-        saveExpansionState()
-        reloadChangedFiles()
+        saveExpansionStates()
+//        reloadChangedFiles()
 
         workspace?.broadcaster.broadcaster.sink(receiveValue: recieveBroadcast).store(in: &cancelables)
     }
@@ -110,11 +111,23 @@ final class ProjectNavigatorViewController: NSViewController {
     }
 
     func reloadChangedFiles() {
-        if let model = workspace?.fileSystemClient?.model, let wsClient = workspace?.fileSystemClient {
-            for item in model.reloadChangedFiles() {
-                outlineView.reloadItem(try? wsClient.getFileItem(item.id))
+        guard let model = workspace?.fileSystemClient?.model, let wsClient = workspace?.fileSystemClient else {
+            return
+        }
+
+        for item in model.reloadChangedFiles() {
+            do {
+                let fileItem = try wsClient.getFileItem(item.id)
+                DispatchQueue.main.async {
+                    self.outlineView.reloadItem(fileItem)
+                }
+            } catch {
+                Log.error("Error retrieving file item: \(error)")
             }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: { self.reloadChangedFiles() })
+        }
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            self.reloadChangedFiles()
         }
     }
 
@@ -176,45 +189,27 @@ final class ProjectNavigatorViewController: NSViewController {
             // expand everything
             outlineView.expandItem(outlineView.item(atRow: 0), expandChildren: true)
         } else {
-            loadExpansionState()
+            restoreExpansionStates()
         }
     }
 
-    /// Save the expansion state of the items in the Project Navigator
-    func saveExpansionState() {
-        guard let workspace = self.workspace,
-              let workspaceItem = outlineView.item(atRow: 0) as? Item,
-              workspace.filter.isEmpty && !isExpandingThings else { return }
-        saveExpansionState(of: workspaceItem)
-    }
-
-    func saveExpansionState(of item: Item) {
-        item.shouldBeExpanded = outlineView.isItemExpanded(item)
-        guard item.shouldBeExpanded else { return }
-        for childIndex in 0 ..< outlineView.numberOfChildren(ofItem: item) {
-            guard let child = outlineView.child(childIndex, ofItem: item) as? Item else { return }
-            guard child.shouldBeExpanded != outlineView.isItemExpanded(child) else { continue }
-            child.shouldBeExpanded = outlineView.isItemExpanded(child)
-            if outlineView.isItemExpanded(child) {
-                saveExpansionState(of: child)
+    func saveExpansionStates() {
+        expandedItemIDs.removeAll()
+        for row in 0..<outlineView.numberOfRows {
+            if let item = outlineView.item(atRow: row) as? FileSystemClient.FileItem,
+               outlineView.isItemExpanded(item) {
+                expandedItemIDs.insert(item.id) // Ensure you have a unique and consistent identifier
             }
         }
     }
 
-    /// Load any saved expansion state of the items in the Project Navigator
-    func loadExpansionState() {
-        isExpandingThings = true
-        var rowNumber = 0
-        while let itemToCheck = outlineView.item(atRow: rowNumber) {
-            guard let fileItem = itemToCheck as? Item else { break }
-            if fileItem.shouldBeExpanded {
-                outlineView.expandItem(itemToCheck)
-            } else {
-                outlineView.collapseItem(itemToCheck)
+    func restoreExpansionStates() {
+        for row in 0..<outlineView.numberOfRows {
+            if let item = outlineView.item(atRow: row) as? FileSystemClient.FileItem,
+               expandedItemIDs.contains(item.id) {
+                outlineView.expandItem(item)
             }
-            rowNumber += 1
         }
-        isExpandingThings = false
     }
 
     /// Recursively gets and selects an ``Item`` from an array of ``Item`` and their `children` based on the `id`.

@@ -53,12 +53,15 @@ extension ProjectNavigatorViewController: NSOutlineViewDelegate {
     }
 
     func outlineViewItemDidExpand(_ notification: Notification) {
-        updateSelection()
-        saveExpansionState()
+        if let item = notification.userInfo?["NSObject"] as? FileSystemClient.FileItem {
+            expandedItemIDs.insert(item.id)
+        }
     }
 
     func outlineViewItemDidCollapse(_ notification: Notification) {
-        saveExpansionState()
+        if let item = notification.userInfo?["NSObject"] as? FileSystemClient.FileItem {
+            expandedItemIDs.remove(item.id)
+        }
     }
 
     func outlineView(_ outlineView: NSOutlineView, itemForPersistentObject object: Any) -> Any? {

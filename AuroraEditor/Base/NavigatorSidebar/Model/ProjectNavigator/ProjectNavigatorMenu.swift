@@ -202,7 +202,7 @@ final class ProjectNavigatorMenu: NSMenu {
     @objc
     private func newFile() {
         outlineView.expandItem((item?.isFolder ?? true) ? item : item?.parent)
-        item?.addFile(fileName: "untitled")
+        item?.addFile(fileName: "untitled.txt")
     }
 
     /// Action that activates the FileCreationSelectionView
