@@ -37,6 +37,8 @@ public class FileSystemClient {
     public let workspaceItem: FileItem
     /// Flattened file items
     public var flattenedFileItems: [String: FileItem]
+    /// Children Map
+    public var childrenMap: [String: [String]] = [:]
     /// Subject
     private var subject = CurrentValueSubject<[FileItem], Never>([])
 
@@ -115,8 +117,7 @@ public class FileSystemClient {
 
     func handleFileChange(file: FileItem,
                           event: DispatchSource.FileSystemEvent) {
-        _ = try? rebuildFiles(fromItem: file,
-                              event: event)
+        _ = try? rebuildFiles(fromItem: file, event: event)
 
         subject.send(workspaceItem.children ?? [])
         DispatchQueue.main.async {

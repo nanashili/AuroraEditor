@@ -61,25 +61,6 @@ extension FileSystemClient {
         return items
     }
 
-    /// Processes a single file item URL by checking its directory status
-    /// and recursively loading sub-items if necessary.
-    private func processFileItem(_ itemURL: URL) throws -> [FileItem] {
-        let resourceKeys: Set<URLResourceKey> = [.isDirectoryKey, .isAliasFileKey]
-        let resourceValues = try itemURL.resourceValues(forKeys: resourceKeys)
-
-        if resourceValues.isAliasFile == true {
-            return []
-        }
-
-        if resourceValues.isDirectory == true {
-            return [FileItem(url: itemURL, children: try { [weak self] in
-                try self?.loadFiles(fromURL: itemURL) ?? []
-            }())]
-        } else {
-            return [FileItem(url: itemURL, children: nil, fileSystemClient: self)]
-        }
-    }
-
     /// Recursively updates `FileItem` children to match the actual file system, adding or deleting as necessary.
     /// - Parameter fileItem: The `FileItem` to update
     /// - Returns: Boolean indicating if any changes were made
@@ -113,9 +94,35 @@ extension FileSystemClient {
     }
 
     /// Fetches and returns the contents of a directory from a FileItem's URL, standardized.
-    private func fetchDirectoryContents(fileItem: FileItem) throws -> [URL] {
-        try fileManager.contentsOfDirectory(at: fileItem.url.resolvingSymlinksInPath(),
-                                            includingPropertiesForKeys: nil).map { $0.standardized }
+    func fetchDirectoryContents(fileItem: FileItem) throws -> [URL] {
+        var results = [URL]()
+        guard let dir = opendir(fileItem.url.path) else {
+            throw NSError(domain: NSPOSIXErrorDomain,
+                          code: Int(errno),
+                          userInfo: [NSLocalizedDescriptionKey: "Unable to open directory: \(fileItem.url.path)"])
+        }
+        defer { closedir(dir) }
+
+        while let entry = readdir(dir) {
+            guard let name = withUnsafePointer(to: &entry.pointee.d_name, {
+                $0.withMemoryRebound(to: Int8.self, capacity: Int(NAME_MAX)) {
+                    String(validatingUTF8: $0)
+                }
+            }), name != ".", name != ".." else {
+                continue
+            }
+
+            let entryURL = fileItem.url.appendingPathComponent(name)
+            var statInfo = stat()
+            if stat(entryURL.path, &statInfo) == 0 {
+                // Check if it's a directory or a regular file (S_IFDIR or S_IFREG)
+                if (statInfo.st_mode & S_IFMT) == S_IFDIR || (statInfo.st_mode & S_IFMT) == S_IFREG {
+                    results.append(entryURL.standardized)
+                }
+            }
+        }
+
+        return results
     }
 
     /// Handles the deletion of `FileItem` children that no longer exist in the file system.

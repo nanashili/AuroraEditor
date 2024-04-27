@@ -130,7 +130,7 @@ extension FileSystemTableViewCell: NSTextFieldDelegate {
         guard newName != fileItem.fileName else { return true }
 
         guard !newName.isEmpty && newName.isValidFilename &&
-              !FileSystemClient.FileItem.fileManger.fileExists(atPath:
+                !LowLevelFileManager().fileExists(atPath:
                     fileItem.url.deletingLastPathComponent().appendingPathComponent(newName).path)
         else { return false }
 
