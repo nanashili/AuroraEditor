@@ -24,23 +24,7 @@ class AuroraDataStorage: ObservableObject {
 
     // Open sheets in the editor
     @Published
-    var showStashChangesSheet: Bool = false {
-        didSet { update() }
-    }
-    @Published
-    var showRenameBranchSheet: Bool = false {
-        didSet { update() }
-    }
-    @Published
-    var showAddRemoteView: Bool = false {
-        didSet { update() }
-    }
-    @Published
-    var showBranchCreationSheet: Bool = false {
-        didSet { update() }
-    }
-    @Published
-    var showTagCreationSheet: Bool = false {
+    var activeSheet: ActiveSheet? = nil {
         didSet { update() }
     }
 

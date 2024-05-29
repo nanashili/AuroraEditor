@@ -205,7 +205,7 @@ final class AuroraEditorWindowController: NSWindowController, ObservableObject {
             alert.addButton(withTitle: "OK")
             alert.runModal()
         } else {
-            workspace.data.showStashChangesSheet.toggle()
+            workspace.data.activeSheet = .stashChanges
         }
     }
 

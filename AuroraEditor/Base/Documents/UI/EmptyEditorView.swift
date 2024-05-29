@@ -8,6 +8,9 @@
 
 import SwiftUI
 
+/// A view representing an empty editor.
+///
+/// Use `EmptyEditorView` to display a message when there is no content in the editor.
 struct EmptyEditorView: View {
     var body: some View {
         ZStack {

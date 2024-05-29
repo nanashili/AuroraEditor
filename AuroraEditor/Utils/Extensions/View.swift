@@ -30,4 +30,10 @@ internal extension View {
                                                                   size: fontSize)!,
                                                      lineHeight: lineHeight))
     }
+
+    func presentSheet(_ sheet: Binding<ActiveSheet?>, sheetType: ActiveSheet) -> some View {
+        self.onTapGesture {
+            sheet.wrappedValue = sheetType
+        }
+    }
 }

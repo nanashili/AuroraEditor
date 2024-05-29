@@ -96,7 +96,7 @@ extension WorkspaceDocument {
 
             // MARK: Source Control menu
             Command(name: "Stash Changes", command: {
-                self.data.showStashChangesSheet.toggle()
+                self.data.activeSheet = .stashChanges
             }),
             Command(name: "Discard Project Changes", command: {
                 self.broadcaster.broadcast(

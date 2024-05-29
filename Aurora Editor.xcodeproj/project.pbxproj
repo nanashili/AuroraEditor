@@ -558,6 +558,11 @@
 		93F0066928A757670038E5B7 /* FileSystemClient+FileIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F0066828A757670038E5B7 /* FileSystemClient+FileIndex.swift */; };
 		93F73D0D28A0D9FD00E67DDE /* WorkspaceDocument+Tabs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F73D0C28A0D9FD00E67DDE /* WorkspaceDocument+Tabs.swift */; };
 		9C3E1A07284E8E020042BEC0 /* WelcomeModuleExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C3E1A06284E8E020042BEC0 /* WelcomeModuleExtensions.swift */; };
+		A00960BD2C07C0AA0047D6AA /* TabViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00960BC2C07C0AA0047D6AA /* TabViews.swift */; };
+		A00960BF2C07C18C0047D6AA /* ActiveSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00960BE2C07C18C0047D6AA /* ActiveSheet.swift */; };
+		A00960C12C07C46E0047D6AA /* ExtensionDynamicData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00960C02C07C46E0047D6AA /* ExtensionDynamicData.swift */; };
+		A00960C32C07EE620047D6AA /* TabBarItemCloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00960C22C07EE620047D6AA /* TabBarItemCloseButton.swift */; };
+		A00960C52C07F0880047D6AA /* TabBarItemPinIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00960C42C07F0880047D6AA /* TabBarItemPinIcon.swift */; };
 		A0142EF62ACB4E490002F95D /* UpdateEditorRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0142EF52ACB4E490002F95D /* UpdateEditorRepository.swift */; };
 		A0142EFE2ACB64AA0002F95D /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = A0142EFD2ACB64AA0002F95D /* ZIPFoundation */; };
 		A0142F012ACB6AC90002F95D /* UpdateLoadingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0142F002ACB6AC90002F95D /* UpdateLoadingState.swift */; };
@@ -1107,7 +1112,7 @@
 		2B5B25522885D9B9009C7384 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = SOURCE_ROOT; };
 		2B5B25542885D9C3009C7384 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = SOURCE_ROOT; };
 		2B5CAC812B87E701006B6C66 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
-		2B615AB62BC85A4300A5457F /* ExtensionCustomViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionCustomViewModel.swift; sourceTree = "<group>"; };
+		2B615AB62BC85A4300A5457F /* ExtensionCustomViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ExtensionCustomViewModel.swift; path = ../UI/ExtensionCustomViewModel.swift; sourceTree = "<group>"; };
 		2B615AB92BC865B500A5457F /* ExtensionOrWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionOrWebView.swift; sourceTree = "<group>"; };
 		2B615ABB2BC865E400A5457F /* ExtensionViewStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionViewStorage.swift; sourceTree = "<group>"; };
 		2B71C0A32874AD61008E0859 /* AuroraProject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuroraProject.swift; sourceTree = "<group>"; };
@@ -1224,6 +1229,11 @@
 		93F0066828A757670038E5B7 /* FileSystemClient+FileIndex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileSystemClient+FileIndex.swift"; sourceTree = "<group>"; };
 		93F73D0C28A0D9FD00E67DDE /* WorkspaceDocument+Tabs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WorkspaceDocument+Tabs.swift"; sourceTree = "<group>"; };
 		9C3E1A06284E8E020042BEC0 /* WelcomeModuleExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeModuleExtensions.swift; sourceTree = "<group>"; };
+		A00960BC2C07C0AA0047D6AA /* TabViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViews.swift; sourceTree = "<group>"; };
+		A00960BE2C07C18C0047D6AA /* ActiveSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveSheet.swift; sourceTree = "<group>"; };
+		A00960C02C07C46E0047D6AA /* ExtensionDynamicData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDynamicData.swift; sourceTree = "<group>"; };
+		A00960C22C07EE620047D6AA /* TabBarItemCloseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItemCloseButton.swift; sourceTree = "<group>"; };
+		A00960C42C07F0880047D6AA /* TabBarItemPinIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItemPinIcon.swift; sourceTree = "<group>"; };
 		A0142EF52ACB4E490002F95D /* UpdateEditorRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateEditorRepository.swift; sourceTree = "<group>"; };
 		A0142F002ACB6AC90002F95D /* UpdateLoadingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateLoadingState.swift; sourceTree = "<group>"; };
 		A0142F022ACB6ADF0002F95D /* UpdateErrorState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateErrorState.swift; sourceTree = "<group>"; };
@@ -1386,6 +1396,7 @@
 				93ACA43428C32F9100672994 /* AuroraEditorWindow */,
 				93ACA43528C32FC000672994 /* WorkspaceDocument */,
 				D7E201AD27E8B3C000CB86D0 /* String+Ranges.swift */,
+				A00960BE2C07C18C0047D6AA /* ActiveSheet.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2087,6 +2098,7 @@
 		20D837BF289A7ACD00D91D05 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				2B615AB62BC85A4300A5457F /* ExtensionCustomViewModel.swift */,
 				0463E51027FCC1DF00806D5C /* AuroraEditorAPI.swift */,
 				20D837C1289A7ACD00D91D05 /* DownloadedPlugin.swift */,
 				20D837BE289A7ACD00D91D05 /* ExtensionsManager.swift */,
@@ -2095,6 +2107,7 @@
 				2B7C8CC52BC5B3160061DE0D /* JSSupport.swift */,
 				2BDE0F762BC8874800C20B85 /* JSTimerSupport.swift */,
 				2B615ABB2BC865E400A5457F /* ExtensionViewStorage.swift */,
+				A00960C02C07C46E0047D6AA /* ExtensionDynamicData.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -2656,6 +2669,7 @@
 				6CDA84AA284C0E4A00C1CC3A /* TabBarItemButtonStyle.swift */,
 				DE6405A52817734700881FDF /* TabBarNative.swift */,
 				DE513F53281DE5D0002260B9 /* TabBarXcode.swift */,
+				A00960BC2C07C0AA0047D6AA /* TabViews.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -2857,7 +2871,6 @@
 		20D83913289A811600D91D05 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				2B615AB62BC85A4300A5457F /* ExtensionCustomViewModel.swift */,
 				28B8F883280FFE4600596236 /* NSTableView+Background.swift */,
 				2B615AB92BC865B500A5457F /* ExtensionOrWebView.swift */,
 			);
@@ -3327,6 +3340,8 @@
 			children = (
 				287776EE27E3515300D46668 /* TabBarItem.swift */,
 				936312E628CCC7AE004CD24B /* TabBarItemIcon.swift */,
+				A00960C22C07EE620047D6AA /* TabBarItemCloseButton.swift */,
+				A00960C42C07F0880047D6AA /* TabBarItemPinIcon.swift */,
 			);
 			path = TabBarItem;
 			sourceTree = "<group>";
@@ -4338,6 +4353,7 @@
 				2093CD4E289AA0A9003A88DD /* FeedbackToolbar.swift in Sources */,
 				2093CD52289AA0AE003A88DD /* FeedbackType.swift in Sources */,
 				2093CD4F289AA0A9003A88DD /* FeedbackView.swift in Sources */,
+				A00960C12C07C46E0047D6AA /* ExtensionDynamicData.swift in Sources */,
 				2093CD53289AA0B5003A88DD /* FeedbackWindowController.swift in Sources */,
 				2BDFA91728D10B9200980385 /* FileCreationGridView.swift in Sources */,
 				2BDFA91828D10B9200980385 /* FileCreationModel.swift in Sources */,
@@ -4400,6 +4416,7 @@
 				2093CDB6289AA1A2003A88DD /* GitlabLoginView.swift in Sources */,
 				2093CD39289AA08F003A88DD /* GitlabOAuthConfiguration.swift in Sources */,
 				2093CD3C289AA08F003A88DD /* GitlabOAuthRouter.swift in Sources */,
+				A00960C32C07EE620047D6AA /* TabBarItemCloseButton.swift in Sources */,
 				2093CD3E289AA095003A88DD /* GitlabUser.swift in Sources */,
 				2093CD23289AA084003A88DD /* GitRouter.swift in Sources */,
 				2093CD11289AA054003A88DD /* GitUIModel.swift in Sources */,
@@ -4532,6 +4549,7 @@
 				2093CD9E289AA15F003A88DD /* Providers.swift in Sources */,
 				2093CD27289AA084003A88DD /* PublicKey.swift in Sources */,
 				2093CD2C289AA089003A88DD /* PullRequest.swift in Sources */,
+				A00960BF2C07C18C0047D6AA /* ActiveSheet.swift in Sources */,
 				2093CD29289AA084003A88DD /* PullRequestRouter.swift in Sources */,
 				2036DD5528DB3DB5003BECB7 /* Queue.swift in Sources */,
 				20EBB507280C32D300F3A5DA /* QuickHelpInspector.swift in Sources */,
@@ -4601,6 +4619,7 @@
 				A0142F0D2ACB71830002F95D /* Int64.swift in Sources */,
 				2093CC92289A9FF5003A88DD /* StatusBarEncodingSelector.swift in Sources */,
 				2093CC91289A9FF5003A88DD /* StatusBarIndentSelector.swift in Sources */,
+				A00960BD2C07C0AA0047D6AA /* TabViews.swift in Sources */,
 				2093CC94289A9FF5003A88DD /* StatusBarLineEndSelector.swift in Sources */,
 				2B5CAC822B87E701006B6C66 /* Log.swift in Sources */,
 				2093CC9A289A9FFD003A88DD /* StatusBarMaximizeButton.swift in Sources */,
@@ -4659,6 +4678,7 @@
 				A03E21F92B0D542B008A6A77 /* CachingImageView.swift in Sources */,
 				93AD8B0A28FD457600317072 /* ThemeJsonLoader+AuroraTheme(Old).swift in Sources */,
 				9384904628FB9CCB006FB263 /* ThemeJsonLoader+TextMate.swift in Sources */,
+				A00960C52C07F0880047D6AA /* TabBarItemPinIcon.swift in Sources */,
 				9384904428FB9C95006FB263 /* ThemeJsonLoader+VSCode.swift in Sources */,
 				93CAE19828F6F11200454C6F /* ThemeJsonLoader.swift in Sources */,
 				20FACF6A2AB60E1C00B09012 /* IssueType.swift in Sources */,
@@ -4772,7 +4792,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 4V2D72S45C;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -4796,7 +4816,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 4V2D72S45C;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -4818,7 +4838,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 4V2D72S45C;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -4841,7 +4861,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 4V2D72S45C;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;

@@ -114,7 +114,6 @@ struct ProjectCommitHistoryView: View {
                             Button("New Branch from \"\(commit.sha)\"...") {
                                 workspace.data.branchRevision = commit.sha
                                 workspace.data.branchRevisionDescription = commit.summary
-                                workspace.data.showBranchCreationSheet.toggle()
                             }
                             Button("Cherry-Pick Tag \"\(commit.sha)\"...") {}.disabled(true)
                         }

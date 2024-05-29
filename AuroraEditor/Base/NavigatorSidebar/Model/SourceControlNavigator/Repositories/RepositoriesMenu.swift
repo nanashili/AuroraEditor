@@ -75,7 +75,7 @@ final class RepositoriesMenu: NSMenu {
     private func createNewBranch() {
         guard let branch = item as? RepoBranch else { return }
 
-        workspace?.data.showBranchCreationSheet.toggle()
+        workspace?.data.activeSheet = .branchCreation
         workspace?.data.branchRevision = branch.name
     }
 
@@ -101,12 +101,12 @@ final class RepositoriesMenu: NSMenu {
             Log.fault("Unable to fetch commits for branch: \(branch.name)")
         }
 
-        workspace?.data.showTagCreationSheet.toggle()
+        workspace?.data.activeSheet = .tagCreation
     }
 
     @objc
     func addNewRemote() {
-        workspace?.data.showAddRemoteView.toggle()
+        workspace?.data.activeSheet = .addRemote
     }
 
     @objc func switchToBranch(_ sender: Any?) {
@@ -120,7 +120,7 @@ final class RepositoriesMenu: NSMenu {
         guard let branch = item as? RepoBranch else { return }
 
         workspace?.data.currentlySelectedBranch = branch.name
-        workspace?.data.showRenameBranchSheet.toggle()
+        workspace?.data.activeSheet = .renameBranch
     }
 
     @objc

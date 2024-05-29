@@ -113,12 +113,12 @@ struct BranchCommitHistoryView: View {
                         Group {
                             Button("Tag \"\(commit.sha)\"...") {
                                 workspace.data.commitHash = commit.sha
-                                workspace.data.showTagCreationSheet.toggle()
+                                workspace.data.activeSheet = .tagCreation
                             }
                             Button("New Branch from \"\(commit.sha)\"...") {
                                 workspace.data.branchRevision = commit.sha
                                 workspace.data.branchRevisionDescription = commit.summary
-                                workspace.data.showBranchCreationSheet.toggle()
+                                workspace.data.activeSheet = .branchCreation
                             }
                             Button("Cherry-Pick Tag \"\(commit.sha)\"...") {}.disabled(true)
                         }
