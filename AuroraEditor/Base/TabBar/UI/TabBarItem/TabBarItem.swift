@@ -57,18 +57,20 @@ struct TabBarItem: View {
     }
 
     func closeAction() {
-        if prefs.preferences.general.tabBarStyle == .native {
-            isAppeared = false
-        }
-        withAnimation(
-            .easeOut(
-                duration:
-                    prefs.preferences.general.tabBarStyle == .native
-                ? 0.15
-                : 0.20
-            )
-        ) {
-            workspace.closeTab(item: item.tabID)
+        if NSEvent.modifierFlags.contains(.option) {
+            guard let hoveredTabID = workspace.hoveredTabId else { return }
+            workspace.closeAllExceptHoveredTab(hoveredTabID: hoveredTabID)
+        } else {
+            if prefs.preferences.general.tabBarStyle == .native {
+                isAppeared = false
+            }
+            withAnimation(
+                .easeOut(
+                    duration: prefs.preferences.general.tabBarStyle == .native ? 0.15 : 0.20
+                )
+            ) {
+                workspace.closeTab(item: item.tabID)
+            }
         }
     }
 
@@ -140,6 +142,7 @@ struct TabBarItem: View {
         .contentShape(Rectangle()) // Make entire area clickable.
         .onHover { hover in
             isHovering = hover
+            workspace.hoveredTabId = hover ? item.tabID : nil
             DispatchQueue.main.async {
                 if hover {
                     NSCursor.arrow.push()

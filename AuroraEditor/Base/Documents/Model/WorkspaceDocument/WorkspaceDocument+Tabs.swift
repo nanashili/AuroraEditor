@@ -17,76 +17,69 @@ extension WorkspaceDocument {
     /// Opens new tab
     /// - Parameter item: any item which can be represented as a tab
     func openTab(item: TabBarItemRepresentable) {
-        // open the tab if it isn't already open
-        if !selectionState.openedTabs.contains(item.tabID) {
-            switch item.tabID {
-            case .codeEditor:
-                guard let file = item as? FileSystemClient.FileItem else { return }
-                self.openFile(item: file)
-            case .extensionInstallation:
-                guard let plugin = item as? Plugin else { return }
-                self.openExtension(item: plugin)
-            case .webTab:
-                guard let webTab = item as? WebTab else { return }
-                self.openWebTab(item: webTab)
-            case .projectHistory:
-                guard let projectCommitHistoryTab = item as? ProjectCommitHistory else { return }
-                self.openProjectCommitHistory(item: projectCommitHistoryTab)
-            case .branchHistory:
-                guard let branchCommitHistoryTab = item as? BranchCommitHistory else { return }
-                self.openBranchCommitHistory(item: branchCommitHistoryTab)
-            case .actionsWorkflow:
-                guard let actionsWorkflowTab = item as? Workflow else { return }
-                self.openActionsWorkflow(item: actionsWorkflowTab)
-            case .extensionCustomView:
-                guard let extensionCustomViewTab = item as? ExtensionCustomViewModel else { return }
-                self.openExtensionCustomView(item: extensionCustomViewTab)
-            }
+        guard !selectionState.openedTabs.contains(item.tabID) else { return }
+
+        switch item.tabID {
+        case .codeEditor:
+            guard let file = item as? FileSystemClient.FileItem else { return }
+            openFile(item: file)
+        case .extensionInstallation:
+            guard let plugin = item as? Plugin else { return }
+            openExtension(item: plugin)
+        case .webTab:
+            guard let webTab = item as? WebTab else { return }
+            openWebTab(item: webTab)
+        case .projectHistory:
+            guard let projectCommitHistoryTab = item as? ProjectCommitHistory else { return }
+            openProjectCommitHistory(item: projectCommitHistoryTab)
+        case .branchHistory:
+            guard let branchCommitHistoryTab = item as? BranchCommitHistory else { return }
+            openBranchCommitHistory(item: branchCommitHistoryTab)
+        case .actionsWorkflow:
+            guard let actionsWorkflowTab = item as? Workflow else { return }
+            openActionsWorkflow(item: actionsWorkflowTab)
+        case .extensionCustomView:
+            guard let extensionCustomViewTab = item as? ExtensionCustomViewModel else { return }
+            openExtensionCustomView(item: extensionCustomViewTab)
         }
+
         updateNewlyOpenedTabs(item: item)
-        // select the tab
         selectionState.selectedId = item.tabID
     }
 
     /// Updates the opened tabs and temporary tab.
     /// - Parameter item: The item to use to update the tab state.
     private func updateNewlyOpenedTabs(item: TabBarItemRepresentable) {
-        if !selectionState.openedTabs.contains(item.tabID) {
-            // If this isn't opened then we do the temp tab functionality
-
-            // But, if there is already a temporary tab, close it first
-            if selectionState.temporaryTab != nil {
-                if let index = selectionState.openedTabs.firstIndex(of: selectionState.temporaryTab!) {
-                    closeTemporaryTab()
-                    selectionState.openedTabs[index] = item.tabID
-                } else {
-                    selectionState.openedTabs.append(item.tabID)
-                }
-            } else {
-                selectionState.openedTabs.append(item.tabID)
-            }
-
-            selectionState.previousTemporaryTab = selectionState.temporaryTab
-            selectionState.temporaryTab = item.tabID
+        if let temporaryTab = selectionState.temporaryTab,
+           let index = selectionState.openedTabs.firstIndex(of: temporaryTab) {
+            closeTemporaryTab()
+            selectionState.openedTabs[index] = item.tabID
+        } else {
+            selectionState.openedTabs.append(item.tabID)
         }
+
+        selectionState.previousTemporaryTab = selectionState.temporaryTab
+        selectionState.temporaryTab = item.tabID
     }
 
     private func openFile(item: FileSystemClient.FileItem) {
-        if !selectionState.openFileItems.contains(item) {
-            selectionState.openFileItems.append(item)
-        }
-        DispatchQueue.main.async {
-            let pathExtention = item.url.pathExtension
+        guard !selectionState.openFileItems.contains(item) else { return }
+
+        selectionState.openFileItems.append(item)
+
+        DispatchQueue.global(qos: .userInitiated).async {
+            let pathExtension = item.url.pathExtension
             do {
                 let codeFile = try CodeFileDocument(
                     for: item.url,
                     withContentsOf: item.url,
-                    ofType: pathExtention
+                    ofType: pathExtension
                 )
-                self.selectionState.openedCodeFiles[item] = codeFile
+                DispatchQueue.main.async {
+                    self.selectionState.openedCodeFiles[item] = codeFile
+                }
 
                 let fileData = try? Data(contentsOf: item.url)
-                // Let the extensions know we opened a file (from a workspace)
                 ExtensionsManager.shared.sendEvent(
                     event: "didOpen",
                     parameters: [
@@ -95,8 +88,8 @@ extension WorkspaceDocument {
                         "contents": String(data: fileData ?? Data(), encoding: .utf8) ?? ""
                     ]
                 )
-            } catch let err {
-                Log.fault("\(err)")
+            } catch {
+                Log.fault("\(error)")
             }
         }
     }
@@ -132,93 +125,83 @@ extension WorkspaceDocument {
 
     /// Closes single tab
     /// - Parameter id: tab bar item's identifier to be closed
-    func closeTab(item id: TabBarItemID) { // swiftlint:disable:this cyclomatic_complexity
+    func closeTab(item id: TabBarItemID) {
         if id == selectionState.temporaryTab {
             selectionState.previousTemporaryTab = selectionState.temporaryTab
             selectionState.temporaryTab = nil
         }
 
         guard let idx = selectionState.openedTabs.firstIndex(of: id) else { return }
-        let closedID = selectionState.openedTabs.remove(at: idx)
-        guard closedID == id else { return }
+        selectionState.openedTabs.remove(at: idx)
 
         switch id {
         case .codeEditor:
             guard let item = selectionState.getItemByTab(id: id) as? FileSystemClient.FileItem else { return }
             closeFileTab(item: item)
-
-            // Let the extensions know we closed a file
             ExtensionsManager.shared.sendEvent(
                 event: "didClose",
                 parameters: ["file": item.url.relativeString]
             )
-
         case .extensionInstallation:
             guard let item = selectionState.getItemByTab(id: id) as? Plugin else { return }
             closeExtensionTab(item: item)
-
         case .webTab:
             guard let item = selectionState.getItemByTab(id: id) as? WebTab else { return }
             closeWebTab(item: item)
-
         case .projectHistory:
             guard let item = selectionState.getItemByTab(id: id) as? ProjectCommitHistory else { return }
             closeProjectCommitHistoryTab(item: item)
-
         case .branchHistory:
             guard let item = selectionState.getItemByTab(id: id) as? BranchCommitHistory else { return }
             closeBranchCommitHistoryTab(item: item)
-
         case .actionsWorkflow:
             guard let item = selectionState.getItemByTab(id: id) as? Workflow else { return }
             closeActionsWorkflowTab(item: item)
-
         case .extensionCustomView:
             guard let item = selectionState.getItemByTab(id: id) as? ExtensionCustomViewModel else { return }
             closeExtensionCustomView(item: item)
-            ExtensionsManager.shared.sendEvent(event: "didCloseExtensionView", parameters: [
-                "view": item
-            ])
+            ExtensionsManager.shared.sendEvent(event: "didCloseExtensionView", parameters: ["view": item])
         }
 
         if selectionState.openedTabs.isEmpty {
             selectionState.selectedId = nil
-        } else if selectionState.selectedId == closedID {
-            // If the closed item is the selected one, then select another tab.
-            if idx == 0 {
-                selectionState.selectedId = selectionState.openedTabs.first
-            } else {
-                selectionState.selectedId = selectionState.openedTabs[idx - 1]
-            }
-        } else {
-            // If the closed item is not the selected one, then do nothing.
+        } else if selectionState.selectedId == id {
+            selectionState.selectedId = idx == 0 ? selectionState.openedTabs.first : selectionState.openedTabs[idx - 1]
         }
     }
 
     /// Closes collection of tab bar items
     /// - Parameter items: items to be closed
     func closeTabs<Items>(items: Items) where Items: Collection, Items.Element == TabBarItemID {
-        for item in items {
-            closeTab(item: item)
-        }
+        items.forEach { closeTab(item: $0) }
     }
 
     /// Closes tabs according to predicator
     /// - Parameter predicate: predicator which returns whether tab should be closed based on its identifier
     func closeTab(where predicate: (TabBarItemID) -> Bool) {
-        closeTabs(items: selectionState.openedTabs.filter(predicate))
+        let itemsToClose = selectionState.openedTabs.filter(predicate)
+        closeTabs(items: itemsToClose)
     }
 
     /// Closes tabs after specified identifier
     /// - Parameter id: identifier after which tabs will be closed
     func closeTabs(after id: TabBarItemID) {
         guard let startIdx = selectionState.openFileItems.firstIndex(where: { $0.tabID == id }) else {
-            assert(false, "Expected file item to be present in openFileItems")
+            assertionFailure("Expected file item to be present in openFileItems")
             return
         }
 
         let range = selectionState.openedTabs[(startIdx + 1)...]
         closeTabs(items: range)
+    }
+
+    func closeAllExceptHoveredTab(hoveredTabID: TabBarItemID) {
+        let tabsToClose = selectionState.openedTabs.filter { $0 != hoveredTabID }
+        closeTabs(items: tabsToClose)
+
+        if selectionState.selectedId != hoveredTabID {
+            selectionState.selectedId = hoveredTabID
+        }
     }
 
     /// Closes an open temporary tab, does not save the temporary tab's file.
@@ -228,90 +211,95 @@ extension WorkspaceDocument {
 
         switch id {
         case .codeEditor:
-            guard let item = selectionState.getItemByTab(id: id)
-                    as? FileSystemClient.FileItem else { return }
-            selectionState.openedCodeFiles.removeValue(forKey: item)
-            if let idx = selectionState.openFileItems.firstIndex(of: item) {
-                Log.info("Removing temp tab")
-                selectionState.openFileItems.remove(at: idx)
+            if let item = selectionState.getItemByTab(id: id) as? FileSystemClient.FileItem {
+                selectionState.openedCodeFiles.removeValue(forKey: item)
+                if let idx = selectionState.openFileItems.firstIndex(of: item) {
+                    Log.info("Removing temp tab")
+                    selectionState.openFileItems.remove(at: idx)
+                }
             }
         case .extensionInstallation:
-            guard let item = selectionState.getItemByTab(id: id)
-                    as? Plugin else { return }
-            closeExtensionTab(item: item)
+            if let item = selectionState.getItemByTab(id: id) as? Plugin {
+                closeExtensionTab(item: item)
+            }
         case .webTab:
-            guard let item = selectionState.getItemByTab(id: id)
-                    as? WebTab else { return }
-            closeWebTab(item: item)
+            if let item = selectionState.getItemByTab(id: id) as? WebTab {
+                closeWebTab(item: item)
+            }
         case .projectHistory:
-            guard let item = selectionState.getItemByTab(id: id)
-                    as? ProjectCommitHistory else { return }
-            closeProjectCommitHistoryTab(item: item)
+            if let item = selectionState.getItemByTab(id: id) as? ProjectCommitHistory {
+                closeProjectCommitHistoryTab(item: item)
+            }
         case .branchHistory:
-            guard let item = selectionState.getItemByTab(id: id)
-                    as? BranchCommitHistory else { return }
-            closeBranchCommitHistoryTab(item: item)
+            if let item = selectionState.getItemByTab(id: id) as? BranchCommitHistory {
+                closeBranchCommitHistoryTab(item: item)
+            }
         case .actionsWorkflow:
-            guard let item = selectionState.getItemByTab(id: id)
-                    as? Workflow else { return }
-            closeActionsWorkflowTab(item: item)
+            if let item = selectionState.getItemByTab(id: id) as? Workflow {
+                closeActionsWorkflowTab(item: item)
+            }
         case .extensionCustomView:
-            guard let item = selectionState.getItemByTab(id: id) as? ExtensionCustomViewModel else { return }
-            closeExtensionCustomView(item: item)
+            if let item = selectionState.getItemByTab(id: id) as? ExtensionCustomViewModel {
+                closeExtensionCustomView(item: item)
+            }
         }
 
-        guard let openFileItemIdx = selectionState
-            .openFileItems
-            .firstIndex(where: { $0.tabID == id }) else { return }
-        selectionState.openFileItems.remove(at: openFileItemIdx)
+        if let openFileItemIdx = selectionState.openFileItems.firstIndex(where: { $0.tabID == id }) {
+            selectionState.openFileItems.remove(at: openFileItemIdx)
+        }
     }
 
     /// Closes an open tab, save text files only.
     /// Removes the tab item from `openedCodeFiles`, `openedExtensions`, and `openFileItems`.
     private func closeFileTab(item: FileSystemClient.FileItem) {
-        let file = selectionState.openedCodeFiles.removeValue(forKey: item)
-        if file?.typeOfFile != .image {
-            file?.saveFileDocument()
+        if let file = selectionState.openedCodeFiles.removeValue(forKey: item), file.typeOfFile != .image {
+            file.saveFileDocument()
         }
 
-        guard let idx = selectionState.openFileItems.firstIndex(of: item) else { return }
-        selectionState.openFileItems.remove(at: idx)
+        if let idx = selectionState.openFileItems.firstIndex(of: item) {
+            selectionState.openFileItems.remove(at: idx)
+        }
     }
 
     private func closeExtensionTab(item: Plugin) {
-        guard let idx = selectionState.openedExtensions.firstIndex(of: item) else { return }
-        selectionState.openedExtensions.remove(at: idx)
+        if let idx = selectionState.openedExtensions.firstIndex(of: item) {
+            selectionState.openedExtensions.remove(at: idx)
+        }
     }
 
     private func closeWebTab(item: WebTab) {
-        guard let idx = selectionState.openedWebTabs.firstIndex(of: item) else { return }
-        selectionState.openedWebTabs.remove(at: idx)
+        if let idx = selectionState.openedWebTabs.firstIndex(of: item) {
+            selectionState.openedWebTabs.remove(at: idx)
+        }
     }
 
     private func closeProjectCommitHistoryTab(item: ProjectCommitHistory) {
-        guard let idx = selectionState.openedProjectCommitHistory.firstIndex(of: item) else { return }
-        selectionState.openedProjectCommitHistory.remove(at: idx)
+        if let idx = selectionState.openedProjectCommitHistory.firstIndex(of: item) {
+            selectionState.openedProjectCommitHistory.remove(at: idx)
+        }
     }
 
     private func closeBranchCommitHistoryTab(item: BranchCommitHistory) {
-        guard let idx = selectionState.openedBranchCommitHistory.firstIndex(of: item) else { return }
-        selectionState.openedBranchCommitHistory.remove(at: idx)
+        if let idx = selectionState.openedBranchCommitHistory.firstIndex(of: item) {
+            selectionState.openedBranchCommitHistory.remove(at: idx)
+        }
     }
 
     private func closeActionsWorkflowTab(item: Workflow) {
-        guard let idx = selectionState.openedActionsWorkflow.firstIndex(of: item) else { return }
-        selectionState.openedActionsWorkflow.remove(at: idx)
+        if let idx = selectionState.openedActionsWorkflow.firstIndex(of: item) {
+            selectionState.openedActionsWorkflow.remove(at: idx)
+        }
     }
 
     private func closeExtensionCustomView(item: ExtensionCustomViewModel) {
-        guard let idx = selectionState.openedCustomExtensionViews.firstIndex(of: item) else { return }
-        selectionState.openedCustomExtensionViews.remove(at: idx)
+        if let idx = selectionState.openedCustomExtensionViews.firstIndex(of: item) {
+            selectionState.openedCustomExtensionViews.remove(at: idx)
+        }
     }
 
     /// Makes the temporary tab permanent when a file save or edit happens.
     @objc func convertTemporaryTab() {
-        if selectionState.selectedId == selectionState.temporaryTab &&
-            selectionState.temporaryTab != nil {
+        if selectionState.selectedId == selectionState.temporaryTab && selectionState.temporaryTab != nil {
             selectionState.previousTemporaryTab = selectionState.temporaryTab
             selectionState.temporaryTab = nil
         }

@@ -32,6 +32,9 @@ class WorkspaceDocument: NSDocument, ObservableObject, NSToolbarDelegate {
     var notificationList: [String] = []
 
     @Published
+    var hoveredTabId: TabBarItemID? = nil
+
+    @Published
     var warningList: [String] = []
 
     @Published

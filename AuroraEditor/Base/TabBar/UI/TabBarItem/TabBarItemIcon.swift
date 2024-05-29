@@ -50,7 +50,7 @@ extension TabBarItem {
                     .frame(width: 0, height: 0)
                     .padding(0)
                     .opacity(0)
-                    .keyboardShortcut("w", modifiers: [.command])
+                    .keyboardShortcut("w", modifiers: [.command, .option])
                 }
                 // Switch Tab Shortcut:
                 // Using an invisible button to contain the keyboard shortcut is simply
@@ -69,7 +69,14 @@ extension TabBarItem {
                 )
                 .background(.blue)
                 // Close button.
-                Button(action: closeAction) {
+                Button(action: {
+                    if NSEvent.modifierFlags.contains(.option) {
+                        guard let hoveredTabID = workspace.hoveredTabId else { return }
+                        workspace.closeAllExceptHoveredTab(hoveredTabID: hoveredTabID)
+                    } else {
+                        closeAction()
+                    }
+                }) {
                     if prefs.preferences.general.tabBarStyle == .xcode {
                         Image(systemName: "xmark")
                             .font(.system(size: 11.2, weight: .regular, design: .rounded))
