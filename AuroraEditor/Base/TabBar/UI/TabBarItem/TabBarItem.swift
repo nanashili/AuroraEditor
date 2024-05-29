@@ -156,7 +156,9 @@ struct TabBarItem: View {
     var body: some View {
         Button(
             action: switchAction,
-            label: { content }
+            label: {
+                content
+            }
         )
         .buttonStyle(TabBarItemButtonStyle())
         .simultaneousGesture(

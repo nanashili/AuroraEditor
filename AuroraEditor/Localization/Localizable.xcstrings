@@ -2593,6 +2593,12 @@
     "Add Account" : {
 
     },
+    "Add Bookmark" : {
+
+    },
+    "Add Bookmark to Another List" : {
+
+    },
     "Add exisiting remote:" : {
 
     },
@@ -2651,6 +2657,9 @@
 
     },
     "Blink cursor" : {
+
+    },
+    "Bookmarks" : {
 
     },
     "Branch" : {
@@ -2719,13 +2728,10 @@
     "Close" : {
 
     },
-    "Close All" : {
+    "Close All Tabs" : {
 
     },
     "Close Other Tabs" : {
-
-    },
-    "Close Tab" : {
 
     },
     "Close Tabs to the Right" : {
@@ -2807,6 +2813,9 @@
 
     },
     "Cursor" : {
+
+    },
+    "Delete Bookmark" : {
 
     },
     "Description" : {
@@ -5921,6 +5930,9 @@
     "Other" : {
 
     },
+    "Pin Tab" : {
+
+    },
     "Please describe the issue:" : {
 
     },
@@ -7564,6 +7576,9 @@
 
     },
     "Rename" : {
+
+    },
+    "Rename Bookmark...." : {
 
     },
     "Rename branch:" : {
@@ -44840,6 +44855,9 @@
 
     },
     "Universal" : {
+
+    },
+    "Unpin Tab" : {
 
     },
     "UPDATE" : {

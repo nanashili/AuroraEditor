@@ -30,19 +30,13 @@ extension TabBarItem {
                 .lineLimit(1)
         }
         .frame(
-            // To horizontally max-out the given width area ONLY in native tab bar style.
             maxWidth: prefs.preferences.general.tabBarStyle == .native ? .infinity : nil,
-            // To max-out the parent (tab bar) area.
             maxHeight: .infinity
         )
         .padding(.horizontal, prefs.preferences.general.tabBarStyle == .native ? 28 : 23)
         .overlay {
             ZStack {
                 if isActive {
-                    // Close Tab Shortcut:
-                    // Using an invisible button to contain the keyboard shortcut is simply
-                    // because the keyboard shortcut has an unexpected bug when working with
-                    // custom buttonStyle. This is an workaround and it works as expected.
                     Button(
                         action: closeAction,
                         label: { EmptyView() }
@@ -52,10 +46,6 @@ extension TabBarItem {
                     .opacity(0)
                     .keyboardShortcut("w", modifiers: [.command, .option])
                 }
-                // Switch Tab Shortcut:
-                // Using an invisible button to contain the keyboard shortcut is simply
-                // because the keyboard shortcut has an unexpected bug when working with
-                // custom buttonStyle. This is an workaround and it works as expected.
                 Button(
                     action: switchAction,
                     label: { EmptyView() }
@@ -68,67 +58,21 @@ extension TabBarItem {
                     modifiers: [.command]
                 )
                 .background(.blue)
-                // Close button.
-                Button(action: {
-                    if NSEvent.modifierFlags.contains(.option) {
-                        guard let hoveredTabID = workspace.hoveredTabId else { return }
-                        workspace.closeAllExceptHoveredTab(hoveredTabID: hoveredTabID)
-                    } else {
-                        closeAction()
-                    }
-                }) {
-                    if prefs.preferences.general.tabBarStyle == .xcode {
-                        Image(systemName: "xmark")
-                            .font(.system(size: 11.2, weight: .regular, design: .rounded))
-                            .frame(width: 16, height: 16)
-                            .foregroundColor(
-                                isActive
-                                ? (
-                                    colorScheme == .dark
-                                    ? .primary
-                                    : Color(nsColor: .controlAccentColor)
-                                )
-                                : .secondary.opacity(0.80)
-                            )
-                    } else {
-                        Image(systemName: "xmark")
-                            .font(.system(size: 9.5, weight: .medium, design: .rounded))
-                            .frame(width: 16, height: 16)
-                    }
-                }
-                .buttonStyle(.borderless)
-                .foregroundColor(isPressingClose ? .primary : .secondary)
-                .background(
-                    colorScheme == .dark
-                    ? Color(nsColor: .white)
-                        .opacity(isPressingClose ? 0.32 : isHoveringClose ? 0.18 : 0)
-                    : (
-                        prefs.preferences.general.tabBarStyle == .xcode
-                        ? Color(nsColor: isActive ? .controlAccentColor : .black)
-                            .opacity(
-                                isPressingClose
-                                ? 0.25
-                                : (isHoveringClose ? (isActive ? 0.10 : 0.06) : 0)
-                            )
-                        : Color(nsColor: .black)
-                            .opacity(isPressingClose ? 0.29 : (isHoveringClose ? 0.11 : 0))
-                    )
+                TabBarItemCloseButton(
+                    closeAction: closeAction,
+                    isActive: isActive,
+                    colorScheme: colorScheme,
+                    prefs: prefs,
+                    isHovering: isHovering
                 )
-                .cornerRadius(2)
-                .accessibilityLabel(Text("Close"))
-                .onHover { hover in
-                    isHoveringClose = hover
-                }
-                .pressAction {
-                    isPressingClose = true
-                } onRelease: {
-                    isPressingClose = false
-                }
-                .opacity(isHovering ? 1 : 0)
-                .animation(.easeInOut(duration: 0.08), value: isHovering)
-                .padding(.leading, prefs.preferences.general.tabBarStyle == .xcode ? 3.5 : 4)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
+        }
+        .overlay {
+            ZStack {
+                TabBarItemPinIcon(prefs: prefs, item: item)
+            }
+            .frame(maxWidth: .infinity, alignment: .trailing)
         }
     }
 }

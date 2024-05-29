@@ -12,6 +12,58 @@ import SwiftUI
 
 extension WorkspaceDocument {
 
+    // MARK: - Tab Actions:
+
+    /// Pins a tab and moves it to the front of the opened tabs.
+    ///
+    /// This function checks if the specified tab item is not already pinned. If it is not pinned,
+    /// it inserts the item into the `pinnedTabs` collection. It then moves the pinned tab to the
+    /// front of the `openedTabs` array to ensure that pinned tabs are always displayed first.
+    ///
+    /// - Parameter item: The identifier of the tab to pin.
+    func pinTab(item: TabBarItemID) {
+        if !selectionState.pinnedTabs.contains(item) {
+            selectionState.pinnedTabs.insert(item)
+
+            // Move the pinned tab to the front of openedTabs
+            if let index = selectionState.openedTabs.firstIndex(of: item) {
+                selectionState.openedTabs.remove(at: index)
+                selectionState.openedTabs.insert(item, at: 0)
+            }
+        }
+    }
+
+    /// Unpins a tab and moves it to the back of the opened tabs.
+    ///
+    /// This function checks if the specified tab item is currently pinned. If it is pinned,
+    /// it removes the item from the `pinnedTabs` collection. It then moves the unpinned tab
+    /// to the back of the `openedTabs` array to ensure that unpinned tabs are displayed after
+    /// all pinned tabs.
+    ///
+    /// - Parameter item: The identifier of the tab to unpin.
+    func unpinTab(item: TabBarItemID) {
+        if selectionState.pinnedTabs.contains(item) {
+            selectionState.pinnedTabs.remove(item)
+
+            // Move the unpinned tab to the back of openedTabs
+            if let index = selectionState.openedTabs.firstIndex(of: item) {
+                let unpinnedTab = selectionState.openedTabs.remove(at: index)
+                selectionState.openedTabs.append(unpinnedTab)
+            }
+        }
+    }
+
+    /// Checks if a tab is pinned.
+    ///
+    /// This function checks if the specified tab item is in the `pinnedTabs` collection,
+    /// indicating that it is currently pinned.
+    ///
+    /// - Parameter item: The identifier of the tab to check.
+    /// - Returns: A Boolean value indicating whether the tab is pinned (`true`) or not (`false`).
+    func isTabPinned(_ item: TabBarItemID) -> Bool {
+        return selectionState.pinnedTabs.contains(item)
+    }
+
     // MARK: Open Tabs
 
     /// Opens new tab
@@ -168,6 +220,8 @@ extension WorkspaceDocument {
         } else if selectionState.selectedId == id {
             selectionState.selectedId = idx == 0 ? selectionState.openedTabs.first : selectionState.openedTabs[idx - 1]
         }
+
+        unpinTab(item: id)
     }
 
     /// Closes collection of tab bar items

@@ -35,7 +35,7 @@ struct TabBarContextMenu: ViewModifier {
     func body(content: Content) -> some View { // swiftlint:disable:this function_body_length
         content.contextMenu(menuItems: {
             Group {
-                Button("Close Tab") {
+                Button("Close") {
                     withAnimation {
                         workspace.closeTab(item: item.tabID)
                     }
@@ -47,6 +47,13 @@ struct TabBarContextMenu: ViewModifier {
                         workspace.closeTab(where: { $0 != item.tabID })
                     }
                 }
+
+                Button("Close All Tabs") {
+                    withAnimation {
+                        workspace.closeTabs(items: workspace.selectionState.openedTabs)
+                    }
+                }
+
                 Button("Close Tabs to the Right") {
                     withAnimation {
                         workspace.closeTabs(after: item.tabID)
@@ -54,12 +61,6 @@ struct TabBarContextMenu: ViewModifier {
                 }
                 // Disable this option when current tab is the last one.
                 .disabled(workspace.selectionState.openedTabs.last?.id == item.tabID.id)
-
-                Button("Close All") {
-                    withAnimation {
-                        workspace.closeTabs(items: workspace.selectionState.openedTabs)
-                    }
-                }
 
                 if isTemporary {
                     Button("Keep Open") {
@@ -91,13 +92,50 @@ struct TabBarContextMenu: ViewModifier {
                     Button("Reveal in Project Navigator") {
                         workspace.listenerModel.highlightedFileItem = item
                     }
-
-                    Button("Open in New Window") {
-
-                    }
-                    .disabled(true)
                 }
             }
+
+            Divider()
+
+            Group {
+                if workspace.isTabPinned(item.tabID) {
+                    Button("Unpin Tab") {
+                        workspace.unpinTab(item: item.tabID)
+                    }
+                } else {
+                    Button("Pin Tab") {
+                        workspace.pinTab(item: item.tabID)
+                    }
+                }
+
+                Button("Open in New Window") {
+
+                }
+                .disabled(true)
+            }
+
+            Divider()
+
+            Group {
+                Menu("Bookmarks") {
+                    Button("Add Bookmark") {
+
+                    }
+
+                    Button("Add Bookmark to Another List") {
+
+                    }
+
+                    Button("Rename Bookmark....") {
+
+                    }
+
+                    Button("Delete Bookmark") {
+
+                    }
+                }
+            }
+
         })
     }
 

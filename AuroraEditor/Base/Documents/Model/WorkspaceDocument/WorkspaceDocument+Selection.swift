@@ -11,7 +11,27 @@ import Version_Control
 
 struct WorkspaceSelectionState: Codable {
     var selectedId: TabBarItemID?
-    var openedTabs: [TabBarItemID] = []
+    var pinnedTabs: Set<TabBarItemID> = []
+    var openedTabs: [TabBarItemID] = [] {
+        didSet {
+            // Move pinned tabs to the front
+            openedTabs = openedTabs.sorted { tab1, tab2 in
+                if pinnedTabs.contains(tab1) && !pinnedTabs.contains(tab2) {
+                    return true
+                } else if !pinnedTabs.contains(tab1) && pinnedTabs.contains(tab2) {
+                    return false
+                } else {
+                    // Use a safe comparison to avoid force unwrapping
+                    if let index1 = openedTabs.firstIndex(of: tab1),
+                       let index2 = openedTabs.firstIndex(of: tab2) {
+                        return index1 < index2
+                    } else {
+                        return false
+                    }
+                }
+            }
+        }
+    }
     var savedTabs: [TabBarItemStorage] = []
     var flattenedSavedTabs: [TabBarItemStorage] {
         var flat = [TabBarItemStorage]()
