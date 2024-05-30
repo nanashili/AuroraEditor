@@ -24,7 +24,7 @@ class AuroraDataStorage: ObservableObject {
 
     // Open sheets in the editor
     @Published
-    var activeSheet: ActiveSheet? = nil {
+    var activeSheet: ActiveSheet? {
         didSet { update() }
     }
 

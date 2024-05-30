@@ -11,11 +11,6 @@ import AppKit
 import Version_Control
 import Combine
 
-import SwiftUI
-import AppKit
-import Version_Control
-import Combine
-
 struct WorkspaceView: View {
     let tabBarHeight = 28.0
     private var path: String = ""
@@ -70,7 +65,8 @@ struct WorkspaceView: View {
             if workspace.fileSystemClient != nil, let model = workspace.statusBarModel {
                 ZStack {
                     if let tabID = workspace.selectionState.selectedId {
-                        TabViews().tabContentForID(tabID: tabID)
+                        TabViews(workspace: workspace)
+                            .tabContentForID(tabID: tabID)
                     } else {
                         EmptyEditorView()
                     }

@@ -27,7 +27,7 @@ struct TabBarItemCloseButton: View {
             } else {
                 closeAction()
             }
-        }) {
+        }, label: {
             if prefs.preferences.general.tabBarStyle == .xcode {
                 Image(systemName: "xmark")
                     .font(.system(size: 11.2, weight: .regular, design: .rounded))
@@ -46,7 +46,7 @@ struct TabBarItemCloseButton: View {
                     .font(.system(size: 9.5, weight: .medium, design: .rounded))
                     .frame(width: 16, height: 16)
             }
-        }
+        })
         .buttonStyle(.borderless)
         .foregroundColor(isPressingCloseState ? .primary : .secondary)
         .background(

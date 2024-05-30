@@ -24,7 +24,9 @@ struct WorkspaceCodeFileView: View {
     @ViewBuilder
     var codeView: some View {
         ZStack {
-            if let selectedItem = workspace.selectionState.openFileItems.first(where: { $0.tabID == workspace.selectionState.selectedId }),
+            if let selectedItem = workspace.selectionState.openFileItems.first(where: {
+                $0.tabID == workspace.selectionState.selectedId
+                }),
                let fileItem = workspace.selectionState.openedCodeFiles[selectedItem] {
 
                 switch fileItem.typeOfFile {

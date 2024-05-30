@@ -177,7 +177,7 @@ extension WorkspaceDocument {
 
     /// Closes single tab
     /// - Parameter id: tab bar item's identifier to be closed
-    func closeTab(item id: TabBarItemID) {
+    func closeTab(item id: TabBarItemID) { // swiftlint:disable:this cyclomatic_complexity
         if id == selectionState.temporaryTab {
             selectionState.previousTemporaryTab = selectionState.temporaryTab
             selectionState.temporaryTab = nil

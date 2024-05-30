@@ -10,8 +10,7 @@ import SwiftUI
 import Version_Control
 
 struct TabViews {
-    @EnvironmentObject
-    private var workspace: WorkspaceDocument
+    var workspace: WorkspaceDocument
 
     private let extensionView = ExtensionViewStorage.shared
 
