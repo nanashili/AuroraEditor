@@ -19,7 +19,7 @@ struct WorkspaceCodeFileView: View {
         let size = AppPreferencesModel.shared.preferences.textEditing.font.size
         let name = AppPreferencesModel.shared.preferences.textEditing.font.name
         return NSFont(name: name, size: Double(size)) ?? NSFont.monospacedSystemFont(ofSize: 12, weight: .regular)
-    }
+    }()
 
     @ViewBuilder
     var codeView: some View {
