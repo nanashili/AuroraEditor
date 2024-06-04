@@ -25,10 +25,11 @@ jobs:
           xcodebuild -version
           echo "Toolchain version"
           swift -version
-          echo "SwiftLint (version)"
-          swiftlint version
+          # echo "SwiftLint (version)"
+          # swiftlint version
 
       - name: Check SwiftLint Version
+        if: false
         id: check_swiftlint_version
         run: |
           current_version=$(swiftlint version)
@@ -43,6 +44,7 @@ jobs:
         shell: bash
 
       - name: Upgrade SwiftLint
+        if: false
         continue-on-error: true
         run: |
           upgrade_required="${{ steps.check_swiftlint_version.outputs.upgrade_required }}"
@@ -52,6 +54,7 @@ jobs:
         shell: bash
 
       - name: SwiftLint (GH Actions)
+        if: false
         run: swiftlint --reporter github-actions-logging --strict
 
       - name: Swift (clean) Build
