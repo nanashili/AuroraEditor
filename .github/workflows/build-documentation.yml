@@ -35,5 +35,5 @@ jobs:
           git commit -m 'deploy'
           git push \
           "https://${{ github.repository_owner }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" \
-          HEAD:docs \
+          HEAD:documentation \
           --force
