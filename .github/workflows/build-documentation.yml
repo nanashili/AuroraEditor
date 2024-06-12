@@ -27,8 +27,10 @@ jobs:
           cd docs
           git init -b documentation
           DOCURL=`basename ${{ github.repository }}`
+          echo "docs.auroraeditor.com" > CNAME
           echo "{\"meta\":{\"title\":\"$DOCURL Documentation\"}}" > theme-settings.json
-          echo "<script>window.location.href = 'documentation/$DOCURL/'.toLowerCase();</script>" > index.html
+          echo "<script>window.location.href = (document.location.host == 'auroraeditor.github.io' ? '/AuroraEditor' : '') + '/documentation/$DOCURL/'.toLowerCase();</script>" > 404.html
+          echo "<script>window.location.href = (document.location.host == 'auroraeditor.github.io' ? '/AuroraEditor' : '') + '/documentation/$DOCURL/'.toLowerCase();</script>" > 404.html
           git add -A .
           git config user.name github-actions
           git config user.email github-actions@github.com
