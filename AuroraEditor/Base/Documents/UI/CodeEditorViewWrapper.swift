@@ -121,21 +121,18 @@ public struct CodeEditorViewWrapper: View {
             language: getLanguage(),
             theme: defaultTheme,
             font: font,
-            tabWidth: 4,
-            indentOption: .spaces(count: 4),
-            lineHeight: 1.45,
-            wrapLines: true,
-            editorOverscroll: 0,
+            tabWidth: 4, // TODO: Add this in settings
+            indentOption: .spaces(count: 4), // TODO: Add this in settings
+            lineHeight: 1.45, // TODO: Add this in settings
+            wrapLines: true, // TODO: Add this in settings
             cursorPositions: $cursorPosition,
-            useThemeBackground: false,
-            highlightProvider: nil, // TODO: @nanashili help?
-            contentInsets: nil,
+            useThemeBackground: true,
+            contentInsets: nil, // TODO: Add this in settings
             isEditable: true,
-            isSelectable: true,
-            letterSpacing: 1,
+            letterSpacing: 1, // TODO: Add this in settings
             bracketPairHighlight: nil,
             undoManager: undoManager,
-            coordinators: [] // TODO: @nanashili help?
+            coordinators: []
         )
         .onChange(of: themeModel.selectedTheme, perform: { newTheme in
             self.theme = newTheme ?? themeModel.themes.first!
