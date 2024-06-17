@@ -168,7 +168,7 @@ class JSSupport: ExtensionInterface {
     func respond(action: String, parameters: [String: Any]) -> JSValue? {
         return context
             .objectForKeyedSubscript(action)?
-            .call(withArguments: [Array(parameters.values).compactMap { val in
+            .call(withArguments: Array(parameters.values).compactMap { val in
                 // Custom view models can crash, only return their name.
                 // The problem is that it is inerhited from Codable so
                 // as? Codable will always pass, so we need to check this
@@ -178,13 +178,13 @@ class JSSupport: ExtensionInterface {
                 }
 
                 // It confirms to Codable, that _should_ be safe
-                if let safeValue = val as? Codable {
+                if val as? Codable != nil {
                     return val // We want the "Any" returned.
                 }
 
                 // This is probably unsafe, do not return.
                 return nil
-            }])
+            })
     }
 
     /// Respond to an (AuroraEditor) JavaScript function.
