@@ -16,7 +16,9 @@
   <a href='https://nightly.link/AuroraEditor/AuroraEditor/workflows/build-editor/development/AuroraEditor_Nightly.zip' target='_blank'>
   <img alt="Download" src="https://img.shields.io/badge/Download-Nightly Build-6bbee8?style=for-the-badge">
  </a>
- <a href='https://twitter.com/intent/tweet?text=Try%20this%20new%20open-source%20code%20editor,%20Aurora%20Editor&url=https://auroraeditor.com&via=Aurora_Editor&hashtags=AuroraEditor,editor,AEIDE,developers,Aurora,OSS' target='_blank'><img src='https://img.shields.io/twitter/url?logo=twitter&style=for-the-badge&url=https%3A%2F%2Fauroraeditor.com'></a>
+ <a href='https://twitter.com/intent/tweet?text=Try%20this%20new%20open-source%20code%20editor,%20Aurora%20Editor&url=https://auroraeditor.com&via=Aurora_Editor&hashtags=AuroraEditor,editor,AEIDE,developers,Aurora,OSS' target='_blank'>
+   <img src='https://img.shields.io/twitter/url?logo=twitter&style=for-the-badge&url=https%3A%2F%2Fauroraeditor.com'>
+ </a>
 </p>
 
 <br />
@@ -34,6 +36,7 @@ It will support everything you could expect from an Xcode-inspired application, 
   <a href='https://github.com/AuroraEditor/AuroraEditor/issues'><img alt="GitHub issues" src="https://img.shields.io/github/issues-raw/AuroraEditor/AuroraEditor?color=f98a6c&style=for-the-badge"></a>
   <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/AuroraEditor/AuroraEditor?color=f98a6c&style=for-the-badge">
   <a href='https://github.com/AuroraEditor/AuroraEditor/fork'><img alt="GitHub forks" src="https://img.shields.io/github/forks/AuroraEditor/AuroraEditor?color=f98a6c&style=for-the-badge"></a>
+  <a href='https://docs.auroraeditor.com' target='_blank'><img src='https://img.shields.io/badge/Documentation-f98a6c'></a>
  </p>
  
  <br />
