@@ -15,11 +15,19 @@ struct WorkspaceCodeFileView: View {
     @StateObject private var prefs: AppPreferencesModel = .shared
     @State private var dropProposal: SplitViewProposalDropPosition?
 
-    private var font: NSFont {
+    /// The font
+    @State
+    private var font: NSFont = {
         let size = AppPreferencesModel.shared.preferences.textEditing.font.size
         let name = AppPreferencesModel.shared.preferences.textEditing.font.name
         return NSFont(name: name, size: Double(size)) ?? NSFont.monospacedSystemFont(ofSize: 12, weight: .regular)
-    }
+    }()
+
+    // private var font: NSFont {
+    //     let size = AppPreferencesModel.shared.preferences.textEditing.font.size
+    //     let name = AppPreferencesModel.shared.preferences.textEditing.font.name
+    //     return NSFont(name: name, size: Double(size)) ?? NSFont.monospacedSystemFont(ofSize: 12, weight: .regular)
+    // }
 
     @ViewBuilder
     var codeView: some View {
