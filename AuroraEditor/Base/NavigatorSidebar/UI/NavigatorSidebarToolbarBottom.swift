@@ -8,13 +8,18 @@
 
 import SwiftUI
 
+/// The bottom toolbar of the navigator sidebar.
 struct NavigatorSidebarToolbarBottom: View {
+
+    /// The active state of the control
     @Environment(\.controlActiveState)
     private var activeState
 
+    /// Workspace document
     @EnvironmentObject
     var workspace: WorkspaceDocument
 
+    /// The view body.
     var body: some View {
         HStack(spacing: 10) {
             addNewFileButton
@@ -29,6 +34,7 @@ struct NavigatorSidebarToolbarBottom: View {
         }
     }
 
+    /// Add new file button.
     private var addNewFileButton: some View {
         Menu {
             Button("Add File") {
@@ -44,6 +50,7 @@ struct NavigatorSidebarToolbarBottom: View {
             }
         } label: {
             Image(systemName: "plus")
+                .accessibilityLabel(Text("Add item"))
         }
         .menuStyle(.borderlessButton)
         .menuIndicator(.hidden)
@@ -51,6 +58,7 @@ struct NavigatorSidebarToolbarBottom: View {
         .opacity(activeState == .inactive ? 0.45 : 1)
     }
 
+    /// Sort button.
     private var sortButton: some View {
         Menu {
             Button {
@@ -60,6 +68,7 @@ struct NavigatorSidebarToolbarBottom: View {
             }
         } label: {
             Image(systemName: "line.3.horizontal.decrease.circle")
+                .accessibilityLabel(Text("Sort"))
         }
         .menuStyle(.borderlessButton)
         .frame(maxWidth: 30)

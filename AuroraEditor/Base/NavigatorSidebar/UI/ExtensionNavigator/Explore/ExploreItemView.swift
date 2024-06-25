@@ -8,14 +8,18 @@
 
 import SwiftUI
 
+/// Explore item view.
 struct ExploreItemView: View {
 
+    /// The extension data.
     @State
     var extensionData: Plugin
 
+    /// Extensions model
     @State
     var extensionsModel: ExtensionInstallationViewModel
 
+    /// The view body.
     var body: some View {
         HStack {
             AsyncImage(url: URL(string: "\(extensionData.extensionImage)")) { phase in
@@ -25,16 +29,19 @@ struct ExploreItemView: View {
                         .scaledToFit()
                         .frame(width: 36, height: 36)
                         .cornerRadius(8)
+                        .accessibilityLabel(Text("Extension Icon"))
                 } else if phase.error != nil {
                     Image(systemName: "lasso")
                         .frame(width: 36, height: 36)
                         .background(.blue)
                         .cornerRadius(8)
+                        .accessibilityLabel(Text("Extension Icon"))
                 } else {
                     Image(systemName: "lasso")
                         .frame(width: 36, height: 36)
                         .background(.blue)
                         .cornerRadius(8)
+                        .accessibilityLabel(Text("Extension Icon"))
                 }
             }
 

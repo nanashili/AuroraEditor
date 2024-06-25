@@ -8,12 +8,29 @@
 
 import SwiftUI
 
+/// A view that represents the quick open view.
 public struct QuickOpenView: View {
-    @ObservedObject private var state: QuickOpenState
-    private let onClose: () -> Void
-    private let openFile: (FileSystemClient.FileItem) -> Void
-    @State private var selectedItem: FileSystemClient.FileItem?
+    /// Quick open state
+    @ObservedObject
+    private var state: QuickOpenState
 
+    /// On close closure
+    private let onClose: () -> Void
+
+    /// Open file closure
+    private let openFile: (FileSystemClient.FileItem) -> Void
+
+    /// Selected item
+    @State
+    private var selectedItem: FileSystemClient.FileItem?
+
+    /// Initialize a new QuickOpenView
+    /// 
+    /// - Parameter state: quick open state
+    /// - Parameter onClose: on close closure
+    /// - Parameter openFile: open file closure
+    /// 
+    /// - Returns: a new QuickOpenView
     public init(
         state: QuickOpenState,
         onClose: @escaping () -> Void,
@@ -24,6 +41,11 @@ public struct QuickOpenView: View {
         self.openFile = openFile
     }
 
+    /// On key down
+    /// 
+    /// - Parameter event: event
+    /// 
+    /// - Returns: true if the event was handled, false otherwise
     func onKeyDown(with event: NSEvent) -> Bool {
         switch event.keyCode {
         case 125: // down arrow
@@ -50,6 +72,9 @@ public struct QuickOpenView: View {
         }
     }
 
+    /// On query change
+    /// 
+    /// - Parameter text: text
     func onQueryChange(text: String) {
         state.fetchOpenQuickly()
         if !state.isShowingOpenQuicklyFiles {
@@ -57,6 +82,9 @@ public struct QuickOpenView: View {
         }
     }
 
+    /// Select offset
+    /// 
+    /// - Parameter offset: offset
     func selectOffset(by offset: Int) {
         guard !state.openQuicklyFiles.isEmpty else { return }
 
@@ -71,8 +99,9 @@ public struct QuickOpenView: View {
         }
     }
 
+    /// The view body.
     public var body: some View {
-        VStack(spacing: 0.0) {
+        VStack(spacing: 0) {
             VStack {
                 HStack(alignment: .center, spacing: 0) {
                     Image(systemName: "doc.text.magnifyingglass")
@@ -81,6 +110,7 @@ public struct QuickOpenView: View {
                         .frame(width: 20, height: 20)
                         .padding(.trailing, 12)
                         .offset(x: 0, y: 1)
+                        .accessibilityLabel(Text("Search for a file"))
                     ActionAwareInput(onDown: onKeyDown,
                                      onTextChange: onQueryChange,
                                      text: $state.openQuicklyQuery)
@@ -104,9 +134,11 @@ public struct QuickOpenView: View {
                                 self.openFile(file)
                                 self.onClose()
                             }
+                            .accessibilityAddTraits(.isButton)
                             .onTapGesture(count: 1) {
                                 self.selectedItem = file
                             }
+                            .accessibilityAddTraits(.isButton)
                         }
                         .frame(minWidth: 250, maxWidth: 250)
                         if state.openQuicklyFiles.isEmpty {

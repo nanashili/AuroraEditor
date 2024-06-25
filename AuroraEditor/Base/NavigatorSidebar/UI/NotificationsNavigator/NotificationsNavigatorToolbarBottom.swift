@@ -8,16 +8,22 @@
 
 import SwiftUI
 
+/// The bottom toolbar for the notifications navigator.
 struct NotificationsNavigatorToolbarBottom: View {
+
+    /// The active state of the control
     @Environment(\.controlActiveState)
     private var activeState
 
+    /// The color scheme
     @Environment(\.colorScheme)
     private var colorScheme
 
+    /// The notifications model
     @ObservedObject
     private var model: NotificationsModel = .shared
 
+    /// The view body.
     var body: some View {
         HStack {
             HStack {
@@ -59,11 +65,13 @@ struct NotificationsNavigatorToolbarBottom: View {
         } label: {
             Image(systemName: "xmark.circle.fill")
                 .symbolRenderingMode(.hierarchical)
+                .accessibilityLabel(Text("Clear filter"))
         }
         .buttonStyle(.plain)
         .opacity(activeState == .inactive ? 0.45 : 1)
     }
 
+    /// Show the history of notifications.
     private var showHistory: some View {
         Button {
 
@@ -71,12 +79,14 @@ struct NotificationsNavigatorToolbarBottom: View {
             Image(systemName: "clock")
                 .font(.system(size: 11))
                 .symbolRenderingMode(.hierarchical)
+                .accessibilityLabel(Text("History"))
         }
         .buttonStyle(.plain)
         .opacity(activeState == .inactive ? 0.45 : 1)
         .help("Show only issues from open documents and recently built sources")
     }
 
+    /// Show only errors.
     private var showErrorsOnly: some View {
         Button {
             if model.filter == .ERROR {
@@ -88,6 +98,7 @@ struct NotificationsNavigatorToolbarBottom: View {
             Image(systemName: "exclamationmark.octagon.fill")
                 .font(.system(size: 11))
                 .symbolRenderingMode(model.filter == .ERROR ? .multicolor : .hierarchical)
+                .accessibilityLabel(Text("Errors only"))
         }
         .buttonStyle(.plain)
         .opacity(activeState == .inactive ? 0.45 : 1)

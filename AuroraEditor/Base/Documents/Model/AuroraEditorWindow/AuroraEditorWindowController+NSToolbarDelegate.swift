@@ -208,14 +208,12 @@ extension AuroraEditorWindowController: NSToolbarDelegate {
         guard let navigatorPane = splitViewController.splitViewItems.first else { return }
         navigatorPane.animator().isCollapsed.toggle()
 
-        for (id, AEExt) in ExtensionsManager.shared.loadedExtensions {
-            Log.info("\(id), didToggleNavigatorPane()")
-            AEExt.respond(
-                action: "didToggleNavigatorPane",
-                parameters: [
-                    "opened": !navigatorPane.animator().isCollapsed
-                ])
-        }
+        ExtensionsManager.shared.sendEvent(
+            event: "didToggleNavigatorPane",
+            parameters: [
+                "opened": !navigatorPane.animator().isCollapsed
+            ]
+        )
     }
 
     /// Toggles the visibility of the inspector pane in the application's user interface.
@@ -242,7 +240,6 @@ extension AuroraEditorWindowController: NSToolbarDelegate {
         }), let libraryPopupIndex = toolbar.items.firstIndex(where: {
             $0.itemIdentifier == .libraryPopup
         }) {
-
             // Ensure that all indices are within bounds.
             if itemListTrackingSeparatorIndex < toolbar.items.count &&
                 flexibleSpaceIndex < toolbar.items.count &&
@@ -279,24 +276,34 @@ extension AuroraEditorWindowController: NSToolbarDelegate {
             }
         }
 
-        for (id, AEExt) in ExtensionsManager.shared.loadedExtensions {
-            Log.info("\(id), didToggleInspectorPane()")
-            AEExt.respond(
-                action: "didToggleInspectorPane",
-                parameters: [
-                    "opened": !inspectorPane.animator().isCollapsed
-                ]
-            )
-        }
+        ExtensionsManager.shared.sendEvent(
+            event: "didToggleInspectorPane",
+            parameters: [
+                "opened": !inspectorPane.animator().isCollapsed
+            ]
+        )
     }
 }
 
 private extension NSToolbarItem.Identifier {
+    /// The identifier for the navigator pane toggle button.
     static let toggleNavigator = NSToolbarItem.Identifier("ToggleNavigator")
+
+    /// The identifier for the inspector pane toggle button.
     static let toggleInspector = NSToolbarItem.Identifier("ToggleInspector")
+
+    /// The identifier for the item list tracking separator.
     static let itemListTrackingSeparator = NSToolbarItem.Identifier("ItemListTrackingSeparator")
+
+    /// The identifier for the branch picker.
     static let branchPicker = NSToolbarItem.Identifier("BranchPicker")
+
+    /// The identifier for the library popup.
     static let libraryPopup = NSToolbarItem.Identifier("LibraryPopup")
+
+    /// The identifier for the run application button.
     static let runApplication = NSToolbarItem.Identifier("RunApplication")
+
+    /// The identifier for the app information view.
     static let toolbarAppInformation = NSToolbarItem.Identifier("ToolbarAppInformation")
 }

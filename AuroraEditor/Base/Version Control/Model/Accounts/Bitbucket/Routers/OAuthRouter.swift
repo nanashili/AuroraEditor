@@ -8,10 +8,22 @@
 
 import Foundation
 
+@available(*, deprecated, renamed: "VersionControl", message: "This will be deprecated in favor of the new VersionControl Remote SDK APIs.")
+/// OAuth router
 public enum OAuthRouter: Router {
+
+    /// Authorize
+    /// 
+    /// - Parameter configuration: Bitbucket OAuth configuration
     case authorize(BitbucketOAuthConfiguration)
+
+    /// Access token
+    /// 
+    /// - Parameter configuration: Bitbucket OAuth configuration
+    /// - Parameter code: Code
     case accessToken(BitbucketOAuthConfiguration, String)
 
+    /// Git configuration
     public var configuration: GitConfiguration? {
         switch self {
         case .authorize(let config): return config
@@ -19,6 +31,7 @@ public enum OAuthRouter: Router {
         }
     }
 
+    /// HTTP method
     public var method: HTTPMethod {
         switch self {
         case .authorize:
@@ -28,6 +41,7 @@ public enum OAuthRouter: Router {
         }
     }
 
+    /// Encoding
     public var encoding: HTTPEncoding {
         switch self {
         case .authorize:
@@ -37,6 +51,7 @@ public enum OAuthRouter: Router {
         }
     }
 
+    /// Path
     public var path: String {
         switch self {
         case .authorize:
@@ -46,6 +61,7 @@ public enum OAuthRouter: Router {
         }
     }
 
+    /// Parameters
     public var params: [String: Any] {
         switch self {
         case .authorize(let config):
@@ -55,6 +71,7 @@ public enum OAuthRouter: Router {
         }
     }
 
+    /// URLRequest
     public var URLRequest: Foundation.URLRequest? {
         switch self {
         case .authorize(let config):

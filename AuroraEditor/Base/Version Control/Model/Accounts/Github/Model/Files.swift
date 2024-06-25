@@ -8,19 +8,35 @@
 
 import Foundation
 
+@available(*, deprecated, renamed: "VersionControl", message: "This will be deprecated in favor of the new VersionControl Remote SDK APIs.")
 /// Files (`[String:File]`)
 public typealias Files = [String: File]
 
 /// File class
 open class File: Codable {
+
+    /// File Identifier
     open private(set) var id: Int = -1
+
+    /// Raw URL
     open var rawURL: URL?
+
+    /// Filename
     open var filename: String?
+
+    /// File Type
     open var type: String?
+
+    /// Language
     open var language: String?
+
+    /// File Size
     open var size: Int?
+
+    /// File Content
     open var content: String?
 
+    /// Coding keys
     enum CodingKeys: String, CodingKey {
         case rawURL = "raw_url"
         case filename

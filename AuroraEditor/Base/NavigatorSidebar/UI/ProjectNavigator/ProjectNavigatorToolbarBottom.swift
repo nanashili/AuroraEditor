@@ -8,19 +8,26 @@
 
 import SwiftUI
 
+/// The bottom toolbar of the project navigator.
 struct ProjectNavigatorToolbarBottom: View {
+
+    /// The active state of the control.
     @Environment(\.controlActiveState)
     private var activeState
 
+    /// The color scheme.
     @Environment(\.colorScheme)
     private var colorScheme
 
+    /// The workspace document.
     @EnvironmentObject
     var workspace: WorkspaceDocument
 
+    /// The filter string.
     @State
     var filter: String = ""
 
+    /// The view body.
     var body: some View {
         HStack {
             addNewFileButton
@@ -54,6 +61,7 @@ struct ProjectNavigatorToolbarBottom: View {
         }
     }
 
+    /// Add new file button.
     private var addNewFileButton: some View {
         Menu {
             Button("New File...") {
@@ -71,6 +79,7 @@ struct ProjectNavigatorToolbarBottom: View {
             }
         } label: {
             Image(systemName: "plus")
+                .accessibilityLabel(Text("New item"))
         }
         .menuStyle(.borderlessButton)
         .menuIndicator(.hidden)
@@ -78,6 +87,7 @@ struct ProjectNavigatorToolbarBottom: View {
         .opacity(activeState == .inactive ? 0.45 : 1)
     }
 
+    /// Sort button.
     private var sortButton: some View {
         Menu {
             Button {
@@ -87,6 +97,7 @@ struct ProjectNavigatorToolbarBottom: View {
             }
         } label: {
             Image(systemName: "line.3.horizontal.decrease.circle")
+                .accessibilityLabel(Text("Sort"))
         }
         .menuStyle(.borderlessButton)
         .frame(maxWidth: 30)
@@ -102,6 +113,7 @@ struct ProjectNavigatorToolbarBottom: View {
         } label: {
             Image(systemName: "xmark.circle.fill")
                 .symbolRenderingMode(.hierarchical)
+                .accessibilityLabel(Text("Clear"))
         }
         .buttonStyle(.plain)
         .opacity(activeState == .inactive ? 0.45 : 1)

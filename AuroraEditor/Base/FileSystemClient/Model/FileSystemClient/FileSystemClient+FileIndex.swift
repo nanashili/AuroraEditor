@@ -18,6 +18,7 @@ extension FileSystemClient {
 
     /// Loads files from a specified URL into `FileItem`s, accounting for concurrency and ignored paths.
     /// - Parameter url: The URL of the directory to load the items of
+    /// 
     /// - Returns: `[FileItem]` representing the contents of the directory
     func loadFiles(fromURL url: URL) throws -> [FileItem] {
         var items: [FileItem] = []

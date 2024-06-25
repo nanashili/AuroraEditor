@@ -16,11 +16,17 @@ import Combine
 final class ProjectNavigatorViewController: NSViewController {
 
     typealias Item = FileSystemClient.FileItem
+
+    /// Drag type for the outline view
     let dragType: NSPasteboard.PasteboardType = .fileURL
 
+    /// The scroll view
     var scrollView: NSScrollView!
+
+    /// The outline view
     var outlineView: NSOutlineView!
 
+    /// The set of cancelables
     var cancelables: Set<AnyCancellable> = .init()
     var expandedItemIDs: Set<String> = []
 
@@ -35,13 +41,22 @@ final class ProjectNavigatorViewController: NSViewController {
         return [root]
     }
 
+    /// The workspace document
     var workspace: WorkspaceDocument?
 
+    /// The icon color style
     var iconColor: AppPreferences.FileIconStyle = .color
+
+    /// The file extensions visibility
     var fileExtensionsVisibility: AppPreferences.FileExtensionsVisibility = .showAll
+
+    /// The shown file extensions
     var shownFileExtensions: AppPreferences.FileExtensions = .default
+
+    /// The hidden file extensions
     var hiddenFileExtensions: AppPreferences.FileExtensions = .default
 
+    /// The row height of the outline view
     var rowHeight: Double = 22 {
         didSet {
             outlineView.rowHeight = rowHeight
@@ -89,6 +104,9 @@ final class ProjectNavigatorViewController: NSViewController {
         workspace?.broadcaster.broadcaster.sink(receiveValue: recieveBroadcast).store(in: &cancelables)
     }
 
+    /// Recieve a broadcast from the workspace
+    /// 
+    /// - Parameter broadcast: the broadcast
     func recieveBroadcast(broadcast: AuroraCommandBroadcaster.Broadcast) {
         switch broadcast.command {
         case "newFileAtPos":
@@ -106,10 +124,12 @@ final class ProjectNavigatorViewController: NSViewController {
         }
     }
 
+    /// Called when the view did disappear
     override func viewDidDisappear() {
         cancelables.forEach({ $0.cancel() })
     }
 
+    /// Reloads the changed files in the workspace
     func reloadChangedFiles() {
         guard let model = workspace?.fileSystemClient?.model, let wsClient = workspace?.fileSystemClient else {
             return
@@ -131,10 +151,12 @@ final class ProjectNavigatorViewController: NSViewController {
         }
     }
 
+    /// Initializer
     init() {
         super.init(nibName: nil, bundle: nil)
     }
 
+    /// Required initializer
     required init?(coder: NSCoder) {
         fatalError()
     }
@@ -170,7 +192,9 @@ final class ProjectNavigatorViewController: NSViewController {
     }
 
     /// Get the appropriate color for the items icon depending on the users preferences.
+    /// 
     /// - Parameter item: The `FileItem` to get the color for
+    /// 
     /// - Returns: A `NSColor` for the given `FileItem`.
     private func color(for item: Item) -> NSColor {
         if item.children == nil && iconColor == .color {
@@ -180,7 +204,9 @@ final class ProjectNavigatorViewController: NSViewController {
         }
     }
 
+    /// Is expanding things
     private var isExpandingThings: Bool = false
+
     /// Perform functions related to reloading the Outline View
     func reloadData() {
         self.outlineView.reloadData()
@@ -213,6 +239,7 @@ final class ProjectNavigatorViewController: NSViewController {
     }
 
     /// Recursively gets and selects an ``Item`` from an array of ``Item`` and their `children` based on the `id`.
+    /// 
     /// - Parameters:
     ///   - id: the id of the item item
     ///   - collection: the array to search for
@@ -242,6 +269,7 @@ final class ProjectNavigatorViewController: NSViewController {
 
     /// Reveals the given `fileItem` in the outline view by expanding all the parent directories of the file.
     /// If the file is not found, it will present an alert saying so.
+    /// 
     /// - Parameter fileItem: The file to reveal.
     public func reveal(_ fileItem: Item) {
         if let parent = fileItem.parent {
@@ -262,6 +290,7 @@ final class ProjectNavigatorViewController: NSViewController {
     }
 
     /// Method for recursively expanding a file's parent directories.
+    /// 
     /// - Parameter item:
     private func expandParent(item: Item) {
         if let parent = item.parent as Item? {
@@ -277,6 +306,7 @@ extension ProjectNavigatorViewController: NSMenuDelegate {
     /// Once a menu gets requested by a `right click` setup the menu
     ///
     /// If the right click happened outside a row this will result in no menu being shown.
+    /// 
     /// - Parameter menu: The menu that got requested
     func menuNeedsUpdate(_ menu: NSMenu) {
         let row = outlineView.clickedRow

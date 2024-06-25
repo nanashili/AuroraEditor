@@ -11,21 +11,26 @@ import SwiftUI
 // A feedback view that allows users to report
 // any issue they might have had on the editor.
 public struct FeedbackView: View {
-
+    /// Initialize feedback view
     public init() {}
 
+    /// Feedback model
     @ObservedObject
     private var feedbackModel: FeedbackModel = .shared
 
+    /// App preferences model
     @StateObject
     var prefs: AppPreferencesModel = .shared
 
+    /// Shows alert
     @State
     var showsAlert: Bool = false
 
+    /// Is submit button pressed
     @State
     var isSubmitButtonPressed: Bool = false
 
+    /// Feedback view body
     public var body: some View {
         VStack {
             ScrollView {
@@ -67,6 +72,7 @@ public struct FeedbackView: View {
         .frame(width: 1028, height: 762)
     }
 
+    /// Basic information view
     private var basicInformation: some View {
         VStack(alignment: .leading) {
             Text("Basic Information")
@@ -79,6 +85,7 @@ public struct FeedbackView: View {
                         HStack {
                             Image(systemName: "arrow.right.circle.fill")
                                 .foregroundColor(.red)
+                                .accessibilityLabel(Text("Required Field"))
                             Text("Please provide a descriptive title for your feedback:")
                         }.padding(.leading, -23)
                     } else {
@@ -98,6 +105,7 @@ public struct FeedbackView: View {
                         HStack {
                             Image(systemName: "arrow.right.circle.fill")
                                 .foregroundColor(.red)
+                                .accessibilityLabel(Text("Required Field"))
                             Text("Which area are you seeing an issue with?")
                         }.padding(.leading, -23)
                     } else {
@@ -125,6 +133,7 @@ public struct FeedbackView: View {
                     HStack {
                         Image(systemName: "arrow.right.circle.fill")
                             .foregroundColor(.red)
+                            .accessibilityLabel(Text("Required Field"))
                         Text("What type of feedback are you reporting?")
                     }.padding(.leading, -23)
                 } else {
@@ -148,6 +157,7 @@ public struct FeedbackView: View {
         }
     }
 
+    /// Description view
     private var description: some View {
         VStack(alignment: .leading) {
             Text("Description")
@@ -161,6 +171,7 @@ public struct FeedbackView: View {
                         HStack {
                             Image(systemName: "arrow.right.circle.fill")
                                 .foregroundColor(.red)
+                                .accessibilityLabel(Text("Required Field"))
                             Text("Please describe the issue:")
                         }.padding(.leading, -23)
                     } else {
@@ -220,6 +231,7 @@ public struct FeedbackView: View {
         }
     }
 
+    /// Show feedback window
     public func showWindow() {
         FeedbackWindowController(view: self, size: NSSize(width: 1028, height: 762)).showWindow(nil)
     }

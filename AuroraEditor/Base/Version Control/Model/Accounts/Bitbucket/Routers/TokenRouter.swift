@@ -8,10 +8,23 @@
 
 import Foundation
 
+@available(*, deprecated, renamed: "VersionControl", message: "This will be deprecated in favor of the new VersionControl Remote SDK APIs.")
+/// Token router
 public enum TokenRouter: Router {
+
+    /// Refresh token
+    /// 
+    /// - Parameter configuration: Bitbucket OAuth configuration
+    /// - Parameter token: Token
     case refreshToken(BitbucketOAuthConfiguration, String)
+
+    /// Empty token
+    /// 
+    /// - Parameter configuration: Bitbucket OAuth configuration
+    /// - Parameter token: Token
     case emptyToken(BitbucketOAuthConfiguration, String)
 
+    /// Git configuration
     public var configuration: GitConfiguration? {
         switch self {
         case .refreshToken(let config, _):
@@ -21,14 +34,17 @@ public enum TokenRouter: Router {
         }
     }
 
+    /// HTTP method
     public var method: HTTPMethod {
         .POST
     }
 
+    /// Encoding
     public var encoding: HTTPEncoding {
         .form
     }
 
+    /// Parameters
     public var params: [String: Any] {
         switch self {
         case let .refreshToken(_, token):
@@ -37,6 +53,7 @@ public enum TokenRouter: Router {
         }
     }
 
+    /// Path
     public var path: String {
         switch self {
         case .refreshToken:
@@ -45,6 +62,7 @@ public enum TokenRouter: Router {
         }
     }
 
+    /// URLRequest
     public var URLRequest: Foundation.URLRequest? {
         switch self {
         case .refreshToken(let config, _):

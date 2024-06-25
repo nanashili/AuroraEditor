@@ -8,7 +8,10 @@
 
 import SwiftUI
 
+/// The bottom toolbar for source control.
 struct SourceControlToolbarBottom: View {
+
+    /// The view body.
     var body: some View {
         HStack(spacing: 0) {
             sourceControlMenu
@@ -22,6 +25,7 @@ struct SourceControlToolbarBottom: View {
         }
     }
 
+    /// Source control menu.
     private var sourceControlMenu: some View {
         Menu {
             Button("Discard Changes...") {}
@@ -32,6 +36,7 @@ struct SourceControlToolbarBottom: View {
                 .disabled(true) // TODO: Implementation Needed
         } label: {
             Image(systemName: "ellipsis.circle")
+                .accessibilityLabel(Text("Source Control Menu"))
         }
         .menuStyle(.borderlessButton)
         .menuIndicator(.hidden)

@@ -8,11 +8,33 @@
 
 import Foundation
 
+@available(*, deprecated, renamed: "VersionControl", message: "This will be deprecated in favor of the new VersionControl Remote SDK APIs.")
+/// Github Repository Router
 enum GithubRepositoryRouter: Router {
+
+    /// Read Repositories
+    /// 
+    /// - Parameter config: Git Configuration
+    /// - Parameter owner: Owner
+    /// - Parameter page: Page
+    /// - Parameter perPage: Per Page
     case readRepositories(GitConfiguration, String, String, String)
+
+    /// Read Authenticated Repositories
+    /// 
+    /// - Parameter config: Git Configuration
+    /// - Parameter page: Page
+    /// - Parameter perPage: Per Page
     case readAuthenticatedRepositories(GitConfiguration, String, String)
+
+    /// Read Repository
+    /// 
+    /// - Parameter config: Git Configuration
+    /// - Parameter owner: Owner
+    /// - Parameter name: Name
     case readRepository(GitConfiguration, String, String)
 
+    /// Configuration
     var configuration: GitConfiguration? {
         switch self {
         case let .readRepositories(config, _, _, _): return config
@@ -21,14 +43,17 @@ enum GithubRepositoryRouter: Router {
         }
     }
 
+    /// HTTP Method
     var method: HTTPMethod {
         .GET
     }
 
+    /// Encoding
     var encoding: HTTPEncoding {
         .url
     }
 
+    /// Parameters
     var params: [String: Any] {
         switch self {
         case let .readRepositories(_, _, page, perPage):
@@ -40,6 +65,7 @@ enum GithubRepositoryRouter: Router {
         }
     }
 
+    /// Path
     var path: String {
         switch self {
         case let .readRepositories(_, owner, _, _):

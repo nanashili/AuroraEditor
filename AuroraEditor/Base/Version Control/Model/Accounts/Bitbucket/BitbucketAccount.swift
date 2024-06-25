@@ -8,8 +8,10 @@
 
 import Foundation
 
+@available(*, deprecated, renamed: "VersionControl", message: "This will be deprecated in favor of the new VersionControl Remote SDK APIs.")
 /// BitBucket base URL
 public let bitbucketBaseURL = "https://api.bitbucket.org/2.0"
+
 /// BitBucket web URL
 public let bitbucketWebURL = "https://bitbucket.org/"
 
@@ -19,6 +21,7 @@ public struct BitbucketAccount {
     public let configuration: BitbucketTokenConfiguration
 
     /// Initialize Bitbucket Account
+    /// 
     /// - Parameter config: Bitbucket token configuration
     public init(_ config: BitbucketTokenConfiguration = BitbucketTokenConfiguration()) {
         configuration = config
@@ -26,6 +29,7 @@ public struct BitbucketAccount {
 }
 
 extension Router {
+    /// URLRequest
     internal var URLRequest: Foundation.URLRequest? {
         request()
     }

@@ -23,22 +23,24 @@ public class FileSystemClient {
     /// Get Files
     public var getFiles: AnyPublisher<[FileItem], Never> =
     CurrentValueSubject<[FileItem], Never>([]).eraseToAnyPublisher()
+
     /// Folder URL
     public var folderURL: URL?
+
     /// Version Control Model
     public var model: SourceControlModel?
 
-    // These should be private but some functions need them public :(
     /// File Manager
     public var fileManager: FileManager
+
     /// Ignored files and folders
     public var ignoredFilesAndFolders: [String]
+
     /// Workspace item
     public let workspaceItem: FileItem
+
     /// Flattened file items
     public var flattenedFileItems: [String: FileItem]
-    /// Children Map
-    public var childrenMap: [String: [String]] = [:]
     /// Subject
     private var subject = CurrentValueSubject<[FileItem], Never>([])
 
@@ -137,8 +139,8 @@ public class FileSystemClient {
     }
 
     // MARK: - Error Enum
-
     enum FileSystemClientError: Error {
+        /// File does not exist
         case fileNotExist
     }
 }

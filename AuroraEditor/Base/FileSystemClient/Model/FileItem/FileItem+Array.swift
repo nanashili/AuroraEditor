@@ -11,7 +11,9 @@ import Foundation
 public extension Array where Element == FileSystemClient.FileItem {
 
     /// Sorts the elements in alphabetical order.
+    /// 
     /// - Parameter foldersOnTop: if set to `true` folders will always be on top of files.
+    /// 
     /// - Returns: A sorted array of ``FileSystemClient/FileSystemClient/FileItem``
     func sortItems(foldersOnTop: Bool) -> [FileItem] {
         return sorted {
@@ -29,7 +31,9 @@ public extension Array where Element == FileSystemClient.FileItem {
 
 public extension Array where Element: Hashable {
     /// Checks the difference between two given items.
+    /// 
     /// - Parameter other: Other element
+    /// 
     /// - Returns: symmetricDifference
     func difference(from other: [Element]) -> [Element] {
         let thisSet = Set(self)

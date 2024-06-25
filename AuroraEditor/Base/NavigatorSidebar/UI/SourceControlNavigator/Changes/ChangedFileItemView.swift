@@ -8,22 +8,28 @@
 
 import SwiftUI
 
+/// A view for a changed file item.
 struct ChangedFileItemView: View {
 
+    /// The changed file.
     @State
     var changedFile: FileItem
 
+    /// The selection.
     @Binding
     var selection: FileItem.ID?
 
+    /// The workspace.
     @State
     var workspace: WorkspaceDocument
 
+    /// The view body.
     var body: some View {
         HStack {
             Image(systemName: changedFile.systemImage)
                 .frame(width: 11, height: 11)
                 .foregroundColor(selection == changedFile.id ? .white : changedFile.iconColor)
+                .accessibilityLabel(Text("Changed File Icon"))
 
             Text(changedFile.fileName)
                 .font(.system(size: 11))
@@ -38,5 +44,6 @@ struct ChangedFileItemView: View {
         .onTapGesture {
             workspace.openTab(item: changedFile)
         }
+        .accessibilityAddTraits(.isButton)
     }
 }

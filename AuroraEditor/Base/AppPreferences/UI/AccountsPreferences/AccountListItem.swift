@@ -8,22 +8,30 @@
 
 import SwiftUI
 
+/// The account list item
 struct AccountListItem: View {
-
+    /// The git client name
     var gitClientName: String
+
+    /// The git client symbol
     var gitClientSymbol: String
+
+    /// The client ID
     var clientId: String
 
+    /// The view body
     var body: some View {
         HStack {
             if clientId == "auroraEditor" {
                 Image(systemName: gitClientSymbol)
                     .resizable()
                     .frame(width: 28.0, height: 28.0)
+                    .accessibilityLabel(Text("Git Client Icon"))
             } else {
                 Image(gitClientSymbol)
                     .resizable()
                     .frame(width: 28.0, height: 28.0)
+                    .accessibilityLabel(Text("Git Client Icon"))
             }
             Text(gitClientName)
                 .font(.system(size: 12))

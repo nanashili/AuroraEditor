@@ -11,23 +11,30 @@ import Foundation
 import FoundationNetworking
 #endif
 
+@available(*, deprecated, renamed: "VersionControl", message: "This will be deprecated in favor of the new VersionControl Remote SDK APIs.")
 /// Review
 public struct Review {
     /// Body
     public let body: String
+
     /// Commit ID
     public let commitID: String
+
     /// ID
     public let id: Int
+
     /// State
     public let state: State
+
     /// Date
     public let submittedAt: Date
+
     /// User
     public let user: GithubUser
 }
 
 extension Review: Codable {
+    /// Coding Keys
     enum CodingKeys: String, CodingKey {
         case body
         case commitID = "commit_id"
@@ -39,23 +46,36 @@ extension Review: Codable {
 }
 
 public extension Review {
+    /// State
     enum State: String, Codable, Equatable {
+
+        /// Approved
         case approved = "APPROVED"
+
+        /// Changes Requested
         case changesRequested = "CHANGES_REQUESTED"
+
+        /// Commented
         case comment = "COMMENTED"
+
+        /// Dismissed
         case dismissed = "DISMISSED"
+
+        /// Pending
         case pending = "PENDING"
     }
 }
 
 public extension GithubAccount {
     /// List reviews
+    /// 
     /// - Parameters:
     ///   - session: GIT URLSession
     ///   - owner: Owner
     ///   - repository: Repository
     ///   - pullRequestNumber: Pullrequest number
     ///   - completion: Completion
+    /// 
     /// - Returns: URLSessionDataTaskProtocol
     @discardableResult
     func listReviews(_ session: GitURLSession = URLSession.shared,
