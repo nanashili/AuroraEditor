@@ -8,32 +8,42 @@
 
 import SwiftUI
 
+/// A view that represents the crash report view.
 public struct CrashReportView: View {
-
+    /// The crash report model
     @StateObject
     private var reportModel: CrashReportModel = .shared
 
+    /// The app preferences model
     private var prefs: AppPreferencesModel = .shared
 
+    /// The error details
     @State
     var errorDetails: String
 
+    /// Hide details
     @State
     private var hideDetails: Bool = false
 
+    /// Hide comment
     @State
     private var hideComment: Bool = false
 
+    /// The crash report view
+    /// 
+    /// - Parameter errorDetails: The error details
     public init(errorDetails: String) {
         self.errorDetails = errorDetails
     }
 
+    /// The view body
     public var body: some View {
         HStack(alignment: .top) {
             VStack(alignment: .leading) {
                 Image(systemName: "exclamationmark.triangle.fill")
                     .symbolRenderingMode(.multicolor)
                     .font(.system(size: 50))
+                    .accessibilityLabel(Text("Error Icon"))
 
                 Spacer()
 
@@ -53,6 +63,7 @@ public struct CrashReportView: View {
 
                 HStack {
                     Image(systemName: hideComment ? "chevron.up" : "chevron.down")
+                        .accessibilityLabel(Text(hideComment ? "Open" : "Close"))
 
                     Text("Comments")
                         .font(.system(size: 12))
@@ -62,6 +73,7 @@ public struct CrashReportView: View {
                         hideComment.toggle()
                     }
                 }
+                .accessibilityAddTraits(.isButton)
                 .padding(.bottom, hideComment ? 5 : 0)
                 .padding(.top, 5)
 
@@ -131,10 +143,12 @@ public struct CrashReportView: View {
                alignment: .leading)
     }
 
+    /// Show the crash report window
     public func showWindow() {
         CrashReportController(view: self).showWindow(nil)
     }
 
+    /// Restart the application
     private func restartApplication() {
         let url = URL(fileURLWithPath: Bundle.main.resourcePath!)
         let path = url.deletingLastPathComponent().deletingLastPathComponent().absoluteString
@@ -145,6 +159,7 @@ public struct CrashReportView: View {
         exit(0)
     }
 
+    /// Close the application
     private func closeApplication() {
         NSApplication.shared.terminate(self)
     }

@@ -6,6 +6,10 @@ on:
   pull_request:
     branches: [main, development]
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build_and_lint:
     runs-on: macos-13
@@ -17,6 +21,8 @@ jobs:
         run: |
           echo "MacOS Version"
           sw_vers
+          echo "Xcode Version"
+          xcodebuild -version
           echo "Toolchain version"
           swift -version
           echo "SwiftLint (version)"
@@ -37,6 +43,7 @@ jobs:
         shell: bash
 
       - name: Upgrade SwiftLint
+        continue-on-error: true
         run: |
           upgrade_required="${{ steps.check_swiftlint_version.outputs.upgrade_required }}"
           if [ "$upgrade_required" == "true" ]; then

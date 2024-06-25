@@ -7,32 +7,44 @@
 //
 import SwiftUI
 
-// swiftlint:disable:next type_body_length
+/// File inspector view
 struct FileInspectorView: View {
+// swiftlint:disable:previous type_body_length
 
+    /// File inspector model
     @ObservedObject
     private var inspectorModel: FileInspectorModel
 
+    /// File manager
     let fileManager = FileManager.default
 
+    /// Identity type hover
     @State
     private var identityTypeHover: Bool = false
 
+    /// Hide identity type
     @State
     private var hideidentityType: Bool = true
 
+    /// Text settings hover
     @State
     private var textSettingsHover: Bool = false
 
+    /// Hide text settings
     @State
     private var hideTextSettings: Bool = true
 
-    /// Initialize with GitClient
-    /// - Parameter gitClient: a GitClient
+    /// Initialize file inspector view
+    /// 
+    /// - Parameter workspaceURL: the current workspace URL
+    /// - Parameter fileURL: the current file URL
+    /// 
+    /// - Returns: a new file inspector view
     init(workspaceURL: URL, fileURL: String) {
         self.inspectorModel = .init(workspaceURL: workspaceURL, fileURL: fileURL)
     }
 
+    /// The view body
     var body: some View {
         VStack(alignment: .leading) {
             VStack {
@@ -51,6 +63,7 @@ struct FileInspectorView: View {
                             .onTapGesture {
                                 hideidentityType.toggle()
                             }
+                            .accessibilityAddTraits(.isButton)
                     }
                 }
 
@@ -100,6 +113,7 @@ struct FileInspectorView: View {
                                             .resizable()
                                             .foregroundColor(.secondary)
                                             .frame(width: 13, height: 11)
+                                            .accessibilityHidden(true)
                                     }
                                 }.frame(maxWidth: 150)
                             }
@@ -122,6 +136,7 @@ struct FileInspectorView: View {
                                         .resizable()
                                         .foregroundColor(.secondary)
                                         .frame(width: 11, height: 11)
+                                        .accessibilityLabel(Text("Open in Finder"))
                                         .onTapGesture {
                                             guard let url = URL(string: "file://\(inspectorModel.fileURL)") else {
                                                 Log.fault("Failed to decode")
@@ -130,6 +145,7 @@ struct FileInspectorView: View {
 
                                             NSWorkspace.shared.activateFileViewerSelecting([url])
                                         }
+                                        .accessibilityAddTraits(.isButton)
 
                                 }
                                 .frame(maxWidth: 150, alignment: .leading)
@@ -164,6 +180,7 @@ struct FileInspectorView: View {
                             .onTapGesture {
                                 hideTextSettings.toggle()
                             }
+                            .accessibilityAddTraits(.isButton)
                     }
                 }
 
@@ -210,6 +227,7 @@ struct FileInspectorView: View {
         .padding(5)
     }
 
+    /// File type picker
     private var fileType: some View {
         Picker("", selection: $inspectorModel.fileTypeSelection) {
             Group {
@@ -319,6 +337,7 @@ struct FileInspectorView: View {
         .frame(maxWidth: 150, maxHeight: 15)
     }
 
+    /// Location picker
     private var location: some View {
         Picker("", selection: $inspectorModel.locationSelection) {
             ForEach(inspectorModel.locationList) {
@@ -330,6 +349,7 @@ struct FileInspectorView: View {
         .frame(maxWidth: 150, maxHeight: 12)
     }
 
+    /// Text encoding picker
     private var textEncoding: some View {
         Picker("", selection: $inspectorModel.textEncodingSelection) {
             ForEach(inspectorModel.textEncodingList) {
@@ -341,6 +361,7 @@ struct FileInspectorView: View {
         .frame(maxWidth: 150, maxHeight: 12)
     }
 
+    /// Line endings picker
     private var lineEndings: some View {
         Picker("", selection: $inspectorModel.lineEndingsSelection) {
             ForEach(inspectorModel.lineEndingsList) {
@@ -352,6 +373,7 @@ struct FileInspectorView: View {
         .frame(maxWidth: 150, maxHeight: 12)
     }
 
+    /// Indent using picker
     private var indentUsing: some View {
         Picker("", selection: $inspectorModel.indentUsingSelection) {
             ForEach(inspectorModel.indentUsingList) {
@@ -363,6 +385,9 @@ struct FileInspectorView: View {
         .frame(maxWidth: 150, maxHeight: 12)
     }
 
+    /// Change file name
+    /// 
+    /// - Parameter newFileName: the new file name
     private func changeFileName(newFileName: String) {
         let fileName = "\((inspectorModel.fileURL as NSString).deletingLastPathComponent)/\(newFileName)"
         do {

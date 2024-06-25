@@ -17,6 +17,7 @@ struct ToolbarNotificationButtonView: View {
     /// The count of notifications for the specified type.
     let notificationCount: Int
 
+    /// The view body.
     var body: some View {
         Button {
             NotificationCenter.default.post(
@@ -29,6 +30,7 @@ struct ToolbarNotificationButtonView: View {
                 Image(systemName: notificationType.iconName())
                     .symbolRenderingMode(.multicolor)
                     .imageScale(.small)
+                    .accessibilityLabel(Text("Notification Icon"))
 
                 // Display the notification count.
                 Text("\(notificationCount)")

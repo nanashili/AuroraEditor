@@ -10,22 +10,36 @@ import Foundation
 import ZIPFoundation
 import AppKit
 
+/// A repository that manages the download and installation of editor updates.
 class UpdateEditorRepository: NSObject, URLSessionDownloadDelegate {
-
+    /// The file manager used to manage files on disk.
     private var fileManager: FileManager
+
+    /// The temporary directory used to store downloaded files.
     private var tempDirectory: URL
+
+    /// The required storage size for the downloaded file.
     private let requiredStorageSize: Int64
 
+    /// The download task used to download the update file.
     private var downloadTask: URLSessionDownloadTask?
+
+    /// The background completion handler used to notify the system when the download is complete.
     private var backgroundCompletionHandler: (() -> Void)?
 
+    /// The progress handler used to report download progress.
     private var progressHandler: ((Double, String?) -> Void)?
 
+    /// The shared `UpdateObservedModel` instance used to manage the update state.
     private let model: UpdateObservedModel = .shared
+
+    /// The URL of the downloaded update file.
     public var updateFileUrl: String? = ""
 
+    /// The time at which the download started.
     private var downloadStartTime: TimeInterval = 0
 
+    /// Initializes a new `UpdateEditorRepository` instance.
     override init() {
         self.fileManager = FileManager.default
         self.tempDirectory = fileManager.temporaryDirectory
@@ -34,20 +48,18 @@ class UpdateEditorRepository: NSObject, URLSessionDownloadDelegate {
         super.init()
     }
 
-    /**
-     Initiates the download of an update file with progress reporting.
-
-     This method starts the download of an update file from a specified URL and provides progress
-     updates through the `progressHandler` closure.
-
-     - Parameters:
-       - progressHandler: A closure that takes a `Double` parameter representing the download progress as 
-                          a percentage. This closure is called periodically to report progress updates.
-
-     - Note:
-       This method sets the `progressHandler`, generates a download URL using `generateDownloadURL()`, 
-       configures a background URLSession, creates a download task, and resumes the download task.
-    **/
+    /// Initiates the download of an update file with progress reporting.
+    /// 
+    /// This method starts the download of an update file from a specified URL and provides progress
+    /// updates through the `progressHandler` closure.
+    /// 
+    /// - Parameters:
+    ///   - progressHandler: A closure that takes a `Double` parameter representing the download progress as 
+    ///                      a percentage. This closure is called periodically to report progress updates.
+    /// 
+    /// - Note:
+    ///   This method sets the `progressHandler`, generates a download URL using `generateDownloadURL()`, 
+    ///   configures a background URLSession, creates a download task, and resumes the download task.
     public func downloadUpdateFile(downloadURL: String, progressHandler: @escaping (Double, String?) -> Void) {
         self.progressHandler = progressHandler
 
@@ -65,24 +77,22 @@ class UpdateEditorRepository: NSObject, URLSessionDownloadDelegate {
         }
     }
 
-    /**
-     Handles the completion of a download task and manages the downloaded file.
-
-     This method is called when the download task has finished downloading the file to a temporary location.
-     It checks if there is sufficient disk space available, moves the downloaded file to the 
-     desired location, and logs the outcome.
-
-     - Parameters:
-       - session: The URLSession that initiated the download task.
-       - downloadTask: The URLSessionDownloadTask that completed.
-       - location: The local URL where the downloaded file is temporarily stored.
-
-     - Note:
-       This method checks if a suggested filename is provided by the server, moves the downloaded 
-       file to a specified location, updates the `updateState` property of
-       `WorkspaceManager.shared.updateEditorModel` based on the outcome,
-       and logs any errors that occur during the process.
-     **/
+    /// Handles the completion of a download task and manages the downloaded file.
+    /// 
+    /// This method is called when the download task has finished downloading the file to a temporary location.
+    /// It checks if there is sufficient disk space available, moves the downloaded file to the 
+    /// desired location, and logs the outcome.
+    /// 
+    /// - Parameters:
+    ///   - session: The URLSession that initiated the download task.
+    ///   - downloadTask: The URLSessionDownloadTask that completed.
+    ///   - location: The local URL where the downloaded file is temporarily stored.
+    /// 
+    /// - Note:
+    ///   This method checks if a suggested filename is provided by the server, moves the downloaded 
+    ///   file to a specified location, updates the `updateState` property of
+    ///   `WorkspaceManager.shared.updateEditorModel` based on the outcome,
+    ///   and logs any errors that occur during the process.
     func urlSession(_ session: URLSession,
                     downloadTask: URLSessionDownloadTask,
                     didFinishDownloadingTo location: URL) {
@@ -133,24 +143,22 @@ class UpdateEditorRepository: NSObject, URLSessionDownloadDelegate {
         }
     }
 
-    /**
-     Handles the progress of a download task by calculating and reporting the download progress as a percentage.
-
-     This method is called as data is being downloaded, and it calculates the download progress based 
-     on the number of bytes written and the total expected bytes to be written.
-
-     - Parameters:
-       - session: The URLSession that initiated the download task.
-       - downloadTask: The URLSessionDownloadTask for which progress is being reported.
-       - bytesWritten: The number of bytes written in the most recent data write operation.
-       - totalBytesWritten: The total number of bytes written so far.
-       - totalBytesExpectedToWrite: The total number of bytes expected to be written for the entire download.
-
-     - Note:
-       This method ensures that `totalBytesExpectedToWrite` is non-zero to avoid division by zero, 
-       calculates the download progress as a percentage, clamps the progress value within the valid range [0, 1],
-       and calls the `progressHandler` with the clamped progress value.
-     **/
+    /// Handles the progress of a download task by calculating and reporting the download progress as a percentage.
+    /// 
+    /// This method is called as data is being downloaded, and it calculates the download progress based 
+    /// on the number of bytes written and the total expected bytes to be written.
+    /// 
+    /// - Parameters:
+    ///   - session: The URLSession that initiated the download task.
+    ///   - downloadTask: The URLSessionDownloadTask for which progress is being reported.
+    ///   - bytesWritten: The number of bytes written in the most recent data write operation.
+    ///   - totalBytesWritten: The total number of bytes written so far.
+    ///   - totalBytesExpectedToWrite: The total number of bytes expected to be written for the entire download.
+    /// 
+    /// - Note:
+    ///   This method ensures that `totalBytesExpectedToWrite` is non-zero to avoid division by zero, 
+    ///   calculates the download progress as a percentage, clamps the progress value within the valid range [0, 1],
+    ///   and calls the `progressHandler` with the clamped progress value.
     public func urlSession(_ session: URLSession,
                            downloadTask: URLSessionDownloadTask,
                            didWriteData bytesWritten: Int64,
@@ -209,21 +217,19 @@ class UpdateEditorRepository: NSObject, URLSessionDownloadDelegate {
         }
     }
 
-    /**
-     Handles the completion of a URLSessionTask.
-
-     This method is called when a URLSessionTask has completed, either successfully or with an error.
-
-     - Parameters:
-       - session: The URLSession that initiated the task.
-       - task: The URLSessionTask that completed.
-       - error: An optional `Error` object indicating any error that occurred during the task's execution.
-                If the task completed successfully, this will be `nil`.
-
-     - Note:
-       This method logs error information and updates the `updateState` property of the 
-       `WorkspaceManager.shared.updateEditorModel` based on the type or domain of the error.
-     **/
+    // Handles the completion of a URLSessionTask.
+    // 
+    // This method is called when a URLSessionTask has completed, either successfully or with an error.
+    // 
+    // - Parameters:
+    //   - session: The URLSession that initiated the task.
+    //   - task: The URLSessionTask that completed.
+    //   - error: An optional `Error` object indicating any error that occurred during the task's execution.
+    //            If the task completed successfully, this will be `nil`.
+    // 
+    // - Note:
+    //   This method logs error information and updates the `updateState` property of the 
+    //   `WorkspaceManager.shared.updateEditorModel` based on the type or domain of the error.
     public func urlSession(_ session: URLSession,
                            task: URLSessionTask,
                            didCompleteWithError error: Error?) {
@@ -261,19 +267,17 @@ class UpdateEditorRepository: NSObject, URLSessionDownloadDelegate {
 
     // MARK: - Util Handling
 
-    /**
-     Checks if there is sufficient disk space available to store a file of a specified size.
-
-     - Parameters:
-       - fileSize: The size of the file to be stored, in bytes.
-
-     - Returns:
-       `true` if there is enough free disk space to accommodate the file, otherwise `false`.
-
-     - Note:
-       This method retrieves the system's free disk space for the temporary directory and compares 
-       it with the specified file size to determine if there is sufficient space.
-     **/
+    /// Checks if there is sufficient disk space available to store a file of a specified size.
+    /// 
+    /// - Parameters:
+    ///   - fileSize: The size of the file to be stored, in bytes.
+    /// 
+    /// - Returns:
+    ///   `true` if there is enough free disk space to accommodate the file, otherwise `false`.
+    /// 
+    /// - Note:
+    ///   This method retrieves the system's free disk space for the temporary directory and compares 
+    ///   it with the specified file size to determine if there is sufficient space.
     private func isDiskSpaceAvailable(forFileOfSize fileSize: Int64) -> Bool {
         do {
             let attributes = try self.fileManager.attributesOfFileSystem(forPath: tempDirectory.path)
@@ -286,6 +290,10 @@ class UpdateEditorRepository: NSObject, URLSessionDownloadDelegate {
         return false
     }
 
+    /// Unzips a file at a specified path to a destination directory.
+    /// 
+    /// - Parameter zipFilePath: The path to the ZIP file to be unzipped.
+    /// - Parameter destinationDirectory: The path to the directory where the ZIP file should be unzipped.
     func unzipFile(zipFilePath: String, to destinationDirectory: String) {
         let task = Process()
         task.executableURL = URL(fileURLWithPath: "/usr/bin/unzip")
@@ -299,6 +307,11 @@ class UpdateEditorRepository: NSObject, URLSessionDownloadDelegate {
         }
     }
 
+    /// Calculates the SHA-256 checksum for a file at a specified path.
+    /// 
+    /// - Parameter filePath: The path to the file for which the checksum should be calculated.
+    /// 
+    /// - Returns: The SHA-256 checksum of the file, or `nil` if an error occurs.
     public func calculateSHA256Checksum(forFileAtPath filePath: String) -> String? {
         let process = Process()
         process.launchPath = "/usr/bin/shasum"
@@ -324,5 +337,4 @@ class UpdateEditorRepository: NSObject, URLSessionDownloadDelegate {
 
         return nil
     }
-
 }

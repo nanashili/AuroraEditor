@@ -8,7 +8,9 @@
 
 import SwiftUI
 
+/// A view that represents the update view.
 struct UpdateView: View {
+    /// The view body
     var body: some View {
         VStack {
             GroupBox {
@@ -26,6 +28,7 @@ struct UpdateView: View {
                             Image(systemName: "info.circle")
                                 .foregroundColor(.secondary)
                                 .font(.system(size: 12, weight: .medium))
+                                .accessibilityLabel(Text("Info Icon"))
                         }
                         .buttonStyle(.plain)
                     }

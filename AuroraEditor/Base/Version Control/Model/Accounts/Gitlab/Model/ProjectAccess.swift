@@ -8,10 +8,21 @@
 
 import Foundation
 
+@available(*, deprecated, renamed: "VersionControl", message: "This will be deprecated in favor of the new VersionControl Remote SDK APIs.")
+/// Project Access
 open class ProjectAccess: Codable {
+
+    /// Access Level
     open var accessLevel: Int?
+
+    /// Notification Level
     open var notificationLevel: Int?
 
+    /// Initialize Project Access
+    /// 
+    /// - Parameter json: JSON
+    /// 
+    /// - Returns: Project Access
     public init(_ json: [String: AnyObject]) {
         accessLevel = json["access_level"] as? Int
         notificationLevel = json["notification_level"] as? Int

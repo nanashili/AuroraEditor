@@ -11,23 +11,32 @@ import Combine
 
 /// A view that pops up a branch picker.
 public struct ToolbarBranchPicker: View {
+
+    /// The active state of the control.
     @Environment(\.controlActiveState)
     private var controlActive
+
+    /// The file system client.
     private var fileSystemClient: FileSystemClient?
 
+    /// The hover state.
     @State
     private var isHovering: Bool = false
 
+    /// The display popover state.
     @State
     private var displayPopover: Bool = false
 
+    /// Application preferences model
     @ObservedObject
     private var prefs: AppPreferencesModel = .shared
 
+    /// The source control model.
     @ObservedObject
     private var changesModel: SourceControlModel
 
     /// Initializes the ``ToolbarBranchPicker`` with an instance of a `FileSystemClient`
+    /// 
     /// - Parameter shellClient: An instance of the current `ShellClient`
     /// - Parameter workspace: An instance of the current `FileSystemClient`
     public init(fileSystemClient: FileSystemClient?) {
@@ -35,6 +44,7 @@ public struct ToolbarBranchPicker: View {
         self.changesModel = .init(workspaceURL: (fileSystemClient?.folderURL)!)
     }
 
+    /// The view body.
     public var body: some View {
         HStack(alignment: .center, spacing: 5) {
             if prefs.sourceControlActive() && changesModel.isGitRepository {
@@ -42,11 +52,13 @@ public struct ToolbarBranchPicker: View {
                     .font(.title3)
                     .imageScale(.medium)
                     .foregroundColor(controlActive == .inactive ? inactiveColor : .primary)
+                    .accessibilityLabel(Text("Git Branche"))
             } else {
                 Image(systemName: "square.dashed")
                     .font(.title3)
                     .imageScale(.medium)
                     .foregroundColor(controlActive == .inactive ? inactiveColor : .accentColor)
+                    .accessibilityLabel(Text("No Source Control"))
             }
             VStack(alignment: .leading, spacing: 2) {
                 Text(title)
@@ -61,6 +73,7 @@ public struct ToolbarBranchPicker: View {
                                 .padding(.trailing)
                             if isHovering {
                                 Image(systemName: "chevron.down")
+                                    .accessibilityLabel(Text("Open Branch Picker"))
                             }
                         }
                         .font(.subheadline)
@@ -76,6 +89,7 @@ public struct ToolbarBranchPicker: View {
                 displayPopover.toggle()
             }
         }
+        .accessibilityAddTraits(.isButton)
         .onHover { active in
             isHovering = active
         }
@@ -85,10 +99,12 @@ public struct ToolbarBranchPicker: View {
         }
     }
 
+    /// The inactive color.
     private var inactiveColor: Color {
         Color(nsColor: .disabledControlTextColor)
     }
 
+    /// The title of the branch picker.
     private var title: String {
         fileSystemClient?.folderURL?.lastPathComponent ?? "Empty"
     }
@@ -101,11 +117,14 @@ public struct ToolbarBranchPicker: View {
     /// 
     private struct PopoverView: View {
 
+        /// The git client.
         var gitClient: GitClient?
 
+        /// The current branch.
         @State
         var currentBranch: String?
 
+        /// The view body.
         var body: some View {
             VStack(alignment: .leading) {
                 if let currentBranch = currentBranch {
@@ -132,6 +151,7 @@ public struct ToolbarBranchPicker: View {
             .frame(width: 340)
         }
 
+        /// A header label.
         func headerLabel(_ title: String) -> some View {
             Text(title)
                 .font(.subheadline.bold())
@@ -144,15 +164,25 @@ public struct ToolbarBranchPicker: View {
 
         /// A Button Cell that represents a branch in the branch picker
         struct BranchCell: View {
-            @Environment(\.dismiss) private var dismiss
 
+            /// The dismiss environment.
+            @Environment(\.dismiss)
+            private var dismiss
+
+            /// The branch name.
             var name: String
+
+            /// The active state.
             var active: Bool = false
+
+            /// The action to perform.
             var action: () -> Void
 
+            /// The hover state.
             @State
             private var isHovering: Bool = false
 
+            /// The view body.
             var body: some View {
                 Button {
                     action()
@@ -165,11 +195,13 @@ public struct ToolbarBranchPicker: View {
                         } icon: {
                             Image("git.branch")
                                 .imageScale(.large)
+                                .accessibilityLabel(Text("Git Branch"))
                         }
                         .foregroundColor(isHovering ? .white : .secondary)
                         if active {
                             Image(systemName: "checkmark.circle.fill")
                                 .foregroundColor(isHovering ? .white : .green)
+                                .accessibilityLabel(Text("Active Branch"))
                         }
                     }
                     .contentShape(Rectangle())
@@ -187,6 +219,7 @@ public struct ToolbarBranchPicker: View {
             }
         }
 
+        /// The branch names.
         var branchNames: [String] {
             // FIXME: Enable this
 //            gitClient?.allBranches.map({ $0.name }).filter { $0 != currentBranch } ?? []

@@ -9,48 +9,73 @@
 import SwiftUI
 import Version_Control
 
+@available(*, deprecated, renamed: "VersionControl", message: "This will be deprecated in favor of the new VersionControl Remote SDK APIs.")
+/// Branch Commit History
 final class BranchCommitHistory: Equatable, Identifiable, TabBarItemRepresentable, ObservableObject {
 
     /// The state of the current Branch Commit History View
     enum State {
+
+        /// Loading
         case loading
+
+        /// Error
         case error
+
+        /// Success
         case success
+
+        /// Empty
         case empty
     }
 
+    /// The state of the current Branch Commit History View
     @Published
     var state: State = .loading
 
+    /// The workspace document
     let workspace: WorkspaceDocument
 
+    /// The branch name
     let branchName: String
 
+    /// Equatable
+    /// 
+    /// - Parameter lhs: The left hand side
+    /// - Parameter rhs: The right hand side
+    /// 
+    /// - Returns: Whether the two are equal
     static func == (lhs: BranchCommitHistory, rhs: BranchCommitHistory) -> Bool {
         guard lhs.tabID == rhs.tabID else { return false }
         guard lhs.title == rhs.title else { return false }
         return true
     }
 
+    /// The tab ID
     public var tabID: TabBarItemID {
         .branchHistory(branchName)
     }
 
+    /// The title
     public var title: String {
         branchName
     }
 
+    /// The icon
     public var icon: Image {
         Image("git.branch")
     }
 
+    /// The icon color
     public var iconColor: Color {
         return .secondary
     }
 
+    /// The project history
     @Published
     var projectHistory: [Commit] = []
 
+    /// The git history date
     @Published
     var gitHistoryDate: CommitDate? {
         didSet {
@@ -65,6 +90,12 @@ final class BranchCommitHistory: Equatable, Identifiable, TabBarItemRepresentabl
         }
     }
 
+    /// Initialize with a workspace and branch name
+    /// 
+    /// - Parameter workspace: The workspace
+    /// - Parameter branchName: The branch name
+    /// 
+    /// - Returns: A Branch Commit History
     init(workspace: WorkspaceDocument, branchName: String) {
         self.workspace = workspace
         self.branchName = branchName
@@ -86,6 +117,9 @@ final class BranchCommitHistory: Equatable, Identifiable, TabBarItemRepresentabl
         }
     }
 
+    /// Reload the project history
+    /// 
+    /// - Throws: Error
     func reloadProjectHistory() throws {
 
         var additionArgs: [String] = []

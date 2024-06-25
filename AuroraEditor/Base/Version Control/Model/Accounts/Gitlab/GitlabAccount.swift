@@ -8,6 +8,7 @@
 
 import Foundation
 
+@available(*, deprecated, renamed: "VersionControl", message: "This will be deprecated in favor of the new VersionControl Remote SDK APIs.")
 /// Gitlab Base URL
 public let gitlabBaseURL = "https://gitlab.com/api/v4/"
 
@@ -20,6 +21,7 @@ public struct GitlabAccount {
     public let configuration: GitConfiguration
 
     /// Initialize Gitlab cccount
+    /// 
     /// - Parameter config: GIT Configuration
     public init(_ config: GitConfiguration = GitlabTokenConfiguration()) {
         configuration = config

@@ -8,9 +8,19 @@
 
 import Foundation
 
+@available(*, deprecated, renamed: "VersionControl", message: "This will be deprecated in favor of the new VersionControl Remote SDK APIs.")
+/// Reviews Router
 enum ReviewsRouter: JSONPostRouter {
+
+    /// List Reviews
+    /// 
+    /// - Parameter config: Git Configuration
+    /// - Parameter owner: Owner
+    /// - Parameter repository: Repository
+    /// - Parameter pullRequestNumber: Pull Request Number
     case listReviews(GitConfiguration, String, String, Int)
 
+    /// HTTP Method
     var method: HTTPMethod {
         switch self {
         case .listReviews:
@@ -18,6 +28,7 @@ enum ReviewsRouter: JSONPostRouter {
         }
     }
 
+    /// Encoding
     var encoding: HTTPEncoding {
         switch self {
         default:
@@ -25,6 +36,7 @@ enum ReviewsRouter: JSONPostRouter {
         }
     }
 
+    /// Configuration
     var configuration: GitConfiguration? {
         switch self {
         case let .listReviews(config, _, _, _):
@@ -32,6 +44,7 @@ enum ReviewsRouter: JSONPostRouter {
         }
     }
 
+    /// Parameters
     var params: [String: Any] {
         switch self {
         case .listReviews:
@@ -39,6 +52,7 @@ enum ReviewsRouter: JSONPostRouter {
         }
     }
 
+    /// Path
     var path: String {
         switch self {
         case let .listReviews(_, owner, repository, pullRequestNumber):

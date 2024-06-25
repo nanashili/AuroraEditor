@@ -8,20 +8,25 @@
 
 import SwiftUI
 
+/// A view that represents a filter button.
 struct FilterButton: View {
+    /// The view body
     var body: some View {
         HStack {
             Image(systemName: "line.3.horizontal.decrease")
                 .font(.system(size: 8))
                 .symbolRenderingMode(.hierarchical)
+                .accessibilityHidden(true)
 
             Image(systemName: "chevron.down")
                 .font(.system(size: 8))
                 .symbolRenderingMode(.hierarchical)
+                .accessibilityHidden(true)
         }
         .padding(7)
         .border(Color.secondary, width: 0.5)
         .cornerRadius(20)
+        .accessibilityLabel(Text("Filter icon"))
     }
 }
 

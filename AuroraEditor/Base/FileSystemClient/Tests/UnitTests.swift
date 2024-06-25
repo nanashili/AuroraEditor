@@ -12,8 +12,10 @@ import Foundation
 import XCTest
 
 final class WorkspaceClientUnitTests: XCTestCase {
+    /// Types of extensions
     let typeOfExtensions = ["json", "txt", "swift", "js", "py", "md"]
 
+    /// Test list file
     func testListFile() throws {
         let directory = try FileManager.default.url(
             for: .developerApplicationDirectory,
@@ -21,7 +23,7 @@ final class WorkspaceClientUnitTests: XCTestCase {
             appropriateFor: nil,
             create: true
         )
-            .appendingPathComponent("CodeEdit", isDirectory: true)
+            .appendingPathComponent("AuroraEditor", isDirectory: true)
             .appendingPathComponent("WorkspaceClientTests", isDirectory: true)
         try? FileManager.default.removeItem(at: directory)
         try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
@@ -58,6 +60,7 @@ final class WorkspaceClientUnitTests: XCTestCase {
         cancellable?.cancel()
     }
 
+    /// Test directory changes
     func testDirectoryChanges() throws {
         let directory = try FileManager.default.url(
             for: .developerApplicationDirectory,
@@ -65,7 +68,7 @@ final class WorkspaceClientUnitTests: XCTestCase {
             appropriateFor: nil,
             create: true
         )
-            .appendingPathComponent("CodeEdit", isDirectory: true)
+            .appendingPathComponent("AuroraEditor", isDirectory: true)
             .appendingPathComponent("WorkspaceClientTests", isDirectory: true)
         try? FileManager.default.removeItem(at: directory)
         try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
@@ -114,6 +117,7 @@ final class WorkspaceClientUnitTests: XCTestCase {
         cancellable?.cancel()
     }
 
+    /// Generate random files
     func generateRandomFiles(amount: Int) -> [String] {
         [String](repeating: "", count: amount)
             .map { _ in
@@ -123,6 +127,7 @@ final class WorkspaceClientUnitTests: XCTestCase {
             }
     }
 
+    /// Generate random string
     func randomString(length: Int) -> String {
         let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         return String((0 ..< length).map { _ in letters.randomElement()! })

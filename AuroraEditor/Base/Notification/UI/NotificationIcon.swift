@@ -8,10 +8,14 @@
 
 import SwiftUI
 
+/// Notification icon
 struct NotificationIcon: View {
 
-    @State public var notification: INotification
+    /// Notification
+    @State
+    public var notification: INotification
 
+    //// The view body.
     var body: some View {
         switch notification.notificationType {
         case .system:
@@ -19,19 +23,23 @@ struct NotificationIcon: View {
                 .symbolRenderingMode(.hierarchical)
                 .font(.system(size: 14))
                 .cornerRadius(5)
+                .accessibilityLabel(Text("System Notification"))
         case .update:
             Image(systemName: "square.and.arrow.down.fill")
                 .symbolRenderingMode(.hierarchical)
                 .font(.system(size: 14))
                 .cornerRadius(5)
+                .accessibilityLabel(Text("Update Notification"))
         case .extensionSystem:
             AsyncImage(url: notification.icon)
                 .font(.system(size: 14))
                 .cornerRadius(5)
+                .accessibilityLabel(Text("Extension Notification"))
         case .custom:
             AsyncImage(url: notification.icon)
                 .font(.system(size: 14))
                 .cornerRadius(5)
+                .accessibilityLabel(Text("Custom Notification"))
         }
     }
 }

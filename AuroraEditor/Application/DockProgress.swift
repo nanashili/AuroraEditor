@@ -12,6 +12,9 @@ import SwiftUI
 import Cocoa
 
 extension NSApplication {
+    /// The dock progress indicator.
+    /// 
+    /// - Parameter progress: The progress value between 0 and 1.
     func setDockProgress(progress: Double) {
         let dockTile = NSApplication.shared.dockTile
         guard let image = NSApplication.shared.applicationIconImage else { return }
@@ -22,6 +25,7 @@ extension NSApplication {
         dockTile.display()
     }
 
+    /// Remove the dock progress indicator.
     func removeDockProgress() {
         let dockTile = NSApplication.shared.dockTile
         guard let image = NSApplication.shared.applicationIconImage else { return }
@@ -29,6 +33,10 @@ extension NSApplication {
         dockTile.display()
     }
 
+    /// The dock progress indicator.
+    /// 
+    /// - Parameter on: The app icon image.
+    /// - Parameter progress: The progress value between 0 and 1.
     private func drawProgress(on appIcon: NSImage, progress: Double) -> NSImage {
         NSImage(size: appIcon.size, flipped: false) { dstRect in
             NSGraphicsContext.current?.imageInterpolation = .high
@@ -53,28 +61,35 @@ extension NSApplication {
     }
 }
 
-/**
-Convenience function for initializing an object and modifying its properties.
-```
-let label = with(NSTextField()) {
-    $0.stringValue = "Foo"
-    $0.textColor = .systemBlue
-    view.addSubview($0)
-}
-```
-*/
-
 @discardableResult
+@available(*, deprecated, message: "Please do not use this anymore.")
+/// Convenience function for initializing an object and modifying its properties.
+/// 
+/// ```
+/// let label = with(NSTextField()) {
+///     $0.stringValue = "Foo"
+///     $0.textColor = .systemBlue
+///     view.addSubview($0)
+/// }
+/// ```
+/// 
+/// - Parameter item: The object to modify.
+/// - Parameter update: The closure to modify the object.
+/// 
+/// - Returns: The modified object.
 private func with<T>(_ item: T, update: (inout T) throws -> Void) rethrows -> T {
     var this = item
     try update(&this)
     return this
 }
 
+/// The dock progress indicator.
 private extension NSBezierPath {
-    /**
-    Create a path for a superellipse that fits inside the given rect.
-    */
+    /// Create a path for a superellipse that fits inside the given rect.
+    /// 
+    /// - Parameter rect: The rect to fit the superellipse inside.
+    /// 
+    /// - Returns: The superellipse path.
     static func superellipse(in rect: CGRect, cornerRadius: Double) -> Self {
         let minSide = min(rect.width, rect.height)
         let radius = min(cornerRadius, minSide / 2)
@@ -114,10 +129,12 @@ private extension NSBezierPath {
         return path
     }
 
-    /**
-    Create a path for a squircle that fits inside the given `rect`.
-    - Precondition: The given `rect` must be square.
-    */
+    /// Create a path for a squircle that fits inside the given `rect`.
+    /// - Precondition: The given `rect` must be square.
+    /// 
+    /// - Parameter rect: The rect to fit the squircle inside.
+    /// 
+    /// - Returns: The squircle path.
     static func squircle(rect: CGRect) -> Self {
         assert(rect.width == rect.height)
         return superellipse(in: rect, cornerRadius: rect.width / 2)
@@ -142,6 +159,7 @@ private final class ProgressSquircleShapeLayer: CAShapeLayer {
         bounds = cgPath.boundingBox
     }
 
+    /// The progress value between 0 and 1.
     var progress: Double {
         get { strokeEnd }
         set {
@@ -165,9 +183,7 @@ private extension CGRect {
 }
 
 private extension NSBezierPath {
-    /**
-    UIKit polyfill.
-    */
+    /// Get the CGPath representation of the NSBezierPath.
     var cgPath: CGPath {
         let path = CGMutablePath()
         var points = [CGPoint](repeating: .zero, count: 3)
@@ -191,23 +207,17 @@ private extension NSBezierPath {
         return path
     }
 
-    /**
-    UIKit polyfill.
-    */
+    /// UIKit polyfill.
     convenience init(roundedRect rect: CGRect, cornerRadius: CGFloat) {
         self.init(roundedRect: rect, xRadius: cornerRadius, yRadius: cornerRadius)
     }
 
-    /**
-    UIKit polyfill.
-    */
+    /// UIKit polyfill.
     func addLine(to point: CGPoint) {
         line(to: point)
     }
 
-    /**
-    UIKit polyfill.
-    */
+    /// UIKit polyfill.
     func addCurve(to endPoint: CGPoint, controlPoint1: CGPoint, controlPoint2: CGPoint) {
         curve(to: endPoint, controlPoint1: controlPoint1, controlPoint2: controlPoint2)
     }

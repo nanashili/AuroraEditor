@@ -10,7 +10,7 @@ import SwiftUI
 
 /// A Button representing a system Help button displaying a question mark symbol.
 public struct HelpButton: View {
-
+    /// The action closure
     private var action: () -> Void
 
     /// Initializes the ``HelpButton`` with an action closure
@@ -19,6 +19,7 @@ public struct HelpButton: View {
         self.action = action
     }
 
+    /// The view body
     public var body: some View {
         Button(action: action, label: {
             ZStack {
@@ -30,6 +31,7 @@ public struct HelpButton: View {
                     .frame(width: 20, height: 20)
                 Image(systemName: "questionmark")
                     .font(.system(size: 12.5, weight: .medium))
+                    .accessibilityLabel(Text("Help"))
             }
         })
         .buttonStyle(PlainButtonStyle())

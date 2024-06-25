@@ -10,19 +10,29 @@
 
 import Foundation
 
+@available(*, deprecated, renamed: "VersionControl", message: "This will be deprecated in favor of the new VersionControl Remote SDK APIs.")
 // TODO: Rebuild Networking Layer for Accounts
 public protocol JSONPostRouter: Router {
     /// Post JSON
-    /// - Parameters:
-    ///   - session: session description
-    ///   - expectedResultType: expectedResultType description
-    ///   - completion: completion description
-    /// - Returns: description
+    /// 
+    /// - Parameter session: URLSession
+    /// - Parameter expectedResultType: T.Type
+    /// - Parameter completion: completion
+    /// 
+    /// - Returns: URLSessionDataTaskProtocol
     func postJSON<T>(
         _ session: GitURLSession,
         expectedResultType: T.Type,
         completion: @escaping (_ json: T?, _ error: Error?) -> Void) -> URLSessionDataTaskProtocol?
 
+    /// Post
+    /// 
+    /// - Parameter session: URLSession
+    /// - Parameter decoder: JSONDecoder
+    /// - Parameter expectedResultType: T.Type
+    /// - Parameter completion: completion
+    /// 
+    /// - Returns: URLSessionDataTaskProtocol
     func post<T: Codable>(
         _ session: GitURLSession,
         decoder: JSONDecoder,
@@ -43,10 +53,12 @@ public protocol JSONPostRouter: Router {
 
 public extension JSONPostRouter {
     /// POST JSON
+    /// 
     /// - Parameters:
     ///   - session: URLSession
     ///   - _: expectedResultType
     ///   - completion: completion
+    /// 
     /// - Returns: URLSessionDataTaskProtocol
     func postJSON<T>(
         _ session: GitURLSession = URLSession.shared,
@@ -112,9 +124,11 @@ public extension JSONPostRouter {
 
     #if !canImport(FoundationNetworking)
     /// POST JSON
+    /// 
     /// - Parameters:
     ///   - session: URLSession
     ///   - _: expectedResultType
+    /// 
     /// - Returns: T?
     @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
     func postJSON<T>(
@@ -148,11 +162,13 @@ public extension JSONPostRouter {
     #endif
 
     /// POST <Codable>
+    /// 
     /// - Parameters:
     ///   - session: session
     ///   - decoder: Decoder (JSON)
     ///   - _: expectedResultType
     ///   - completion: completion
+    /// 
     /// - Returns: URLSessionDataTaskProtocol
     func post<T: Codable>(
         _ session: GitURLSession = URLSession.shared,
@@ -213,10 +229,12 @@ public extension JSONPostRouter {
 
     #if !canImport(FoundationNetworking)
     /// POST <Codable>
+    /// 
     /// - Parameters:
     ///   - session: URLSession
     ///   - decoder: Decoder
     ///   - _: expectedResultType
+    /// 
     /// - Returns: T
     @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
     func post<T: Codable>(

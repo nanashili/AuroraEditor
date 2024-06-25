@@ -16,23 +16,46 @@ import Version_Control
 // directory, create one or clone one from their desired
 // git provider and can drag and drop a file or a folder
 public struct WelcomeView: View {
-
+    /// Shell client
     let shellClient: ShellClient
+
+    /// Open document closure
     let openDocument: (URL?, @escaping () -> Void) -> Void
+
+    /// New document closure
     let newDocument: () -> Void
+
+    /// Dismiss window closure
     let dismissWindow: () -> Void
 
+    /// Color scheme
     @Environment(\.colorScheme)
     var colorScheme
+
+    /// Show git clone
     @State
     var showGitClone = false
+
+    /// Repo path
     @State
     private var repoPath = "~/"
+
+    /// Is hovering
     @State
     var isHovering: Bool = false
+
+    /// Is hovering close
     @State
     var isHoveringClose: Bool = false
 
+    /// Initialize a new WelcomeView
+    /// 
+    /// - Parameter shellClient: shell client
+    /// - Parameter openDocument: open document closure
+    /// - Parameter newDocument: new document closure
+    /// - Parameter dismissWindow: dismiss window closure
+    /// 
+    /// - Returns: a new WelcomeView
     init(shellClient: ShellClient,
          openDocument: @escaping (URL?, @escaping () -> Void) -> Void,
          newDocument: @escaping () -> Void,
@@ -43,9 +66,11 @@ public struct WelcomeView: View {
         self.dismissWindow = dismissWindow
     }
 
+    /// Application preferences
     @ObservedObject
     private var prefs: AppPreferencesModel = .shared
 
+    /// The view body.
     public var body: some View {
         ZStack(alignment: .topLeading) {
             VStack(spacing: 8) {
@@ -53,6 +78,7 @@ public struct WelcomeView: View {
                 Image(nsImage: NSApp.applicationIconImage)
                     .resizable()
                     .frame(width: 128, height: 128)
+                    .accessibilityLabel(Text("Aura Editor Icon"))
                 Text("Welcome to Aurora")
                     .font(.system(size: 38))
                 Text("Version \(appVersion) (\(appBuild))")
@@ -68,6 +94,7 @@ public struct WelcomeView: View {
                     .onTapGesture {
                         copyInformation()
                     }
+                    .accessibilityAddTraits(.isButton)
 
                 Spacer().frame(height: 20)
                 HStack {
@@ -81,6 +108,7 @@ public struct WelcomeView: View {
                             newDocument()
                             dismissWindow()
                         }
+                        .accessibilityAddTraits(.isButton)
 
                         WelcomeActionView(
                             iconName: "plus.square.on.square",
@@ -90,6 +118,7 @@ public struct WelcomeView: View {
                         .onTapGesture {
                             showGitClone = true
                         }
+                        .accessibilityAddTraits(.isButton)
                         .disabled(!prefs.sourceControlActive())
 
                         WelcomeActionView(
@@ -100,6 +129,7 @@ public struct WelcomeView: View {
                         .onTapGesture {
                             openDocument(nil, dismissWindow)
                         }
+                        .accessibilityAddTraits(.isButton)
 
                         WelcomeActionView(
                             iconName: "cursorarrow.and.square.on.square.dashed",
@@ -163,6 +193,9 @@ public struct WelcomeView: View {
         }
     }
 
+    /// Git disabled text
+    /// 
+    /// - Returns: a string
     private func gitDisabledText() -> String {
         if prefs.sourceControlActive() {
             return "Start working on something from a Git repository"
@@ -171,6 +204,7 @@ public struct WelcomeView: View {
         }
     }
 
+    /// Dismis button
     private var dismissButton: some View {
         Button(
             action: dismissWindow,

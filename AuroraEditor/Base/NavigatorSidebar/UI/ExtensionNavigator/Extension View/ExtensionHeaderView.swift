@@ -8,11 +8,14 @@
 
 import SwiftUI
 
+/// Extension header view.
 struct ExtensionHeaderView: View {
 
+    /// The extension info.
     @State
     var extensionInfo: Plugin
 
+    /// The view body.
     var body: some View {
         VStack {
             HStack(alignment: .top) {
@@ -23,16 +26,19 @@ struct ExtensionHeaderView: View {
                             .scaledToFit()
                             .frame(width: 130, height: 130)
                             .cornerRadius(28)
+                            .accessibilityHidden(true)
                     } else if phase.error != nil {
                         Image(systemName: "lasso")
                             .frame(width: 130, height: 130)
                             .background(.blue)
                             .cornerRadius(28)
+                            .accessibilityHidden(true)
                     } else {
                         Image(systemName: "lasso")
                             .frame(width: 130, height: 130)
                             .background(.blue)
                             .cornerRadius(28)
+                            .accessibilityHidden(true)
                     }
                 }
 

@@ -8,6 +8,7 @@
 
 import Foundation
 import Combine
+import OSLog
 
 /// Class that manages a broadcaster.
 /// The broadcaster is a publisher used to broadcast a command to any subscribers of
@@ -54,10 +55,16 @@ import Combine
 class AuroraCommandBroadcaster {
     /// Aurora extensions broadcaster
     public private(set) var broadcaster: AnyPublisher<Broadcast, Never>
+
+    /// The subject that the broadcaster uses to send commands
     private var subject: CurrentValueSubject<Broadcast, Never>
 
+    /// The logger for this class
+    private let logger = Logger(subsystem: "com.auroraeditor", category: "Broadcaster")
+
+    /// Initializes the broadcaster
     init() {
-        Log.info("[AuroraCommandBroadcaster] init()")
+        logger.info("[AuroraCommandBroadcaster] init()")
         subject = .init(.init(sender: "AuroraEditor", command: "NOOP"))
         broadcaster = subject
             .handleEvents(receiveCancel: {})
