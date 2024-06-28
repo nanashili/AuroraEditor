@@ -8,6 +8,7 @@
 
 import Foundation
 import Version_Control
+import OSLog
 
 @available(*, deprecated, renamed: "VersionControl", message: "This will be deprecated in favor of the new VersionControl Remote SDK APIs.")
 /// Github actions model
@@ -104,6 +105,9 @@ class GitHubActions: ObservableObject {
     @Published
     var jobId: String = ""
 
+    /// Logger
+    let logger = Logger(subsystem: "com.auroraeditor.vcs", category: "GitHub Actions")
+
     /// Initialize Github Actions
     /// 
     /// - Parameter workspace: Workspace Document
@@ -127,7 +131,7 @@ class GitHubActions: ObservableObject {
             case .success(let data):
                 let decoder = JSONDecoder()
                 guard let workflows = try? decoder.decode(Workflows.self, from: data) else {
-                    Log.debug(
+                    self.logger.debug(
                         "Error: Unable to decode \(String(data: data, encoding: .utf8) ?? "")"
                     )
                     DispatchQueue.main.async {
@@ -144,7 +148,7 @@ class GitHubActions: ObservableObject {
                 DispatchQueue.main.async {
                     self.state = .error
                 }
-                Log.fault("\(error)")
+                self.logger.fault("\(error)")
             }
         })
     }
@@ -182,7 +186,7 @@ class GitHubActions: ObservableObject {
                     DispatchQueue.main.async {
                         self.workflowRunState = .error
                     }
-                    Log.debug(
+                    self.logger.debug(
                         "Error: \(error), \(String(data: data, encoding: .utf8) ?? "")"
                     )
                 }
@@ -190,7 +194,7 @@ class GitHubActions: ObservableObject {
                 DispatchQueue.main.async {
                     self.workflowRunState = .error
                 }
-                Log.fault("\(error)")
+                self.logger.fault("\(error)")
             }
 
         })
@@ -234,7 +238,7 @@ class GitHubActions: ObservableObject {
                     DispatchQueue.main.async {
                         self.jobsState = .error
                     }
-                    Log.debug(
+                    self.logger.debug(
                         "Error: \(error), \(String(data: data, encoding: .utf8) ?? "")"
                     )
                 }
@@ -242,7 +246,7 @@ class GitHubActions: ObservableObject {
                 DispatchQueue.main.async {
                     self.jobsState = .error
                 }
-                Log.fault("\(error)")
+                self.logger.fault("\(error)")
             }
         })
     }
@@ -256,7 +260,7 @@ class GitHubActions: ObservableObject {
                            enableDebugging: Bool,
                            completion: @escaping (Result<String, Error>) -> Void) {
         guard !jobId.isEmpty else {
-            Log.fault("No job id provided")
+            self.logger.fault("No job id provided")
             return
         }
 
@@ -273,10 +277,10 @@ class GitHubActions: ObservableObject {
                                    completionHandler: { result in
             switch result {
             case .success:
-                Log.debug("Succeffully Re-Run job: \(jobId)")
+                self.logger.debug("Succeffully Re-Run job: \(jobId)")
                 completion(.success("Succeffully Re-Run job: \(jobId)"))
             case .failure(let error):
-                Log.fault("\(error)")
+                self.logger.fault("\(error)")
                 completion(.failure(error))
             }
         })
@@ -295,9 +299,9 @@ class GitHubActions: ObservableObject {
                                    completionHandler: { result in
             switch result {
             case .success:
-                Log.debug("Succeffully Downloaded Workflow Logs for: \(jobId)")
+                self.logger.debug("Succeffully Downloaded Workflow Logs for: \(jobId)")
             case .failure(let error):
-                Log.fault("\(error)")
+                self.logger.fault("\(error)")
             }
         })
     }
@@ -329,7 +333,7 @@ class GitHubActions: ObservableObject {
             }
             self.objectWillChange.send()
         } catch {
-            Log.fault("Failed to get project remote URL.")
+            self.logger.fault("Failed to get project remote URL.")
             DispatchQueue.main.async {
                 self.state = .repoFailure
                 self.objectWillChange.send()

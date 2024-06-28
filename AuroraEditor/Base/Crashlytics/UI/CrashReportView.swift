@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import OSLog
 
 /// A view that represents the crash report view.
 public struct CrashReportView: View {
@@ -48,7 +49,7 @@ public struct CrashReportView: View {
                 Spacer()
 
                 HelpButton {
-                    Log.info("Help")
+                    // TODO: Add help content
                 }
             }
             VStack(alignment: .leading) {
@@ -120,7 +121,6 @@ public struct CrashReportView: View {
                     Button {
                         UserDefaults.standard.removeObject(forKey: "crash")
                         if prefs.preferences.accounts.sourceControlAccounts.gitAccount.isEmpty {
-                            Log.info("Failed to find a github account")
                             restartApplication()
                         } else {
                             reportModel.createIssue(comments: reportModel.comments,

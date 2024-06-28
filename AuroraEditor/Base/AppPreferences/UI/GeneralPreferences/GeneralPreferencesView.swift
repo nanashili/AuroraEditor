@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import OSLog
 
 /// A view that implements the `General` preference section
 public struct GeneralPreferencesView: View {
@@ -27,12 +28,16 @@ public struct GeneralPreferencesView: View {
     @State
     var openInAuroraEditor: Bool = true
 
+    /// Logger
+    let logger: Logger
+
     /// Initializes the general preferences view
     public init() {
+        self.logger = Logger(subsystem: "com.auroraeditor", category: "General Preferences View")
+
         guard let defaults = UserDefaults(
             suiteName: "com.auroraeditor.shared"
         ) else {
-            Log.fault("Failed to get/init shared defaults")
             return
         }
 

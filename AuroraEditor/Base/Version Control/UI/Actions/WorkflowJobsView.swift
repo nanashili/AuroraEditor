@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import OSLog
 
 struct WorkflowJobsView: View {
     @ObservedObject
@@ -64,9 +65,6 @@ struct WorkflowJobsView: View {
                             workspace: actionsModel.workspace,
                             jobId: actionsModel.jobId
                         )
-                        .log {
-                            Log.info("Currently selected job id: \(actionsModel.jobId)")
-                        }
                     }
 
                     // TODO: Find a way to show it for each job

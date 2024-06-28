@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import OSLog
 
 /// Tab bar item view.
 struct TabBarItem: View {
@@ -182,7 +183,6 @@ struct TabBarItem: View {
             TapGesture(count: 2)
                 .onEnded { _ in
                     if isTemporary {
-                        Log.info("Converting temp tab")
                         workspace.convertTemporaryTab()
                     }
                 }

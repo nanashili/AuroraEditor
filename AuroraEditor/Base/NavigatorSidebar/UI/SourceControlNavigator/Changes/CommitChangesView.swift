@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import OSLog
 
 /// A view for committing changes.
 struct CommitChangesView: View {
@@ -141,8 +142,10 @@ struct CommitChangesView: View {
 
     /// Commits the changes.
     private func commit() {
+        let logger: Logger = Logger(subsystem: "com.auroraeditor.vcs", category: "Commit Changes View")
+
         guard let client = gitClient else {
-            Log.fault("No git client!")
+            logger.fault("No git client!")
             return
         }
         do {
@@ -157,10 +160,10 @@ struct CommitChangesView: View {
                 }
                 try client.commit(message: message)
             } else {
-                Log.info("No changes to commit!")
+                logger.info("No changes to commit!")
             }
         } catch let err {
-            Log.fault("\(err)")
+            logger.fault("\(err)")
         }
     }
 }

@@ -123,13 +123,13 @@ extension FileItem {
                 previousName.replacingOccurrences(of: ".\(fileExtension)", with: "")
             fileUrl = fileUrl.deletingLastPathComponent().appendingPathComponent("\(fileName) copy\(fileExtension)")
         }
-        Log.info("Duplicating file to \(fileUrl)")
+        self.logger.info("Duplicating file to \(fileUrl)")
 
         if FileItem.fileManger.fileExists(atPath: self.url.path) {
             do {
                 try FileItem.fileManger.copyItem(at: self.url, to: fileUrl)
             } catch {
-                Log.fault("Error at \(self.url.path) to \(fileUrl.path)")
+                self.logger.fault("Error at \(self.url.path) to \(fileUrl.path)")
                 fatalError(error.localizedDescription)
             }
         }
@@ -143,7 +143,7 @@ extension FileItem {
         createMissingParentDirectory(for: newLocation.deletingLastPathComponent())
 
         do {
-            Log.info("Moving file \(self.url.debugDescription) to \(newLocation.debugDescription)")
+            self.logger.info("Moving file \(self.url.debugDescription) to \(newLocation.debugDescription)")
             try FileItem.fileManger.moveItem(at: self.url, to: newLocation)
         } catch { fatalError(error.localizedDescription) }
 
@@ -155,7 +155,7 @@ extension FileItem {
             }
             // if the folder doesn't exist and the function was ordered to create it, create it.
             if createSelf && !FileItem.fileManger.fileExists(atPath: url.path) {
-                Log.info("Creating folder \(url.debugDescription)")
+                self.logger.info("Creating folder \(url.debugDescription)")
                 // Create the folder
                 do {
                     try FileItem.fileManger.createDirectory(at: url,

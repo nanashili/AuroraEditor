@@ -54,7 +54,6 @@ struct UpdateReadyState: View {
                                isPresented: $showInstallAlert, actions: {
                             Button(role: .destructive) {
                                 guard let url = repository.updateFileUrl else {
-                                    Log.debug("Invalid Url")
                                     return
                                 }
 
