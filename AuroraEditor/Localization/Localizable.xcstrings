@@ -2851,9 +2851,6 @@
     "Create..." : {
 
     },
-    "Current Textmate Scope" : {
-
-    },
     "Cursor" : {
 
     },
@@ -5916,9 +5913,6 @@
 
     },
     "main" : {
-
-    },
-    "main = putStrLn \"Hello World!\"" : {
 
     },
     "Maximize" : {
@@ -47170,9 +47164,6 @@
 
     },
     "Wrap Lines" : {
-
-    },
-    "XX" : {
 
     },
     "Your current stashed changes on this branch will no longer be visible in Aurora Editor if the branch is renamed." : {

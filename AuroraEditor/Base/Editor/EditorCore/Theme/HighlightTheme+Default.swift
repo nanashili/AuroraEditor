@@ -8,9 +8,10 @@
 
 import Foundation
 import AppKit
-// TODO: @0xWDG Look if this can be removed.
+
 public extension HighlightTheme {
     /// Default Highlight theme
+    @available(*, deprecated)
     static let `default`: HighlightTheme = HighlightTheme(settings: [
         ThemeSetting(scope: "source", parentScopes: [], attributes: [
             ColorThemeAttribute(color: .exampleTextColor),
@@ -192,5 +193,5 @@ public extension HighlightTheme {
 private let fontSize: CGFloat = 12
 
 fileprivate extension NSColor {
-    static let exampleTextColor = NSColor(color: .white)!
+    static let exampleTextColor = NSColor(hex: "#FFF")
 }
