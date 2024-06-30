@@ -87,7 +87,7 @@ public struct TextEditingPreferencesView: View {
         HStack {
             Text("settings.global.font")
             Spacer()
-            Picker("", selection: $prefs.preferences.textEditing.font.customFont) {
+            Picker("", selection: $prefs.preferences.editorFont.customFont) {
                 Text("settings.global.font.system")
                     .tag(false)
                 Text("settings.global.font.custom")
@@ -95,10 +95,10 @@ public struct TextEditingPreferencesView: View {
             }
             .labelsHidden()
             .fixedSize()
-            if prefs.preferences.textEditing.font.customFont {
+            if prefs.preferences.editorFont.customFont {
                 FontPicker(
-                    "\(prefs.preferences.textEditing.font.name) \(prefs.preferences.textEditing.font.size)",
-                    name: $prefs.preferences.textEditing.font.name, size: $prefs.preferences.textEditing.font.size
+                    "\(prefs.preferences.editorFont.name) \(prefs.preferences.editorFont.size)",
+                    name: $prefs.preferences.editorFont.name, size: $prefs.preferences.editorFont.size
                 )
             }
         }

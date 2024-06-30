@@ -49,12 +49,12 @@ public struct TerminalPreferencesView: View {
             VStack(alignment: .trailing) {
                 Picker("", selection: $prefs.preferences.terminal.shell) {
                     Text("settings.terminal.shell.system")
-                        .tag(AppPreferences.TerminalShell.system)
+                        .tag(TerminalShell.system)
                     Divider()
                     Text("ZSH")
-                        .tag(AppPreferences.TerminalShell.zsh)
+                        .tag(TerminalShell.zsh)
                     Text("Bash")
-                        .tag(AppPreferences.TerminalShell.bash)
+                        .tag(TerminalShell.bash)
                 }
                 .labelsHidden()
                 .frame(width: inputWidth)
@@ -72,7 +72,7 @@ public struct TerminalPreferencesView: View {
         HStack {
             Text("settings.global.font")
             Spacer()
-            Picker("", selection: $prefs.preferences.terminal.font.customFont) {
+            Picker("", selection: $prefs.preferences.terminal.customTerminalFont) {
                 Text("settings.global.font.system")
                     .tag(false)
                 Text("settings.global.font.custom")
@@ -80,10 +80,11 @@ public struct TerminalPreferencesView: View {
             }
             .labelsHidden()
             .frame(width: inputWidth)
-            if prefs.preferences.terminal.font.customFont {
+            if prefs.preferences.terminal.customTerminalFont {
                 FontPicker(
-                    "\(prefs.preferences.terminal.font.name) \(prefs.preferences.terminal.font.size)",
-                    name: $prefs.preferences.terminal.font.name, size: $prefs.preferences.terminal.font.size
+                    "\(prefs.preferences.terminal.terminalFontName) \(prefs.preferences.terminal.terminalFontSize)",
+                    name: $prefs.preferences.terminal.terminalFontName,
+                    size: $prefs.preferences.terminal.terminalFontSize
                 )
             }
         }
@@ -96,7 +97,7 @@ public struct TerminalPreferencesView: View {
             Spacer()
             VStack(alignment: .trailing) {
                 Picker("", selection: $prefs.preferences.terminal.cursorStyle) {
-                    ForEach(AppPreferences.TerminalCursorStyle.allCases) { style in
+                    ForEach(TerminalCursorStyle.allCases) { style in
                         Text(style.rawValue.capitalized)
                             .tag(style)
                     }

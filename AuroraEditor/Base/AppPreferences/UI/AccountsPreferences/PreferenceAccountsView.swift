@@ -18,25 +18,33 @@ public struct PreferenceAccountsView: View {
     @StateObject
     private var prefs: AppPreferencesModel = .shared
 
+    @State
+    private var accounts: [AccountPreferences] = []
+
     /// Initializes the preference accounts view
-    public init() {}
+    public init() {
+        _accounts = State(initialValue: AccountPreferences.fetchAll())
+    }
 
     /// The view body
     public var body: some View {
         PreferencesContent {
-            if prefs.preferences.accounts.sourceControlAccounts.gitAccount.isEmpty {
+            if accounts.isEmpty {
                 Text("settings.account.no.account")
                     .padding(.horizontal)
                     .multilineTextAlignment(.center)
                     .font(.system(size: 16))
                     .foregroundColor(.secondary)
             } else {
-                List($prefs.preferences.accounts.sourceControlAccounts.gitAccount) { account in
-                    AccountItemView(account: account, onDeleteCallback: removeSourceControlAccount)
+                List {
+                    ForEach($accounts) { account in
+                        AccountItemView(account: account, onDeleteCallback: removeAccount)
+                    }
+                    .onDelete(perform: deleteAccount)
                 }
                 .frame(minHeight: 435)
                 .padding(.horizontal, -10)
-                .listStyle(.plain)
+                .listStyle(PlainListStyle())
             }
 
             HStack {
@@ -47,7 +55,7 @@ public struct PreferenceAccountsView: View {
                     Text("settings.account.add")
                         .foregroundColor(.white)
                 }
-                .buttonStyle(.borderedProminent)
+                .buttonStyle(BorderedProminentButtonStyle())
                 .sheet(isPresented: $openAccountDialog) {
                     AccountSelectionDialog()
                 }
@@ -55,18 +63,22 @@ public struct PreferenceAccountsView: View {
         }
     }
 
-    /// Removes the source control account
-    /// 
-    /// - Parameter selectedAccountId: The selected account ID
-    func removeSourceControlAccount(selectedAccountId: String) {
-        var gitAccounts = prefs.preferences.accounts.sourceControlAccounts.gitAccount
-
-        for account in gitAccounts where account.id == selectedAccountId {
-            let index = gitAccounts.firstIndex(of: account)
-            gitAccounts.remove(at: index ?? 0)
+    /// Deletes the selected account
+    ///
+    /// - Parameter indexSet: The index set of the account to remove
+    private func deleteAccount(at indexSet: IndexSet) {
+        indexSet.forEach { index in
+            let account = accounts[index]
+            AccountPreferences.delete(account)
+            accounts.remove(at: index)
         }
+    }
 
-        prefs.preferences.accounts.sourceControlAccounts.gitAccount = gitAccounts
+    /// Removes the source control account
+    ///
+    /// - Parameter selectedAccountId: The selected account ID
+    private func removeAccount(selectedAccountId: String) {
+        accounts.removeAll { $0.id == selectedAccountId }
     }
 }
 
