@@ -1,8 +1,6 @@
 name: Periphery (unused code detection)
 
 on:
-  push:
-    branches: [main, development]
   pull_request:
     branches: [main, development]
 
