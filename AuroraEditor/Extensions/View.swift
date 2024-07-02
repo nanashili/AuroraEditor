@@ -35,7 +35,10 @@ internal extension View {
         ModifiedContent(
             content: self,
             modifier: FontWithLineHeight(
-                font: NSFont(name: "SF Pro Text", size: fontSize) ?? .systemFont(ofSize: fontSize),
+                font: NSFont(
+                    name: "SF Pro Text",
+                    size: fontSize
+                ) ?? .systemFont(ofSize: fontSize),
                 lineHeight: lineHeight
             )
         )
