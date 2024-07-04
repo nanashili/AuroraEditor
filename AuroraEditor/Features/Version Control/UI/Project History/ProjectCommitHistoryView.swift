@@ -50,17 +50,6 @@ struct ProjectCommitHistoryView: View {
 
                 Spacer()
 
-                switch projectHistoryModel.state {
-                case .loading:
-                    EmptyView()
-                case .success:
-                    showCommitDetails
-                case .error:
-                    EmptyView()
-                case .empty:
-                    EmptyView()
-                }
-
                 FilterCommitHistoryView()
                     .frame(width: 300)
             }
