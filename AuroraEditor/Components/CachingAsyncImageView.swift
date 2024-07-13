@@ -12,7 +12,7 @@ import SwiftUI
 /// A view that represents a caching async image view.
 struct CachingAsyncImageView: NSViewRepresentable {
     /// The contributor avatar URL.
-    let contributorAvatarURL: String
+    let avatarURL: String
 
     /// The image size.
     let imageSize: CGFloat
@@ -32,7 +32,7 @@ struct CachingAsyncImageView: NSViewRepresentable {
     /// - Parameter nsView: The NSView.
     /// - Parameter context: The context.
     func updateNSView(_ nsView: CachingImageView, context: Context) {
-        if let url = URL(string: contributorAvatarURL) {
+        if let url = URL(string: avatarURL) {
             nsView.loadImage(from: url)
         }
 

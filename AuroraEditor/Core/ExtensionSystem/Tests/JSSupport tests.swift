@@ -1,5 +1,5 @@
 //
-//  AuroraJSSupportTests.swift
+//  JSSupport tests.swift
 //  Aurora Editor
 //
 //  Created by Wesley de Groot on 09/04/2024.
@@ -45,7 +45,7 @@ final class AuroraJSSupportTests: XCTestCase {
               let value = jsSupport?.respond(
                 action: "AECustomApiTest",
                 parameters: ["val": "AECustomApiTest using respond()"]
-              ), value.toString() == "AECustomApiTest using respond()" else {
+              ), script.isUndefined, value.toString() == "AECustomApiTest using respond()" else {
             XCTFail("Error: No value returned.")
             return
         }

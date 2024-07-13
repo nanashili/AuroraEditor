@@ -17,20 +17,14 @@ class Avatar {
     /// 
     /// - Returns: Avatar image
     public func gitAvatar(authorEmail: String) -> some View {
-        VStack {
-            // swiftlint:disable:next line_length
-            AsyncImage(url: URL(string: "https://www.gravatar.com/avatar/\(Avatar().generateAvatarHash(authorEmail))")) { phase in
-                if let image = phase.image {
-                    image
-                        .resizable()
-                        .clipShape(Circle())
-                        .frame(width: 42, height: 42)
-                } else if phase.error != nil {
-                    self.defaultAvatar(author: authorEmail)
-                } else {
-                    self.defaultAvatar(author: authorEmail)
-                }
-            }
+        let avatarURL = "https://www.gravatar.com/avatar/\(Avatar().generateAvatarHash(authorEmail))"
+
+        return LazyVStack {
+            CachingAsyncImageView(avatarURL: avatarURL,
+                                  imageSize: 42)
+            .frame(width: 42, height: 42)
+            .clipShape(Circle())
+            .accessibilityLabel("Contributor Avatar")
         }
     }
 
@@ -40,26 +34,11 @@ class Avatar {
     /// 
     /// - Returns: Contributer avatar image
     public func contributorAvatar(contributorAvatarURL: String) -> some View {
-        CachingAsyncImageView(contributorAvatarURL: contributorAvatarURL,
+        CachingAsyncImageView(avatarURL: contributorAvatarURL,
                               imageSize: 42)
             .frame(width: 42, height: 42)
             .clipShape(Circle())
             .accessibilityLabel("Contributor Avatar")
-    }
-
-    /// Default Avatar
-    /// 
-    /// - Parameter author: Author's email
-    /// 
-    /// - Returns: Default avatar image
-    private func defaultAvatar(author: String) -> some View {
-        VStack {
-            Image(systemName: "person.crop.circle.fill")
-                .symbolRenderingMode(.hierarchical)
-                .resizable()
-                .foregroundColor(Avatar().avatarColor(author: author))
-                .frame(width: 42, height: 42)
-        }
     }
 
     /// Generate avatar hash

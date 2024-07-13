@@ -399,13 +399,17 @@
 		2B48F7442C03B63E000EAD67 /* highlight.css in Resources */ = {isa = PBXBuildFile; fileRef = 2B48F7432C03B63E000EAD67 /* highlight.css */; };
 		2B53D1FC2B77A2250064114F /* AuroraEditorConfigTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B53D1FB2B77A2250064114F /* AuroraEditorConfigTests.swift */; };
 		2B53D1FF2B77A82D0064114F /* AuroraEditorConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B53D1FD2B77A2660064114F /* AuroraEditorConfig.swift */; };
+		2B56E13F2C3DAE2700A80B6C /* BroadcastHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B56E13E2C3DAE2700A80B6C /* BroadcastHandler.swift */; };
+		2B56E1412C3DAED000A80B6C /* ExtensionDynamicData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B56E1402C3DAED000A80B6C /* ExtensionDynamicData.swift */; };
+		2B56E1442C3DB30200A80B6C /* ExtensionDoc_fromAE.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B56E1432C3DB30200A80B6C /* ExtensionDoc_fromAE.swift */; };
+		2B56E1462C3DB31600A80B6C /* ExtensionDoc_toAE.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B56E1452C3DB31600A80B6C /* ExtensionDoc_toAE.swift */; };
+		2B56E1492C3DB8E200A80B6C /* DynamicUI in Frameworks */ = {isa = PBXBuildFile; productRef = 2B56E1482C3DB8E200A80B6C /* DynamicUI */; };
 		2B5B25532885D9BA009C7384 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 2B5B25522885D9B9009C7384 /* .swiftlint.yml */; };
 		2B5B25552885D9C3009C7384 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 2B5B25542885D9C3009C7384 /* .gitignore */; };
 		2B5CAC822B87E701006B6C66 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5CAC812B87E701006B6C66 /* Log.swift */; };
 		2B615AB72BC85A4300A5457F /* ExtensionCustomViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B615AB62BC85A4300A5457F /* ExtensionCustomViewModel.swift */; };
-		2B615ABA2BC865B500A5457F /* ExtensionOrWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B615AB92BC865B500A5457F /* ExtensionOrWebView.swift */; };
+		2B615ABA2BC865B500A5457F /* ExtensionCustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B615AB92BC865B500A5457F /* ExtensionCustomView.swift */; };
 		2B615ABC2BC865E400A5457F /* ExtensionViewStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B615ABB2BC865E400A5457F /* ExtensionViewStorage.swift */; };
-		2B6B3D6D2C3820A100B041B5 /* ExtensionDocumentation.docc in Sources */ = {isa = PBXBuildFile; fileRef = 2B6B3D6C2C3820A000B041B5 /* ExtensionDocumentation.docc */; };
 		2B6CB09E2AFFA3B1001E4955 /* AEUpdateService.app in Resources */ = {isa = PBXBuildFile; fileRef = A01AB2D12ACC9EDA0029EDF0 /* AEUpdateService.app */; };
 		2B74A3F02C0F8FFA002498F5 /* JSCPromise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B74A3EF2C0F8FFA002498F5 /* JSCPromise.swift */; };
 		2B74A3F22C0F90B2002498F5 /* JSCFetch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B74A3F12C0F90B2002498F5 /* JSCFetch.swift */; };
@@ -413,7 +417,6 @@
 		2B7A583527E4BA0100D25D4E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0468438427DC76E200F8E88E /* AppDelegate.swift */; };
 		2B7AC06B282452FB0082A5B8 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B7AC06A282452FB0082A5B8 /* Media.xcassets */; };
 		2B7C8CC62BC5B3160061DE0D /* JSSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7C8CC52BC5B3160061DE0D /* JSSupport.swift */; };
-		2B7C8CC92BC5B3A10061DE0D /* AuroraJSSupportTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7C8CC72BC5B3440061DE0D /* AuroraJSSupportTests.swift */; };
 		2B89F85428B13E9D007CB9C1 /* AuroraMessageBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B89F85328B13E9D007CB9C1 /* AuroraMessageBox.swift */; };
 		2BA10C862C34841B0040B192 /* emptyURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA10C852C34841B0040B192 /* emptyURL.swift */; };
 		2BA8F0862C1DADBD005A06A3 /* AuroraEditorSourceEditor in Frameworks */ = {isa = PBXBuildFile; productRef = 2BA8F0852C1DADBD005A06A3 /* AuroraEditorSourceEditor */; };
@@ -439,6 +442,7 @@
 		2BE487F428245162003F3F64 /* Open With Aurora Editor.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 2BE487EC28245162003F3F64 /* Open With Aurora Editor.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		2BE5EDAD28AE64A700C0A4AE /* AEExtensionKit in Frameworks */ = {isa = PBXBuildFile; productRef = 2BE5EDAC28AE64A700C0A4AE /* AEExtensionKit */; };
 		2BF86A4228AF9EA400079705 /* AEExtensionKit in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 2BE5EDAC28AE64A700C0A4AE /* AEExtensionKit */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		2BF8CD4F2C417281009DC130 /* JSSupport tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF8CD4E2C417281009DC130 /* JSSupport tests.swift */; };
 		2BF915DF2AC03D5900A10273 /* SourceControlRelatedMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF915DE2AC03D5800A10273 /* SourceControlRelatedMenu.swift */; };
 		6C05A8AF284D0CA3007F4EAA /* WorkspaceDocument+Listeners.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C05A8AE284D0CA3007F4EAA /* WorkspaceDocument+Listeners.swift */; };
 		7BBF20172939B11400D60627 /* RecentProjectsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BBF20162939B11400D60627 /* RecentProjectsStore.swift */; };
@@ -1018,20 +1022,22 @@
 		2B48F7432C03B63E000EAD67 /* highlight.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = highlight.css; sourceTree = "<group>"; };
 		2B53D1FB2B77A2250064114F /* AuroraEditorConfigTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuroraEditorConfigTests.swift; sourceTree = "<group>"; };
 		2B53D1FD2B77A2660064114F /* AuroraEditorConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuroraEditorConfig.swift; sourceTree = "<group>"; };
+		2B56E13E2C3DAE2700A80B6C /* BroadcastHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BroadcastHandler.swift; sourceTree = "<group>"; };
+		2B56E1402C3DAED000A80B6C /* ExtensionDynamicData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDynamicData.swift; sourceTree = "<group>"; };
+		2B56E1432C3DB30200A80B6C /* ExtensionDoc_fromAE.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ExtensionDoc_fromAE.swift; path = AuroraEditor/Core/ExtensionSystem/ExtensionDocumentation/ExtensionDoc_fromAE.swift; sourceTree = SOURCE_ROOT; };
+		2B56E1452C3DB31600A80B6C /* ExtensionDoc_toAE.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ExtensionDoc_toAE.swift; path = AuroraEditor/Core/ExtensionSystem/ExtensionDocumentation/ExtensionDoc_toAE.swift; sourceTree = SOURCE_ROOT; };
 		2B5B25522885D9B9009C7384 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = SOURCE_ROOT; };
 		2B5B25542885D9C3009C7384 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = SOURCE_ROOT; };
 		2B5CAC812B87E701006B6C66 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		2B615AB62BC85A4300A5457F /* ExtensionCustomViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionCustomViewModel.swift; sourceTree = "<group>"; };
-		2B615AB92BC865B500A5457F /* ExtensionOrWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionOrWebView.swift; sourceTree = "<group>"; };
+		2B615AB92BC865B500A5457F /* ExtensionCustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionCustomView.swift; sourceTree = "<group>"; };
 		2B615ABB2BC865E400A5457F /* ExtensionViewStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionViewStorage.swift; sourceTree = "<group>"; };
-		2B6B3D6C2C3820A000B041B5 /* ExtensionDocumentation.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = ExtensionDocumentation.docc; sourceTree = "<group>"; };
 		2B71C0A32874AD61008E0859 /* AuroraProject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuroraProject.swift; sourceTree = "<group>"; };
 		2B74A3EF2C0F8FFA002498F5 /* JSCPromise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSCPromise.swift; sourceTree = "<group>"; };
 		2B74A3F12C0F90B2002498F5 /* JSCFetch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSCFetch.swift; sourceTree = "<group>"; };
 		2B7A56B52BD5036900A728D7 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		2B7AC06A282452FB0082A5B8 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		2B7C8CC52BC5B3160061DE0D /* JSSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSSupport.swift; sourceTree = "<group>"; };
-		2B7C8CC72BC5B3440061DE0D /* AuroraJSSupportTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuroraJSSupportTests.swift; sourceTree = "<group>"; };
 		2B89F85328B13E9D007CB9C1 /* AuroraMessageBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuroraMessageBox.swift; sourceTree = "<group>"; };
 		2BA10C852C34841B0040B192 /* emptyURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = emptyURL.swift; sourceTree = "<group>"; };
 		2BCBAAC72927C41E00D4DFB2 /* BindingProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindingProxy.swift; sourceTree = "<group>"; };
@@ -1054,6 +1060,7 @@
 		2BE487EC28245162003F3F64 /* Open With Aurora Editor.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Open With Aurora Editor.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BE487EE28245162003F3F64 /* FinderSync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinderSync.swift; sourceTree = "<group>"; };
 		2BE487F028245162003F3F64 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2BF8CD4E2C417281009DC130 /* JSSupport tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "JSSupport tests.swift"; path = "AuroraEditor/Core/ExtensionSystem/Tests/JSSupport tests.swift"; sourceTree = SOURCE_ROOT; };
 		2BF915DE2AC03D5800A10273 /* SourceControlRelatedMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SourceControlRelatedMenu.swift; sourceTree = "<group>"; };
 		6C05A8AE284D0CA3007F4EAA /* WorkspaceDocument+Listeners.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WorkspaceDocument+Listeners.swift"; sourceTree = "<group>"; };
 		6CDA84AA284C0E4A00C1CC3A /* TabBarItemButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItemButtonStyle.swift; sourceTree = "<group>"; };
@@ -1224,6 +1231,8 @@
 				209D0246289AB9750082441F /* SwiftTerm in Frameworks */,
 				A0386D8D2B866E2300EFAFBA /* SwiftTerm in Frameworks */,
 				A0386D872B8667F000EFAFBA /* Version-Control in Frameworks */,
+				A0386D8A2B866D9E00EFAFBA /* Version-Control in Frameworks */,
+				2B56E1492C3DB8E200A80B6C /* DynamicUI in Frameworks */,
 				200AA21228ED88B30068C7C6 /* Version-Control in Frameworks */,
 				A0142EFE2ACB64AA0002F95D /* ZIPFoundation in Frameworks */,
 				A080945D2C34A2B000EDDA59 /* Version-Control in Frameworks */,
@@ -1284,6 +1293,8 @@
 				206B128028DF7311002CDE51 /* EmptyEditorView.swift */,
 				0485EB1E27E7458B00138301 /* WorkspaceCodeFileView.swift */,
 				B658FB3127DA9E0F00EA4DBD /* WorkspaceView.swift */,
+				2B56E1402C3DAED000A80B6C /* ExtensionDynamicData.swift */,
+				2B56E13E2C3DAE2700A80B6C /* BroadcastHandler.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -1880,7 +1891,8 @@
 		20D837BC289A7ACD00D91D05 /* ExtensionSystem */ = {
 			isa = PBXGroup;
 			children = (
-				2B6B3D6C2C3820A000B041B5 /* ExtensionDocumentation.docc */,
+				2BF8CD4D2C41725A009DC130 /* Tests */,
+				2B56E1422C3DB2CB00A80B6C /* ExtensionDocumentation */,
 				20D837BF289A7ACD00D91D05 /* Models */,
 				20D83912289A80E700D91D05 /* Network */,
 				20D83913289A811600D91D05 /* UI */,
@@ -2593,7 +2605,7 @@
 			isa = PBXGroup;
 			children = (
 				2B615AB62BC85A4300A5457F /* ExtensionCustomViewModel.swift */,
-				2B615AB92BC865B500A5457F /* ExtensionOrWebView.swift */,
+				2B615AB92BC865B500A5457F /* ExtensionCustomView.swift */,
 				28B8F883280FFE4600596236 /* NSTableView+Background.swift */,
 			);
 			path = UI;
@@ -2899,16 +2911,6 @@
 			path = "Theme Attributes";
 			sourceTree = "<group>";
 		};
-		2B11FF882AB0E8F4005B649C /* Aurora EditorTests */ = {
-			isa = PBXGroup;
-			children = (
-				2B53D1FB2B77A2250064114F /* AuroraEditorConfigTests.swift */,
-				2B11FF892AB0E8F4005B649C /* AuroraINITests.swift */,
-				2B7C8CC72BC5B3440061DE0D /* AuroraJSSupportTests.swift */,
-			);
-			path = "Aurora EditorTests";
-			sourceTree = "<group>";
-		};
 		2B11FF952AB0EBF8005B649C /* Aurora Editor UITests */ = {
 			isa = PBXGroup;
 			children = (
@@ -2930,6 +2932,15 @@
 				2B3DAA4F2BFD24C500A7773D /* QLHighlighter.swift */,
 			);
 			path = AEquicklook;
+			sourceTree = "<group>";
+		};
+		2B56E1422C3DB2CB00A80B6C /* ExtensionDocumentation */ = {
+			isa = PBXGroup;
+			children = (
+				2B56E1432C3DB30200A80B6C /* ExtensionDoc_fromAE.swift */,
+				2B56E1452C3DB31600A80B6C /* ExtensionDoc_toAE.swift */,
+			);
+			path = ExtensionDocumentation;
 			sourceTree = "<group>";
 		};
 		2B6B3D712C38213600B041B5 /* JavaScript Support */ = {
@@ -2981,6 +2992,23 @@
 				2B15CA0028254139004E8F22 /* OpenWithAuroraEditor.entitlements */,
 			);
 			path = OpenWithAuroraEditor;
+			sourceTree = "<group>";
+		};
+		2BF8CD4D2C41725A009DC130 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				2BF8CD4E2C417281009DC130 /* JSSupport tests.swift */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		2BF8CD502C41735A009DC130 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				2B53D1FB2B77A2250064114F /* AuroraEditorConfigTests.swift */,
+				2B11FF892AB0E8F4005B649C /* AuroraINITests.swift */,
+			);
+			path = Tests;
 			sourceTree = "<group>";
 		};
 		5C403B8D27E20F8000788241 /* Frameworks */ = {
@@ -3247,6 +3275,7 @@
 		A01A83092C33336B0015DC7E /* EditorConfig */ = {
 			isa = PBXGroup;
 			children = (
+				2BF8CD502C41735A009DC130 /* Tests */,
 				2B53D1FD2B77A2660064114F /* AuroraEditorConfig.swift */,
 				2B11FF812AB0E87C005B649C /* AuroraINIParser.swift */,
 				2B71C0A32874AD61008E0859 /* AuroraProject.swift */,
@@ -3358,7 +3387,6 @@
 				20425E46297EE7270022FE5A /* Tools */,
 				B658FB2E27DA9E0F00EA4DBD /* AuroraEditor */,
 				2BE487ED28245162003F3F64 /* OpenWithAuroraEditor */,
-				2B11FF882AB0E8F4005B649C /* Aurora EditorTests */,
 				2B11FF952AB0EBF8005B649C /* Aurora Editor UITests */,
 				A01AB2D22ACC9EDA0029EDF0 /* AEUpdateService */,
 				2B3DAA3F2BFD1BD400A7773D /* AEquicklook */,
@@ -3543,6 +3571,7 @@
 				2BA8F0882C1DADD4005A06A3 /* AuroraEditorTextView */,
 				A0DD4EF02C30BEFB007E4124 /* GRDB */,
 				A080945C2C34A2B000EDDA59 /* Version-Control */,
+				2B56E1482C3DB8E200A80B6C /* DynamicUI */,
 			);
 			productName = AuroraEditor;
 			productReference = B658FB2C27DA9E0F00EA4DBD /* Aurora Editor.app */;
@@ -3635,6 +3664,7 @@
 				2BA8F0872C1DADD4005A06A3 /* XCRemoteSwiftPackageReference "AuroraEditorTextView" */,
 				A0DD4EEF2C30BEFB007E4124 /* XCRemoteSwiftPackageReference "GRDB" */,
 				A080945B2C34A2B000EDDA59 /* XCLocalSwiftPackageReference "../Version-Control-Kit" */,
+				2B56E1472C3DB8E200A80B6C /* XCRemoteSwiftPackageReference "DynamicUI" */,
 			);
 			productRefGroup = B658FB2D27DA9E0F00EA4DBD /* Products */;
 			projectDirPath = "";
@@ -3859,8 +3889,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				2B53D1FC2B77A2250064114F /* AuroraEditorConfigTests.swift in Sources */,
+				2BF8CD4F2C417281009DC130 /* JSSupport tests.swift in Sources */,
 				2B11FF8A2AB0E8F4005B649C /* AuroraINITests.swift in Sources */,
-				2B7C8CC92BC5B3A10061DE0D /* AuroraJSSupportTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4025,7 +4055,7 @@
 				04C3254D27FF331B00C8DA2D /* ExtensionNavigatorItem.swift in Sources */,
 				A0B660E92C4136A8009D0993 /* Trie.swift in Sources */,
 				0483E35027FDB17700354AC0 /* ExtensionNavigatorView.swift in Sources */,
-				2B615ABA2BC865B500A5457F /* ExtensionOrWebView.swift in Sources */,
+				2B615ABA2BC865B500A5457F /* ExtensionCustomView.swift in Sources */,
 				20CC5ABE291CD12F007DB911 /* ExtensionPrivacyView.swift in Sources */,
 				2093CD59289AA0C6003A88DD /* ExtensionsManager.swift in Sources */,
 				2093CD54289AA0C0003A88DD /* ExtensionsStoreAPI.swift in Sources */,
@@ -4073,7 +4103,6 @@
 				934D2F0A28C591FD0034E5C8 /* GeneralPreferencesViewSections.swift in Sources */,
 				2093CD31289AA089003A88DD /* Gist.swift in Sources */,
 				2093CD2A289AA084003A88DD /* GistRouter.swift in Sources */,
-				2B6B3D6D2C3820A100B041B5 /* ExtensionDocumentation.docc in Sources */,
 				2093CD35289AA089003A88DD /* Git.swift in Sources */,
 				2093CDB5289AA1A2003A88DD /* GitAccountItem.swift in Sources */,
 				2093CD15289AA054003A88DD /* GitClient.swift in Sources */,
@@ -4159,6 +4188,7 @@
 				2093CDA1289AA167003A88DD /* Loopable.swift in Sources */,
 				2093CD4A289AA095003A88DD /* Namespace.swift in Sources */,
 				93983D2D28CE012500E54409 /* NavigatorModeSelectModel.swift in Sources */,
+				2B56E1462C3DB31600A80B6C /* ExtensionDoc_toAE.swift in Sources */,
 				93DEBF7E295C441E002EAD63 /* NavigatorSidebar+Splitting.swift in Sources */,
 				2813F93927ECC4C300E305E4 /* NavigatorSidebar.swift in Sources */,
 				93DEBF7C295C1F6D002EAD63 /* NavigatorSidebarToolbar.swift in Sources */,
@@ -4283,6 +4313,7 @@
 				9354D4BB28AD2872004C6D18 /* StandardTableViewCell.swift in Sources */,
 				2093CDE8289AAE87003A88DD /* StashChangesSheet.swift in Sources */,
 				2093CC90289A9FEE003A88DD /* StatusBar.swift in Sources */,
+				2B56E1442C3DB30200A80B6C /* ExtensionDoc_fromAE.swift in Sources */,
 				938E8E83291CBC3400DB8320 /* StatusBarBracketCountLabel.swift in Sources */,
 				2093CC97289A9FF5003A88DD /* StatusBarBreakpointButton.swift in Sources */,
 				2093CC9C289A9FFD003A88DD /* StatusBarClearButton.swift in Sources */,
@@ -4347,6 +4378,7 @@
 				2093CDAE289AA185003A88DD /* ThemePreferencesView.swift in Sources */,
 				2093CDAD289AA185003A88DD /* ThemePreviewIcon.swift in Sources */,
 				2093CDD9289AA511003A88DD /* Time.swift in Sources */,
+				2B56E1412C3DAED000A80B6C /* ExtensionDynamicData.swift in Sources */,
 				2093CD17289AA079003A88DD /* TokenRouter.swift in Sources */,
 				2B04576828E6FFE300024F2D /* TokenThemeAttribute.swift in Sources */,
 				2077162E287C8EC80069C68E /* ToolbarAppInfo.swift in Sources */,
@@ -4364,6 +4396,7 @@
 				A0142F012ACB6AC90002F95D /* UpdateLoadingState.swift in Sources */,
 				20091DBE28DE3336008FDDFC /* UpdateModel.swift in Sources */,
 				20091DBA28DE220A008FDDFC /* UpdatePreferences.swift in Sources */,
+				2B56E13F2C3DAE2700A80B6C /* BroadcastHandler.swift in Sources */,
 				20091DB528DE1FC7008FDDFC /* UpdatePreferencesView.swift in Sources */,
 				A0142F092ACB6B2D0002F95D /* UpdateReadyState.swift in Sources */,
 				A05D17CB2ACE041E002153C9 /* UpdateUpToDateState.swift in Sources */,
@@ -5017,6 +5050,14 @@
 				revision = 6224857a6f2caba5d7b13b396dd52e7de9a3bbad;
 			};
 		};
+		2B56E1472C3DB8E200A80B6C /* XCRemoteSwiftPackageReference "DynamicUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/0xWDG/DynamicUI";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.0.2;
+			};
+		};
 		2BA8F0842C1DADBD005A06A3 /* XCRemoteSwiftPackageReference "AuroraEditorSourceEditor" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/AuroraEditor/AuroraEditorSourceEditor";
@@ -5084,6 +5125,11 @@
 		209D0245289AB9750082441F /* SwiftTerm */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = SwiftTerm;
+		};
+		2B56E1482C3DB8E200A80B6C /* DynamicUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2B56E1472C3DB8E200A80B6C /* XCRemoteSwiftPackageReference "DynamicUI" */;
+			productName = DynamicUI;
 		};
 		2BA8F0852C1DADBD005A06A3 /* AuroraEditorSourceEditor */ = {
 			isa = XCSwiftPackageProductDependency;
