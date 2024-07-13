@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 60;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -544,6 +544,7 @@
 		A0B660EB2C4136BB009D0993 /* TrieNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B660EA2C4136B9009D0993 /* TrieNode.swift */; };
 		A0C0386A2ACF1C1E00DACE3F /* Sentry in Frameworks */ = {isa = PBXBuildFile; productRef = A0C038692ACF1C1E00DACE3F /* Sentry */; };
 		A0C0386C2ACF1C1E00DACE3F /* SentrySwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = A0C0386B2ACF1C1E00DACE3F /* SentrySwiftUI */; };
+		A0C04CF62C4300B900E3DDA1 /* Version-Control in Frameworks */ = {isa = PBXBuildFile; productRef = A0C04CF52C4300B900E3DDA1 /* Version-Control */; };
 		A0DD4EEA2C30BEA2007E4124 /* DatabaseQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DD4EE92C30BEA2007E4124 /* DatabaseQueue.swift */; };
 		A0DD4EEC2C30BEAC007E4124 /* PersistableRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DD4EEB2C30BEAC007E4124 /* PersistableRecord.swift */; };
 		A0DD4EEE2C30BECC007E4124 /* AppPreferencesDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DD4EED2C30BECC007E4124 /* AppPreferencesDatabase.swift */; };
@@ -1231,11 +1232,11 @@
 				209D0246289AB9750082441F /* SwiftTerm in Frameworks */,
 				A0386D8D2B866E2300EFAFBA /* SwiftTerm in Frameworks */,
 				A0386D872B8667F000EFAFBA /* Version-Control in Frameworks */,
-				A0386D8A2B866D9E00EFAFBA /* Version-Control in Frameworks */,
 				2B56E1492C3DB8E200A80B6C /* DynamicUI in Frameworks */,
 				200AA21228ED88B30068C7C6 /* Version-Control in Frameworks */,
 				A0142EFE2ACB64AA0002F95D /* ZIPFoundation in Frameworks */,
 				A080945D2C34A2B000EDDA59 /* Version-Control in Frameworks */,
+				A0C04CF62C4300B900E3DDA1 /* Version-Control in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3572,6 +3573,7 @@
 				A0DD4EF02C30BEFB007E4124 /* GRDB */,
 				A080945C2C34A2B000EDDA59 /* Version-Control */,
 				2B56E1482C3DB8E200A80B6C /* DynamicUI */,
+				A0C04CF52C4300B900E3DDA1 /* Version-Control */,
 			);
 			productName = AuroraEditor;
 			productReference = B658FB2C27DA9E0F00EA4DBD /* Aurora Editor.app */;
@@ -3663,8 +3665,8 @@
 				2BA8F0842C1DADBD005A06A3 /* XCRemoteSwiftPackageReference "AuroraEditorSourceEditor" */,
 				2BA8F0872C1DADD4005A06A3 /* XCRemoteSwiftPackageReference "AuroraEditorTextView" */,
 				A0DD4EEF2C30BEFB007E4124 /* XCRemoteSwiftPackageReference "GRDB" */,
-				A080945B2C34A2B000EDDA59 /* XCLocalSwiftPackageReference "../Version-Control-Kit" */,
 				2B56E1472C3DB8E200A80B6C /* XCRemoteSwiftPackageReference "DynamicUI" */,
+				A0C04CF42C4300B900E3DDA1 /* XCRemoteSwiftPackageReference "Version-Control-Kit" */,
 			);
 			productRefGroup = B658FB2D27DA9E0F00EA4DBD /* Products */;
 			projectDirPath = "";
@@ -5034,13 +5036,6 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCLocalSwiftPackageReference section */
-		A080945B2C34A2B000EDDA59 /* XCLocalSwiftPackageReference "../Version-Control-Kit" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = "../Version-Control-Kit";
-		};
-/* End XCLocalSwiftPackageReference section */
-
 /* Begin XCRemoteSwiftPackageReference section */
 		200AA21028ED88B30068C7C6 /* XCRemoteSwiftPackageReference "Version-Control-Kit" */ = {
 			isa = XCRemoteSwiftPackageReference;
@@ -5104,6 +5099,14 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 8.13.0;
+			};
+		};
+		A0C04CF42C4300B900E3DDA1 /* XCRemoteSwiftPackageReference "Version-Control-Kit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AuroraEditor/Version-Control-Kit";
+			requirement = {
+				kind = exactVersion;
+				version = 1.0.2;
 			};
 		};
 		A0DD4EEF2C30BEFB007E4124 /* XCRemoteSwiftPackageReference "GRDB" */ = {
@@ -5173,6 +5176,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A0C038682ACF1C1E00DACE3F /* XCRemoteSwiftPackageReference "sentry-cocoa" */;
 			productName = SentrySwiftUI;
+		};
+		A0C04CF52C4300B900E3DDA1 /* Version-Control */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A0C04CF42C4300B900E3DDA1 /* XCRemoteSwiftPackageReference "Version-Control-Kit" */;
+			productName = "Version-Control";
 		};
 		A0DD4EF02C30BEFB007E4124 /* GRDB */ = {
 			isa = XCSwiftPackageProductDependency;
