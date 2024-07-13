@@ -48,6 +48,14 @@ struct NotificationToastView: View {
                         .frame(maxWidth: 24, maxHeight: 24)
                         .accessibilityLabel(Text("Dismiss"))
                         .onTapGesture {
+                            ExtensionsManager.shared.sendEvent(
+                                event: "didDismissNotification",
+                                parameters: [
+                                    "identifier": notification.id,
+                                    "extension": notification.sender
+                                ]
+                            )
+
                             model.showNotificationToast = false
                         }
                         .accessibilityAddTraits(.isButton)
@@ -63,12 +71,24 @@ struct NotificationToastView: View {
         .padding(.horizontal, 10)
         .frame(minWidth: 350, minHeight: 75)
         .background(colorScheme == .light ? .white : Color(hex: "#252525"))
-        .cornerRadius(8)
+        .clipShape(RoundedRectangle(cornerRadius: 8))
         .shadow(radius: 1)
         .onHover { hovering in
             // Track if the mouse is hovering over the notification for interaction.
             model.hoveringOnToast = hovering
         }
+        .onTapGesture {
+            ExtensionsManager.shared.sendEvent(
+                event: "didClickOnNotification",
+                parameters: [
+                    "identifier": notification.id,
+                    "extension": notification.sender,
+                    "title": notification.title,
+                    "message": notification.message
+                ]
+            )
+        }
+        .accessibilityAddTraits(.isButton)
     }
 
     /// Get the current time stamp.
