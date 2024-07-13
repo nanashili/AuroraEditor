@@ -91,6 +91,7 @@ final class BranchCommitHistory: Equatable, Identifiable, TabBarItemRepresentabl
                     try self.reloadProjectHistory()
                 } catch {
                     self.logger.error("Failed to get commits")
+                    self.state = .error
                 }
             }
         }
