@@ -6,8 +6,6 @@ on:
       - development
       - beta
       - main
-  pull_request:
-    branches: [main, development]
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
