@@ -1,5 +1,5 @@
 //
-//  AuroraJSSupportTests.swift
+//  JSSupport tests.swift
 //  Aurora Editor
 //
 //  Created by Wesley de Groot on 09/04/2024.
