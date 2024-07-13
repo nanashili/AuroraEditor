@@ -11,9 +11,9 @@ import JavaScriptCore
 /// JavaScript `fetch` function
 ///
 /// - Note: Depends on JSPromise.
-class JSFetch {
+class JSCFetch {
     /// Shared instance so it will not be unloaded.
-    static let shared: JSFetch = .init()
+    static let shared: JSCFetch = .init()
 
     /// Register class into the current JavaScript Context.
     /// - Parameter jsContext: The current JavaScript context.
@@ -25,8 +25,8 @@ class JSFetch {
     }
 
     /// (Obj-C) The fetch function
-    let fetch: @convention(block) (String) -> JSPromise? = { link in
-        let promise = JSPromise()
+    let fetch: @convention(block) (String) -> JSCPromise? = { link in
+        let promise = JSCPromise()
         promise.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { timer in
             timer.invalidate()
 
@@ -34,9 +34,8 @@ class JSFetch {
                 URLSession.shared.dataTask(with: url) { (data, _, error) in
                     if let error = error {
                         promise.fail(error: error.localizedDescription)
-                    } else if let data = data,
-                        let string = String(data: data, encoding: String.Encoding.utf8) {
-                        promise.success(value: string)
+                    } else if let data = data {
+                        promise.success(value: String(decoding: data, as: UTF8.self))
                     } else {
                         promise.fail(error: "\(url) is empty")
                     }
