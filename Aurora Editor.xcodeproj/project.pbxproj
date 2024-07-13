@@ -397,7 +397,6 @@
 		2B3DAA502BFD24C500A7773D /* QLHighlighter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B3DAA4F2BFD24C500A7773D /* QLHighlighter.swift */; };
 		2B48F7422C03B62F000EAD67 /* highlight.js in Resources */ = {isa = PBXBuildFile; fileRef = 2B48F7412C03B62F000EAD67 /* highlight.js */; };
 		2B48F7442C03B63E000EAD67 /* highlight.css in Resources */ = {isa = PBXBuildFile; fileRef = 2B48F7432C03B63E000EAD67 /* highlight.css */; };
-		2B53D1FC2B77A2250064114F /* AuroraEditorConfigTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B53D1FB2B77A2250064114F /* AuroraEditorConfigTests.swift */; };
 		2B53D1FF2B77A82D0064114F /* AuroraEditorConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B53D1FD2B77A2660064114F /* AuroraEditorConfig.swift */; };
 		2B56E13F2C3DAE2700A80B6C /* BroadcastHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B56E13E2C3DAE2700A80B6C /* BroadcastHandler.swift */; };
 		2B56E1412C3DAED000A80B6C /* ExtensionDynamicData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B56E1402C3DAED000A80B6C /* ExtensionDynamicData.swift */; };
@@ -545,6 +544,7 @@
 		A0C0386A2ACF1C1E00DACE3F /* Sentry in Frameworks */ = {isa = PBXBuildFile; productRef = A0C038692ACF1C1E00DACE3F /* Sentry */; };
 		A0C0386C2ACF1C1E00DACE3F /* SentrySwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = A0C0386B2ACF1C1E00DACE3F /* SentrySwiftUI */; };
 		A0C04CF62C4300B900E3DDA1 /* Version-Control in Frameworks */ = {isa = PBXBuildFile; productRef = A0C04CF52C4300B900E3DDA1 /* Version-Control */; };
+		A0C04CF72C43096700E3DDA1 /* AuroraEditorConfigTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B53D1FB2B77A2250064114F /* AuroraEditorConfigTests.swift */; };
 		A0DD4EEA2C30BEA2007E4124 /* DatabaseQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DD4EE92C30BEA2007E4124 /* DatabaseQueue.swift */; };
 		A0DD4EEC2C30BEAC007E4124 /* PersistableRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DD4EEB2C30BEAC007E4124 /* PersistableRecord.swift */; };
 		A0DD4EEE2C30BECC007E4124 /* AppPreferencesDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DD4EED2C30BECC007E4124 /* AppPreferencesDatabase.swift */; };
@@ -3890,7 +3890,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2B53D1FC2B77A2250064114F /* AuroraEditorConfigTests.swift in Sources */,
+				A0C04CF72C43096700E3DDA1 /* AuroraEditorConfigTests.swift in Sources */,
 				2BF8CD4F2C417281009DC130 /* JSSupport tests.swift in Sources */,
 				2B11FF8A2AB0E8F4005B649C /* AuroraINITests.swift in Sources */,
 			);
@@ -4482,9 +4482,10 @@
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 32X8TT6Y3C;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -4506,9 +4507,10 @@
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 32X8TT6Y3C;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;

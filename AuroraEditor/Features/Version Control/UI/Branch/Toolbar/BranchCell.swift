@@ -2,7 +2,7 @@
 //  BranchCell.swift
 //  Aurora Editor
 //
-//  Created by Tihan-Nico Paxton on 2024/07/06.
+//  Created by Nanashi Li on 2024/07/06.
 //  Copyright © 2024 Aurora Company. All rights reserved.
 //
 

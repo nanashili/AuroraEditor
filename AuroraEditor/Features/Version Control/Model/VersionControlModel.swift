@@ -2,7 +2,7 @@
 //  VersionControlModel.swift
 //  Aurora Editor
 //
-//  Created by Tihan-Nico Paxton on 2024/07/08.
+//  Created by Nanashi Li on 2024/07/08.
 //  Copyright © 2024 Aurora Company. All rights reserved.
 //
 
