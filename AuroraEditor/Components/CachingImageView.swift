@@ -25,7 +25,11 @@ class CachingImageView: NSView {
     private let imageView = NSImageView(frame: .zero)
 
     /// The image size.
-    private var imageSize: NSSize = NSSize(width: 42, height: 42) // Default value
+    private var imageSize: NSSize = NSSize(width: 42, height: 42)
+
+    /// The fallback image.
+    private let fallbackImage = NSImage(systemSymbolName: "person.crop.circle.fill",
+                                        accessibilityDescription: "")
 
     /// Make the CachingImageView.
     /// 
@@ -84,16 +88,21 @@ class CachingImageView: NSView {
         } else {
             URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
                 guard let self = self,
-                        let data = data,
-                        let response = response,
-                        error == nil,
-                        url == self.imageUrl else {
+                      let data = data,
+                      let response = response,
+                      error == nil,
+                      url == self.imageUrl else {
+                    DispatchQueue.main.async {
+                        self?.image = self?.fallbackImage
+                    }
                     return
                 }
                 DispatchQueue.main.async {
                     if let image = NSImage(data: data) {
                         ImageCache.shared.cacheImage(data: data, response: response)
                         self.image = image
+                    } else {
+                        self.image = self.fallbackImage
                     }
                 }
             }.resume()
