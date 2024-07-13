@@ -19,13 +19,11 @@ class Avatar {
     public func gitAvatar(authorEmail: String) -> some View {
         let avatarURL = "https://www.gravatar.com/avatar/\(Avatar().generateAvatarHash(authorEmail))"
 
-        return LazyVStack {
-            CachingAsyncImageView(avatarURL: avatarURL,
-                                  imageSize: 42)
-            .frame(width: 42, height: 42)
-            .clipShape(Circle())
-            .accessibilityLabel("Contributor Avatar")
-        }
+        return CachingAsyncImageView(avatarURL: avatarURL,
+                                     imageSize: 42)
+        .frame(width: 42, height: 42)
+        .clipShape(Circle())
+        .accessibilityLabel("Contributor Avatar")
     }
 
     /// Get Controbuter Avatar
