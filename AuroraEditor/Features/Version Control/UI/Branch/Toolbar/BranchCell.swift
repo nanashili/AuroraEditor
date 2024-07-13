@@ -35,7 +35,7 @@ struct BranchCell: View {
         handleRefresh: @escaping () -> Void,
         versionControl: VersionControlModel,
         workspace: WorkspaceDocument,
-        abranch: GitBranch
+        branch: GitBranch
     ) {
         self.handleRefresh = handleRefresh
         self.versionControl = versionControl
