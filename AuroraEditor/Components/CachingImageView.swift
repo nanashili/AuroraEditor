@@ -29,11 +29,14 @@ class CachingImageView: NSView {
 
     /// The fallback image.
     private var fallbackImage: NSImage {
-        let image = NSImage(
+        if let image = NSImage(
             systemSymbolName: "person.crop.circle.fill",
             accessibilityDescription: ""
-        )! // swiftlint:disable:this force_unwrapping
-        return image.resizing(to: imageSize)
+        ) {
+            return image.resizing(to: imageSize)
+        }
+
+        return NSImage()
     }
 
     /// Make the CachingImageView.
