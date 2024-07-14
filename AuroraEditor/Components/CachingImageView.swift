@@ -28,8 +28,16 @@ class CachingImageView: NSView {
     private var imageSize: NSSize = NSSize(width: 42, height: 42)
 
     /// The fallback image.
-    private let fallbackImage = NSImage(systemSymbolName: "person.crop.circle.fill",
-                                        accessibilityDescription: "")
+    private var fallbackImage: NSImage {
+        if let image = NSImage(
+            systemSymbolName: "person.crop.circle.fill",
+            accessibilityDescription: ""
+        ) {
+            return image.resizing(to: imageSize)
+        }
+
+        return NSImage()
+    }
 
     /// Make the CachingImageView.
     /// 
