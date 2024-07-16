@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -541,9 +541,18 @@
 		A0AC782A2C3DCBBA00EF4A2B /* WorkspaceUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0AC78292C3DCBB600EF4A2B /* WorkspaceUtils.swift */; };
 		A0B660E92C4136A8009D0993 /* Trie.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B660E82C4136A5009D0993 /* Trie.swift */; };
 		A0B660EB2C4136BB009D0993 /* TrieNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B660EA2C4136B9009D0993 /* TrieNode.swift */; };
+		A0C0088D2C4515A200B990D2 /* CoAuthorSuggestions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C0088C2C45159C00B990D2 /* CoAuthorSuggestions.swift */; };
+		A0C008902C459B5100B990D2 /* Version-Control in Frameworks */ = {isa = PBXBuildFile; productRef = A0C0088F2C459B5100B990D2 /* Version-Control */; };
+		A0C008942C45AA7B00B990D2 /* MentionableCacheEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C008932C45AA7700B990D2 /* MentionableCacheEntry.swift */; };
+		A0C008962C45AB5300B990D2 /* MentionableUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C008952C45AB4C00B990D2 /* MentionableUser.swift */; };
+		A0C008982C45AC3E00B990D2 /* GitHubUserDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C008972C45AC3C00B990D2 /* GitHubUserDatabase.swift */; };
+		A0C0089A2C45B20E00B990D2 /* GitHubMentionableService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C008992C45B20900B990D2 /* GitHubMentionableService.swift */; };
+		A0C0089C2C45C08C00B990D2 /* VersionControlProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C0089B2C45C08400B990D2 /* VersionControlProvider.swift */; };
+		A0C0089F2C45D3CA00B990D2 /* CoAuthorTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C0089E2C45D3C800B990D2 /* CoAuthorTextView.swift */; };
+		A0C008A12C45D43C00B990D2 /* CoAuthorSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C008A02C45D43B00B990D2 /* CoAuthorSection.swift */; };
+		A0C008A32C45DFDE00B990D2 /* SanitizedMentionable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C008A22C45DFDD00B990D2 /* SanitizedMentionable.swift */; };
 		A0C0386A2ACF1C1E00DACE3F /* Sentry in Frameworks */ = {isa = PBXBuildFile; productRef = A0C038692ACF1C1E00DACE3F /* Sentry */; };
 		A0C0386C2ACF1C1E00DACE3F /* SentrySwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = A0C0386B2ACF1C1E00DACE3F /* SentrySwiftUI */; };
-		A0C04CF62C4300B900E3DDA1 /* Version-Control in Frameworks */ = {isa = PBXBuildFile; productRef = A0C04CF52C4300B900E3DDA1 /* Version-Control */; };
 		A0C04CF72C43096700E3DDA1 /* AuroraEditorConfigTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B53D1FB2B77A2250064114F /* AuroraEditorConfigTests.swift */; };
 		A0DD4EEA2C30BEA2007E4124 /* DatabaseQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DD4EE92C30BEA2007E4124 /* DatabaseQueue.swift */; };
 		A0DD4EEC2C30BEAC007E4124 /* PersistableRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DD4EEB2C30BEAC007E4124 /* PersistableRecord.swift */; };
@@ -1160,6 +1169,15 @@
 		A0AC78292C3DCBB600EF4A2B /* WorkspaceUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceUtils.swift; sourceTree = "<group>"; };
 		A0B660E82C4136A5009D0993 /* Trie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trie.swift; sourceTree = "<group>"; };
 		A0B660EA2C4136B9009D0993 /* TrieNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrieNode.swift; sourceTree = "<group>"; };
+		A0C0088C2C45159C00B990D2 /* CoAuthorSuggestions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoAuthorSuggestions.swift; sourceTree = "<group>"; };
+		A0C008932C45AA7700B990D2 /* MentionableCacheEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentionableCacheEntry.swift; sourceTree = "<group>"; };
+		A0C008952C45AB4C00B990D2 /* MentionableUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentionableUser.swift; sourceTree = "<group>"; };
+		A0C008972C45AC3C00B990D2 /* GitHubUserDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubUserDatabase.swift; sourceTree = "<group>"; };
+		A0C008992C45B20900B990D2 /* GitHubMentionableService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubMentionableService.swift; sourceTree = "<group>"; };
+		A0C0089B2C45C08400B990D2 /* VersionControlProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionControlProvider.swift; sourceTree = "<group>"; };
+		A0C0089E2C45D3C800B990D2 /* CoAuthorTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoAuthorTextView.swift; sourceTree = "<group>"; };
+		A0C008A02C45D43B00B990D2 /* CoAuthorSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoAuthorSection.swift; sourceTree = "<group>"; };
+		A0C008A22C45DFDD00B990D2 /* SanitizedMentionable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SanitizedMentionable.swift; sourceTree = "<group>"; };
 		A0DD4EE92C30BEA2007E4124 /* DatabaseQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseQueue.swift; sourceTree = "<group>"; };
 		A0DD4EEB2C30BEAC007E4124 /* PersistableRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistableRecord.swift; sourceTree = "<group>"; };
 		A0DD4EED2C30BECC007E4124 /* AppPreferencesDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPreferencesDatabase.swift; sourceTree = "<group>"; };
@@ -1236,7 +1254,7 @@
 				200AA21228ED88B30068C7C6 /* Version-Control in Frameworks */,
 				A0142EFE2ACB64AA0002F95D /* ZIPFoundation in Frameworks */,
 				A080945D2C34A2B000EDDA59 /* Version-Control in Frameworks */,
-				A0C04CF62C4300B900E3DDA1 /* Version-Control in Frameworks */,
+				A0C008902C459B5100B990D2 /* Version-Control in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1438,6 +1456,8 @@
 		20752E3B28CA4C2200935487 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				A0C0089B2C45C08400B990D2 /* VersionControlProvider.swift */,
+				A0C008912C45AA6100B990D2 /* Repository */,
 				A0AC78262C3DC8C200EF4A2B /* VersionControlMonitor.swift */,
 				A06852D02C3C7E2A0008D83A /* VersionControlModel.swift */,
 				A045C4752C39BF83008B5C28 /* WorkspaceGitStatus.swift */,
@@ -2496,6 +2516,8 @@
 		20D83906289A7D9F00D91D05 /* Changes */ = {
 			isa = PBXGroup;
 			children = (
+				A0C008A62C45EA3B00B990D2 /* Description */,
+				A0C0089D2C45D3BE00B990D2 /* CoAuthor */,
 				201169E12837B3D800F92B46 /* ChangesView.swift */,
 				2086334E28A530AF00E29A22 /* CommitChangesView.swift */,
 			);
@@ -3382,6 +3404,43 @@
 			path = Trie;
 			sourceTree = "<group>";
 		};
+		A0C008912C45AA6100B990D2 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				A0C008992C45B20900B990D2 /* GitHubMentionableService.swift */,
+				A0C008972C45AC3C00B990D2 /* GitHubUserDatabase.swift */,
+				A0C008922C45AA6F00B990D2 /* Mentionables */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		A0C008922C45AA6F00B990D2 /* Mentionables */ = {
+			isa = PBXGroup;
+			children = (
+				A0C008952C45AB4C00B990D2 /* MentionableUser.swift */,
+				A0C008932C45AA7700B990D2 /* MentionableCacheEntry.swift */,
+			);
+			path = Mentionables;
+			sourceTree = "<group>";
+		};
+		A0C0089D2C45D3BE00B990D2 /* CoAuthor */ = {
+			isa = PBXGroup;
+			children = (
+				A0C008A22C45DFDD00B990D2 /* SanitizedMentionable.swift */,
+				A0C008A02C45D43B00B990D2 /* CoAuthorSection.swift */,
+				A0C0089E2C45D3C800B990D2 /* CoAuthorTextView.swift */,
+				A0C0088C2C45159C00B990D2 /* CoAuthorSuggestions.swift */,
+			);
+			path = CoAuthor;
+			sourceTree = "<group>";
+		};
+		A0C008A62C45EA3B00B990D2 /* Description */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Description;
+			sourceTree = "<group>";
+		};
 		B658FB2327DA9E0F00EA4DBD = {
 			isa = PBXGroup;
 			children = (
@@ -3573,7 +3632,7 @@
 				A0DD4EF02C30BEFB007E4124 /* GRDB */,
 				A080945C2C34A2B000EDDA59 /* Version-Control */,
 				2B56E1482C3DB8E200A80B6C /* DynamicUI */,
-				A0C04CF52C4300B900E3DDA1 /* Version-Control */,
+				A0C0088F2C459B5100B990D2 /* Version-Control */,
 			);
 			productName = AuroraEditor;
 			productReference = B658FB2C27DA9E0F00EA4DBD /* Aurora Editor.app */;
@@ -3666,7 +3725,7 @@
 				2BA8F0872C1DADD4005A06A3 /* XCRemoteSwiftPackageReference "AuroraEditorTextView" */,
 				A0DD4EEF2C30BEFB007E4124 /* XCRemoteSwiftPackageReference "GRDB" */,
 				2B56E1472C3DB8E200A80B6C /* XCRemoteSwiftPackageReference "DynamicUI" */,
-				A0C04CF42C4300B900E3DDA1 /* XCRemoteSwiftPackageReference "Version-Control-Kit" */,
+				A0C0088E2C459B5100B990D2 /* XCLocalSwiftPackageReference "../Version-Control-Kit" */,
 			);
 			productRefGroup = B658FB2D27DA9E0F00EA4DBD /* Products */;
 			projectDirPath = "";
@@ -4164,6 +4223,7 @@
 				20FACF872AB60F8500B09012 /* INotificationsModel.swift in Sources */,
 				B6EE989027E8879A00CDD8AB /* InspectorSidebar.swift in Sources */,
 				B6EE989227E887C600CDD8AB /* InspectorSidebarToolbar.swift in Sources */,
+				A0C0089C2C45C08C00B990D2 /* VersionControlProvider.swift in Sources */,
 				A0142F0D2ACB71830002F95D /* Int64.swift in Sources */,
 				2093CD34289AA089003A88DD /* Issue.swift in Sources */,
 				2093CD51289AA0AE003A88DD /* IssueArea.swift in Sources */,
@@ -4208,6 +4268,7 @@
 				20FACFA22AB6161E00B09012 /* NotificationProfileToggle.swift in Sources */,
 				20FACF7A2AB60EC500B09012 /* NotificationService.swift in Sources */,
 				20FACF732AB60E7600B09012 /* NotificationsFilter.swift in Sources */,
+				A0C0089F2C45D3CA00B990D2 /* CoAuthorTextView.swift in Sources */,
 				20FACF672AB60DD200B09012 /* NotificationsModel.swift in Sources */,
 				20FACF952AB610A200B09012 /* NotificationsNavigatorToolbarBottom.swift in Sources */,
 				20FACF972AB610B900B09012 /* NotificationsNavigatorView.swift in Sources */,
@@ -4247,6 +4308,7 @@
 				2093CD45289AA095003A88DD /* ProjectAccess.swift in Sources */,
 				20752E4128CA4C6500935487 /* ProjectCommitHistory.swift in Sources */,
 				20752E4328CA4E3100935487 /* ProjectCommitHistoryView.swift in Sources */,
+				A0C0088D2C4515A200B990D2 /* CoAuthorSuggestions.swift in Sources */,
 				2093CD42289AA095003A88DD /* ProjectHook.swift in Sources */,
 				286471AB27ED51FD0039369D /* ProjectNavigator.swift in Sources */,
 				04C3255C2801F86900C8DA2D /* ProjectNavigatorMenu.swift in Sources */,
@@ -4288,6 +4350,7 @@
 				2093CDBF289AA247003A88DD /* SearchModeModel.swift in Sources */,
 				202F2E35289E7277000D3CAD /* SearchResultMatchModel.swift in Sources */,
 				2093CDC0289AA247003A88DD /* SearchResultModel.swift in Sources */,
+				A0C008A12C45D43C00B990D2 /* CoAuthorSection.swift in Sources */,
 				2093CD6E289AA0FC003A88DD /* SegmentedControl.swift in Sources */,
 				2093CD4D289AA0A2003A88DD /* Session.swift in Sources */,
 				20B6A1FE28AFE107004EC8D7 /* SettingItem.swift in Sources */,
@@ -4315,6 +4378,7 @@
 				9354D4BB28AD2872004C6D18 /* StandardTableViewCell.swift in Sources */,
 				2093CDE8289AAE87003A88DD /* StashChangesSheet.swift in Sources */,
 				2093CC90289A9FEE003A88DD /* StatusBar.swift in Sources */,
+				A0C0089A2C45B20E00B990D2 /* GitHubMentionableService.swift in Sources */,
 				2B56E1442C3DB30200A80B6C /* ExtensionDoc_fromAE.swift in Sources */,
 				938E8E83291CBC3400DB8320 /* StatusBarBracketCountLabel.swift in Sources */,
 				2093CC97289A9FF5003A88DD /* StatusBarBreakpointButton.swift in Sources */,
@@ -4363,6 +4427,8 @@
 				2093CDA6289AA173003A88DD /* TerminalPreferencesView.swift in Sources */,
 				A0AC782A2C3DCBBA00EF4A2B /* WorkspaceUtils.swift in Sources */,
 				2093CDAC289AA185003A88DD /* TerminalThemeView.swift in Sources */,
+				A0C008962C45AB5300B990D2 /* MentionableUser.swift in Sources */,
+				A0C008A32C45DFDE00B990D2 /* SanitizedMentionable.swift in Sources */,
 				2B04575628E6FFE300024F2D /* TextAlignmentThemeAttribute.swift in Sources */,
 				2B04575B28E6FFE300024F2D /* TextBlockThemeAttribute.swift in Sources */,
 				2093CD9B289AA14F003A88DD /* TextEditingPreferences.swift in Sources */,
@@ -4402,6 +4468,7 @@
 				20091DB528DE1FC7008FDDFC /* UpdatePreferencesView.swift in Sources */,
 				A0142F092ACB6B2D0002F95D /* UpdateReadyState.swift in Sources */,
 				A05D17CB2ACE041E002153C9 /* UpdateUpToDateState.swift in Sources */,
+				A0C008982C45AC3E00B990D2 /* GitHubUserDatabase.swift in Sources */,
 				2093CDD8289AA511003A88DD /* URL.swift in Sources */,
 				2093CD36289AA08F003A88DD /* UserRouter.swift in Sources */,
 				2BD0BD142977331400629A86 /* VibrantEffect.swift in Sources */,
@@ -4426,6 +4493,7 @@
 				204F7BB728D7907A00F49092 /* WorkflowViewController.swift in Sources */,
 				204F7BB528D7906A00F49092 /* WorkflowWrapperView.swift in Sources */,
 				0485EB1F27E7458B00138301 /* WorkspaceCodeFileView.swift in Sources */,
+				A0C008942C45AA7B00B990D2 /* MentionableCacheEntry.swift in Sources */,
 				93EF416728C1F828004083AD /* WorkspaceDocument+Commands.swift in Sources */,
 				A045C4732C39A90C008B5C28 /* BranchCell.swift in Sources */,
 				6C05A8AF284D0CA3007F4EAA /* WorkspaceDocument+Listeners.swift in Sources */,
@@ -5038,6 +5106,13 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCLocalSwiftPackageReference section */
+		A0C0088E2C459B5100B990D2 /* XCLocalSwiftPackageReference "../Version-Control-Kit" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = "../Version-Control-Kit";
+		};
+/* End XCLocalSwiftPackageReference section */
+
 /* Begin XCRemoteSwiftPackageReference section */
 		200AA21028ED88B30068C7C6 /* XCRemoteSwiftPackageReference "Version-Control-Kit" */ = {
 			isa = XCRemoteSwiftPackageReference;
@@ -5103,14 +5178,6 @@
 				minimumVersion = 8.13.0;
 			};
 		};
-		A0C04CF42C4300B900E3DDA1 /* XCRemoteSwiftPackageReference "Version-Control-Kit" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/AuroraEditor/Version-Control-Kit";
-			requirement = {
-				kind = exactVersion;
-				version = 1.0.2;
-			};
-		};
 		A0DD4EEF2C30BEFB007E4124 /* XCRemoteSwiftPackageReference "GRDB" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/groue/GRDB.swift";
@@ -5169,6 +5236,10 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = "Version-Control";
 		};
+		A0C0088F2C459B5100B990D2 /* Version-Control */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = "Version-Control";
+		};
 		A0C038692ACF1C1E00DACE3F /* Sentry */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = A0C038682ACF1C1E00DACE3F /* XCRemoteSwiftPackageReference "sentry-cocoa" */;
@@ -5178,11 +5249,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A0C038682ACF1C1E00DACE3F /* XCRemoteSwiftPackageReference "sentry-cocoa" */;
 			productName = SentrySwiftUI;
-		};
-		A0C04CF52C4300B900E3DDA1 /* Version-Control */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = A0C04CF42C4300B900E3DDA1 /* XCRemoteSwiftPackageReference "Version-Control-Kit" */;
-			productName = "Version-Control";
 		};
 		A0DD4EF02C30BEFB007E4124 /* GRDB */ = {
 			isa = XCSwiftPackageProductDependency;

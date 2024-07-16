@@ -108,24 +108,31 @@ final class SourceControlController: NSViewController {
 
 extension SourceControlController: NSOutlineViewDataSource {
     /// Get the number of children for a given item.
-    /// 
+    ///
     /// - Parameters:
     ///   - outlineView: The outline view
-    ///   - item: the item
-    /// 
+    ///   - item: The item (ignored in this implementation as we're dealing with a flat list)
+    ///
     /// - Returns: The number of children
     func outlineView(_ outlineView: NSOutlineView, numberOfChildrenOfItem item: Any?) -> Int {
-        return workspace?.fileSystemClient?.model?.changed.count ?? 0
+        return filteredFileItems.count
     }
 
     /// Get the child for a given index.
-    /// 
-    /// - Parameter outlineView: The outline view
-    /// - Parameter index: The index
-    /// 
-    /// - Returns: The child
+    ///
+    /// - Parameters:
+    ///   - outlineView: The outline view
+    ///   - index: The index
+    ///   - item: The item (ignored in this implementation as we're dealing with a flat list)
+    ///
+    /// - Returns: The child at the specified index
     func outlineView(_ outlineView: NSOutlineView, child index: Int, ofItem item: Any?) -> Any {
-        return workspace?.fileSystemClient?.model?.changed[index] ?? 0
+        return filteredFileItems[index]
+    }
+
+    /// Computed property to filter file items
+    private var filteredFileItems: [FileItem] {
+        return workspace?.fileSystemClient?.model?.changed ?? []
     }
 
     /// Get the object for a given item.

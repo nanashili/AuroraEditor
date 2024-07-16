@@ -21,6 +21,7 @@ final class SourceControlTableViewCell: FileSystemTableViewCell {
         frame frameRect: NSRect,
         item: FileSystemClient.FileItem?,
         versionControlModel: VersionControlModel?,
+        isVersionControl: Bool = false,
         workspace: WorkspaceDocument?,
         isEditable _: Bool = false
     ) {
@@ -28,6 +29,7 @@ final class SourceControlTableViewCell: FileSystemTableViewCell {
             frame: frameRect,
             item: item,
             versionControlModel: versionControlModel,
+            isVersionControl: true,
             workspace: workspace,
             isEditable: false
         )

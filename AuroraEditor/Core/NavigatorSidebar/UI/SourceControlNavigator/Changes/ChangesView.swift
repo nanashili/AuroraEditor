@@ -21,13 +21,13 @@ struct ChangesView: View {
 
     /// The changes model.
     @ObservedObject
-    var changesModel: SourceControlModel
+    var versionControl: VersionControlModel = .shared
 
     /// The view body.
     var body: some View {
         VStack(alignment: .center) {
             if prefs.sourceControlActive() {
-                if changesModel.isGitRepository {
+                if versionControl.workspaceIsRepository {
                     switch workspace.fileSystemClient?.model?.state {
                     case .success:
                         if let changed = workspace.fileSystemClient?.model?.changed,

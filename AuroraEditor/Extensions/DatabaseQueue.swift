@@ -18,4 +18,13 @@ extension DatabaseQueue {
         let dbQueue = try DatabaseQueue(path: databasePath)
         return dbQueue
     }
+
+    /// Fetches the GitHub database queue at the preferences database path.
+    /// - Returns: The fetched `DatabaseQueue` instance.
+    /// - Throws: An error if the database queue cannot be fetched.
+    static func fetchGitHubDatabase() throws -> DatabaseQueue {
+        let databasePath = try FileManager.gitHubDatabasePath()
+        let dbQueue = try DatabaseQueue(path: databasePath)
+        return dbQueue
+    }
 }

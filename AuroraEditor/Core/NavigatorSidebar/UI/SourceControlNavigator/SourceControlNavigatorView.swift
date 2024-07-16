@@ -28,6 +28,9 @@ struct SourceControlNavigatorView: View {
     @ObservedObject
     var repositoryModel: RepositoryModel
 
+    @ObservedObject
+    private var versionControl: VersionControlModel = .shared
+
     /// Initializes the view.
     /// 
     /// - Parameter workspace: The workspace document.
@@ -37,9 +40,8 @@ struct SourceControlNavigatorView: View {
 
     /// The view body.
     var body: some View {
-        if repositoryModel.isGitRepository {
+        if versionControl.workspaceIsRepository {
             VStack {
-
                 SegmentedControl($selectedSection,
                                  options: doesUserHaveGitAccounts()
                                     ? ["Changes", "Repositories", "Actions"]
@@ -55,7 +57,7 @@ struct SourceControlNavigatorView: View {
                 }
 
                 if selectedSection == 0 {
-                    ChangesView(changesModel: .init(workspaceURL: workspace.workspaceURL()))
+                    ChangesView()
                 }
 
                 if selectedSection == 1 {
