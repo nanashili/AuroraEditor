@@ -19,7 +19,10 @@ jobs:
 
       - name: Build Documentation
         run: |
-          xcodebuild docbuild CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO -scheme "Aurora Editor" \
+          xcodebuild -quiet docbuild \
+          -scheme "Aurora Editor" \
+          CODE_SIGN_IDENTITY="" \
+          CODE_SIGNING_REQUIRED=NO \
           OTHER_DOCC_FLAGS="--transform-for-static-hosting --output-path docs"
 
       - name: Init new repo in dist folder and commit generated files
