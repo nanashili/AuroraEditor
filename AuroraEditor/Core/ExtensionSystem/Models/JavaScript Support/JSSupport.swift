@@ -135,7 +135,7 @@ class JSSupport: ExtensionInterface {
             return true
         }
 
-        let respond: Responder = { (action: String, parameters: [String: Any])  in
+        let broadcaster: Responder = { (action: String, parameters: [String: Any]) in
             self.jsLogger.debug(
                 "JSAPI:\n Function: \(action)\n Parameters: \(String(describing: parameters))"
             )
@@ -162,7 +162,7 @@ class JSSupport: ExtensionInterface {
         context?
             .objectForKeyedSubscript("AuroraEditor")
             .setObject(
-                unsafeBitCast(respond, to: AnyObject.self),
+                unsafeBitCast(broadcaster, to: AnyObject.self),
                 forKeyedSubscript: "respond" as (NSCopying & NSObjectProtocol)
             )
 
@@ -170,7 +170,7 @@ class JSSupport: ExtensionInterface {
         context?
             .objectForKeyedSubscript("AuroraEditor")
             .setObject(
-                unsafeBitCast(respond, to: AnyObject.self),
+                unsafeBitCast(broadcaster, to: AnyObject.self),
                 forKeyedSubscript: "respondTo" as (NSCopying & NSObjectProtocol)
             )
     }
@@ -191,33 +191,6 @@ class JSSupport: ExtensionInterface {
         JSCTimerSupport.shared.registerInto(jsContext: context)
         JSCPromise.shared.registerInto(jsContext: context)
         JSCFetch.shared.registerInto(jsContext: context)
-    }
-
-    /// Respond to an (AuroraEditor) JavaScript function.
-    ///
-    /// - Parameter action: action to perform
-    /// - Parameter parameters: with parameters
-    ///
-    /// - Returns: response value from javascript
-    func respond(action: String, parameters: [String: Any]) -> JSValue? {
-        var JSONParameters = self.anyArrayToJSON(array: parameters)
-
-        jsLogger.debug(
-            "Calling function \(action), with \(JSONParameters)"
-        )
-
-        // Re ensure that the string is safe
-        JSONParameters = escape(JSON: JSONParameters)
-
-        // Constructor to run `function(parameters)`
-        let action = """
-            if (typeof \(action) === 'function') {
-                \(action)(JSON.parse(\"\(JSONParameters)\"))
-            }
-            """
-
-        return context?
-            .evaluateScript(action)
     }
 
     /// Respond to an (AuroraEditor) JavaScript function.
@@ -259,7 +232,7 @@ class JSSupport: ExtensionInterface {
             } else if let numbericValue = value as? (any Numeric) {
                 // Value is numeric, numeric characters don't need to be escaped
                 json.append("\"\(key)\":\(numbericValue),")
-            } else if var stringValue = value as? String {
+            } else if let stringValue = value as? String {
                 // Value is a string, strings need to be escaped
                 json.append("\"\(key)\":\"\(escape(JSON: stringValue))\",")
             } else {
@@ -295,18 +268,55 @@ class JSSupport: ExtensionInterface {
     }
 
     // MARK: - Aurora Editor Extension interface
-    /// Respond to an (AuroraEditor) JavaScript function.
+    /// Send a action to an extension to respond to
     ///
     /// - Parameter action: action to perform
     /// - Parameter parameters: with parameters
     ///
-    /// - Returns: response value from javascript
-    func respond(action: String, parameters: [String: Any]) -> Bool {
-        if let val = self.respond(action: action, parameters: parameters), val.isBoolean {
+    /// - Returns: Response value from the extension
+    @discardableResult
+    func respond(action: String, parameters: [String: Any]) -> Any {
+        var JSONParameters = self.anyArrayToJSON(array: parameters)
+
+        jsLogger.debug(
+            "Calling function \(action), with \(JSONParameters)"
+        )
+
+        // Re ensure that the string is safe
+        JSONParameters = escape(JSON: JSONParameters)
+
+        // Constructor to run `function(parameters)`
+        let action = """
+            if (typeof \(action) === 'function') {
+                \(action)(JSON.parse(\"\(JSONParameters)\"))
+            }
+            """
+
+        guard let val = context?.evaluateScript(action) else {
+            return false
+        }
+
+        if val.isBoolean {
             return val.toBool()
         }
 
-        return true
+        if val.isObject, let object = val.toObject() {
+            return object
+        }
+
+        if val.isString, let string = val.toString() {
+            return string
+        }
+
+        if val.isArray, let array = val.toArray() {
+            return array
+        }
+
+        if val.isNumber, let number = val.toNumber() {
+            return number
+        }
+
+        return false
     }
 
     /// Register JSSupport as an extension
