@@ -6,7 +6,7 @@
 //  Copyright © 2024 Aurora Company. All rights reserved.
 //
 
-import SwiftUICore
+import SwiftUI
 import Version_Control
 
 struct SanitizedMentionable: View {
