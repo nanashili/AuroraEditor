@@ -15,7 +15,7 @@ public protocol ExtensionDocumentationFromAuroraEditor {
     /// Build the editor view for a specific file.
     ///
     /// Please note the view will be rendered using the first "view" key provided in the return value
-
+    ///
     /// - Parameter file: The file url (relative path)
     /// - Returns: An array containing the necessary elements to build an editor.
     func buildEditor(file: String) -> [String: Any]
