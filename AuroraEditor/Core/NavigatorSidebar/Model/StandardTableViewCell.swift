@@ -23,6 +23,9 @@ class StandardTableViewCell: NSTableCellView {
     /// The arrow down icon next to the secondary label
     var upstreamChangesPullIcon: NSImageView!
 
+    /// The checkbox of the cell
+    var checkbox: NSButton!
+
     /// The workspace document
     var workspace: WorkspaceDocument?
 
@@ -32,6 +35,8 @@ class StandardTableViewCell: NSTableCellView {
             resizeSubviews(withOldSize: .zero)
         }
     }
+
+    private var isVersionControl: Bool = false
 
     /// The application preferences
     private let prefs = AppPreferencesModel.shared.preferences.general
@@ -45,8 +50,10 @@ class StandardTableViewCell: NSTableCellView {
     init(
         frame frameRect: NSRect,
         isEditable: Bool = true,
+        isVersionControl: Bool = false,
         workspace: WorkspaceDocument?
     ) {
+        self.isVersionControl = isVersionControl
         super.init(frame: frameRect)
         setupViews(
             frame: frameRect,
@@ -61,14 +68,26 @@ class StandardTableViewCell: NSTableCellView {
     // Default init, assumes isEditable to be false
     override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
-        setupViews(frame: frameRect, isEditable: false)
+        setupViews(
+            frame: frameRect,
+            isEditable: false
+        )
     }
 
     /// Set up the views
     /// 
     /// - Parameter frameRect: the frame
     /// - Parameter isEditable: whether the cell is editable
-    private func setupViews(frame frameRect: NSRect, isEditable: Bool) {
+    private func setupViews(
+        frame frameRect: NSRect,
+        isEditable: Bool
+    ) {
+        if isVersionControl {
+            // Create the checkbox
+            checkbox = createCheckbox()
+            addSubview(checkbox)
+        }
+
         // Create the label
         label = createLabel()
         configLabel(label: self.label, isEditable: isEditable)
@@ -182,6 +201,13 @@ class StandardTableViewCell: NSTableCellView {
         icon.contentTintColor = NSColor(Color.secondary)
     }
 
+    /// Create checkbox
+    func createCheckbox() -> NSButton {
+        let checkbox = NSButton(checkboxWithTitle: "", target: nil, action: nil)
+        checkbox.translatesAutoresizingMaskIntoConstraints = false
+        return checkbox
+    }
+
     /// Create constraints
     /// 
     /// - Parameter frameRect: the frame
@@ -192,7 +218,7 @@ class StandardTableViewCell: NSTableCellView {
     // MARK: Layout
     /// The width of the icon
     let iconWidth: CGFloat = 22
-    let smallIconWidth: CGFloat = 16
+    let checkboxWidth: CGFloat = 16
     let arrowDownIconWidth: CGFloat = 7
 
     /// Resize the subviews
@@ -201,19 +227,43 @@ class StandardTableViewCell: NSTableCellView {
     override func resizeSubviews(withOldSize oldSize: NSSize) { // swiftlint:disable:this function_body_length
         super.resizeSubviews(withOldSize: oldSize)
 
-        fileIcon.frame = NSRect(
-            x: 2,
-            y: 4,
-            width: iconWidth,
-            height: frame.height
-        )
-        if let alignmentRect = fileIcon.image?.alignmentRect {
+        if isVersionControl {
+            checkbox.frame = NSRect(
+                x: 2,
+                y: (frame.height - checkboxWidth) / 2,
+                width: checkboxWidth,
+                height: checkboxWidth
+            )
+
             fileIcon.frame = NSRect(
-                x: (iconWidth + 4 - alignmentRect.width) / 2,
+                x: checkbox.frame.maxX + 2,
                 y: 4,
-                width: alignmentRect.width,
+                width: iconWidth,
                 height: frame.height
             )
+            if let alignmentRect = fileIcon.image?.alignmentRect {
+                fileIcon.frame = NSRect(
+                    x: checkbox.frame.maxX + (iconWidth + 4 - alignmentRect.width) / 2,
+                    y: 4,
+                    width: alignmentRect.width,
+                    height: frame.height
+                )
+            }
+        } else {
+            fileIcon.frame = NSRect(
+                x: 2,
+                y: 4,
+                width: iconWidth,
+                height: frame.height
+            )
+            if let alignmentRect = fileIcon.image?.alignmentRect {
+                fileIcon.frame = NSRect(
+                    x: (iconWidth + 4 - alignmentRect.width) / 2,
+                    y: 4,
+                    width: alignmentRect.width,
+                    height: frame.height
+                )
+            }
         }
 
         if secondaryLabelRightAligned {
@@ -249,7 +299,7 @@ class StandardTableViewCell: NSTableCellView {
             )
 
             label.frame = NSRect(
-                x: iconWidth + 2,
+                x: fileIcon.frame.maxX + 2,
                 y: 2.5,
                 width: secondaryLabelXPosition - fileIcon.frame.maxX - 5,
                 height: 25
@@ -259,7 +309,7 @@ class StandardTableViewCell: NSTableCellView {
             let newSize = label.sizeThatFits(CGSize(width: mainLabelWidth,
                                                     height: CGFloat.greatestFiniteMagnitude))
             label.frame = NSRect(
-                x: iconWidth + 2,
+                x: fileIcon.frame.maxX + 2,
                 y: 2.5,
                 width: newSize.width,
                 height: 25

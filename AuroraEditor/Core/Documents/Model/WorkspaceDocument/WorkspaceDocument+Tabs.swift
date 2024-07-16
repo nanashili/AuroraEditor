@@ -89,7 +89,9 @@ extension WorkspaceDocument {
                     withContentsOf: item.url,
                     ofType: pathExtention
                 )
-                self.selectionState.openedCodeFiles[item] = codeFile
+                DispatchQueue.main.async {
+                    self.selectionState.openedCodeFiles[item] = codeFile
+                }
 
                 let fileData = try? Data(contentsOf: item.url)
                 // Let the extensions know we opened a file (from a workspace)

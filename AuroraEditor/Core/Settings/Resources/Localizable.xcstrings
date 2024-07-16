@@ -30,6 +30,9 @@
         }
       }
     },
+    "(%@)" : {
+
+    },
     "##Community" : {
 
     },
@@ -2602,6 +2605,9 @@
     "Add Account" : {
 
     },
+    "Add Co-Authors" : {
+
+    },
     "Add exisiting remote:" : {
 
     },
@@ -2695,6 +2701,9 @@
     "Category" : {
 
     },
+    "Character count warning" : {
+
+    },
     "Check for Updates" : {
 
     },
@@ -2782,6 +2791,9 @@
     "CLOSE WINDOW" : {
 
     },
+    "Co-Authors" : {
+
+    },
     "Code Coverage" : {
 
     },
@@ -2789,9 +2801,6 @@
 
     },
     "Comments" : {
-
-    },
-    "Commit" : {
 
     },
     "Commit to **%@**" : {
@@ -5785,9 +5794,6 @@
     "Help" : {
 
     },
-    "Hi" : {
-
-    },
     "Hide" : {
 
     },
@@ -5807,6 +5813,9 @@
 
     },
     "Icon" : {
+
+    },
+    "Ideal commit summaries are concise (under 50 chars) and descriptive" : {
 
     },
     "Identity and Type" : {
@@ -7720,6 +7729,9 @@
 
     },
     "Remove" : {
+
+    },
+    "Remove Co-Authors" : {
 
     },
     "Remove from Recent Projects" : {
@@ -44962,9 +44974,6 @@
     "Split View" : {
 
     },
-    "Stage All" : {
-
-    },
     "Stash" : {
 
     },
@@ -45001,7 +45010,7 @@
     "Tags:" : {
 
     },
-    "Test" : {
+    "Tap for information about ideal commit summary length" : {
 
     },
     "Text" : {
@@ -45020,6 +45029,9 @@
 
     },
     "The extension developer, **Nanashi Li**, indicated that the extensions privacy practices may include handling of data as described below. For more information, see the [extension developer's privacy policy](https://auroraeditor.com)." : {
+
+    },
+    "The workspace is configured with the following Git account: %@" : {
 
     },
     "This branch is tracking **\"upstream/main\"** and renaming this branch will not change the branch name on the remote." : {
@@ -47155,9 +47167,6 @@
 
     },
     "What's New" : {
-
-    },
-    "Whats up?" : {
 
     },
     "Which area are you seeing an issue with?" : {

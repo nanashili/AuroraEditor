@@ -9,6 +9,7 @@
 import Foundation
 import Combine
 import Version_Control
+import GRDB
 
 /// A model class responsible for handling version control operations within the Aurora Editor workspace.
 class VersionControlModel: ObservableObject {
@@ -43,6 +44,20 @@ class VersionControlModel: ObservableObject {
     /// The list of files changed in the upstream remote repository.
     @Published var changedUpstreamFiles: [String] = []
 
+    @Published var workspaceProvider: VersionControlProvider = .none
+
+    @Published var workspaceEmail: String = ""
+
+    // MARK: GitHub Variables Start
+
+    /// A list of mentionable users in the repo
+    @Published var githubRepositoryMentionables: [IAPIMentionableUser] = []
+
+    /// The GitHub Repository Id
+    @Published var githubRepoId: Int = -1
+
+    // MARK: GitHub Variables End
+
     /// A set of cancellable objects for Combine publishers.
     private var cancellables = Set<AnyCancellable>()
 
@@ -62,12 +77,14 @@ class VersionControlModel: ObservableObject {
     public func initializeModel(workspaceURL: URL) {
         self.workspaceURL = workspaceURL
         checkIfWorkspaceIsRepository()
+        getWorkspaceOrGlobalEmail()
 
         Task {
             await getWorkspaceBranches()
             await getWorkspaceRecentBranches()
             await getRemoteURL()
             await getRemoteChangeFiles()
+            await getRepositoryMentionables()
         }
     }
 
@@ -81,6 +98,29 @@ class VersionControlModel: ObservableObject {
             self.workspaceIsRepository = self.check.checkIfProjectIsRepo(
                 workspaceURL: workspaceURL
             )
+        }
+    }
+
+    public func getWorkspaceOrGlobalEmail() {
+        guard let workspaceURL = workspaceURL else { return }
+
+        do {
+            let email = try Config().getConfigValue(directoryURL: workspaceURL,
+                                                    name: "user.email",
+                                                    onlyLocal: true) ??
+            Config().getConfigValue(directoryURL: workspaceURL,
+                                        name: "user.email",
+                                        onlyLocal: false) ??
+            ""
+
+            DispatchQueue.main.async {
+                self.workspaceEmail = email
+            }
+        } catch {
+            print("Error fetching workspace email: \(error)")
+            DispatchQueue.main.async {
+                self.workspaceEmail = ""
+            }
         }
     }
 
@@ -152,12 +192,36 @@ class VersionControlModel: ObservableObject {
 
             DispatchQueue.main.async {
                 self.upstreamURL = remoteURL?.removingNewLines() ?? ""
+                self.updateWorkspaceProvider(with: remoteURL)
             }
         } catch {
             DispatchQueue.main.async {
                 self.upstreamURL = ""
+                self.workspaceProvider = .none
             }
         }
+    }
+
+    private func updateWorkspaceProvider(with remoteURL: String?) {
+        guard let remoteURL = remoteURL else {
+            self.workspaceProvider = .none
+            return
+        }
+
+        let urlPatterns: [(provider: VersionControlProvider, pattern: String)] = [
+            (.github, "github.com"),
+            (.bitbucket, "bitbucket.org"),
+            (.gitlab, "gitlab.com")
+        ]
+
+        for (provider, pattern) in urlPatterns {
+            if remoteURL.range(of: pattern, options: .caseInsensitive) != nil {
+                self.workspaceProvider = provider
+                return
+            }
+        }
+
+        self.workspaceProvider = .none
     }
 
     /// The current branch object of the workspace.
@@ -209,5 +273,76 @@ class VersionControlModel: ObservableObject {
                 self.changedUpstreamFiles = []
             }
         }
+    }
+
+    // MARK: GitHub Functions Start
+
+    private func getRepositoryMentionables() async {
+        guard let (owner, repo) = extractOwnerAndRepo(from: upstreamURL) else {
+            DispatchQueue.main.async {
+                self.githubRepositoryMentionables = []
+            }
+            return
+        }
+
+        do {
+            let response = try GitHubAPI().fetchMentionables(
+                owner: owner,
+                name: repo,
+                etag: nil
+            )
+
+            DispatchQueue.main.async {
+                self.githubRepositoryMentionables = response?.users ?? []
+            }
+        } catch {
+            DispatchQueue.main.async {
+                self.githubRepositoryMentionables = []
+            }
+        }
+    }
+
+    // TODO: Handle caching with the `etag` sent from GitHub
+    private func refreshMentionables() {
+        let gitHubUserDatabase = GitHubUserDatabase()
+
+        do {
+            let mentionableService = GitHubMentionableService(database: gitHubUserDatabase)
+            try mentionableService.updateMentionables(
+                owner: "",
+                name: "",
+                repoId: githubRepoId,
+                account: ""
+            )
+        } catch {
+
+        }
+    }
+
+    private func extractOwnerAndRepo(
+        from remoteURL: String
+    ) -> (owner: String, repo: String)? {
+        let pattern = #"https?://(?:www\.)?github\.com/([^/]+)/([^/]+)"#
+        let regex = try? NSRegularExpression(pattern: pattern, options: [])
+
+        if let match = regex?.firstMatch(
+            in: remoteURL,
+            options: [],
+            range: NSRange(location: 0, length: remoteURL.utf16.count)
+        ) {
+            if let ownerRange = Range(match.range(at: 1), in: remoteURL),
+               let repoRange = Range(match.range(at: 2), in: remoteURL) {
+                let owner = String(remoteURL[ownerRange])
+                var repo = String(remoteURL[repoRange])
+
+                // Remove the .git suffix if it exists
+                if repo.hasSuffix(".git") {
+                    repo.removeLast(4)
+                }
+
+                return (owner, repo)
+            }
+        }
+        return nil
     }
 }

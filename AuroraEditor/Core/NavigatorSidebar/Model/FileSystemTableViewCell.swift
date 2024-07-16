@@ -37,6 +37,7 @@ class FileSystemTableViewCell: StandardTableViewCell {
         frame frameRect: NSRect,
         item: FileSystemClient.FileItem?,
         versionControlModel: VersionControlModel?,
+        isVersionControl: Bool = false,
         workspace: WorkspaceDocument?,
         isEditable: Bool = true
     ) {
@@ -44,6 +45,7 @@ class FileSystemTableViewCell: StandardTableViewCell {
         super.init(
             frame: frameRect,
             isEditable: isEditable,
+            isVersionControl: isVersionControl,
             workspace: workspace
         )
         if let item = item {

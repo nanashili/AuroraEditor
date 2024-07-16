@@ -36,10 +36,6 @@ public final class SourceControlModel: ObservableObject {
     @Published
     public var changed: [FileItem]
 
-    /// Whether the workspace is a git repository
-    @Published
-    public var isGitRepository: Bool = false
-
     /// A set of cancellables
     private var cancellables = Set<AnyCancellable>()
 
@@ -51,7 +47,6 @@ public final class SourceControlModel: ObservableObject {
     /// - Parameter workspaceURL: the current workspace URL we also need this to open files in finder
     public init(workspaceURL: URL) {
         self.workspaceURL = workspaceURL
-        self.isGitRepository = Check().checkIfProjectIsRepo(workspaceURL: workspaceURL)
         gitClient = GitClient(
             directoryURL: workspaceURL,
             shellClient: sharedShellClient.shellClient

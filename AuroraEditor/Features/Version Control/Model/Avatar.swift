@@ -16,12 +16,15 @@ class Avatar {
     /// - Parameter authorEmail: Author's email
     /// 
     /// - Returns: Avatar image
-    public func gitAvatar(authorEmail: String) -> some View {
+    public func gitAvatar(
+        imageSize: CGFloat = 42,
+        authorEmail: String
+    ) -> some View {
         let avatarURL = "https://www.gravatar.com/avatar/\(Avatar().generateAvatarHash(authorEmail))"
 
         return CachingAsyncImageView(avatarURL: avatarURL,
-                                     imageSize: 42)
-        .frame(width: 42, height: 42)
+                                     imageSize: imageSize)
+        .frame(width: imageSize, height: imageSize)
         .clipShape(Circle())
         .accessibilityLabel("Contributor Avatar")
     }
@@ -31,10 +34,13 @@ class Avatar {
     /// - Parameter contributerAvatarURL: Contributers's avatar url
     /// 
     /// - Returns: Contributer avatar image
-    public func contributorAvatar(contributorAvatarURL: String) -> some View {
+    public func contributorAvatar(
+        imageSize: CGFloat = 42,
+        contributorAvatarURL: String
+    ) -> some View {
         CachingAsyncImageView(avatarURL: contributorAvatarURL,
-                              imageSize: 42)
-            .frame(width: 42, height: 42)
+                              imageSize: imageSize)
+            .frame(width: imageSize, height: imageSize)
             .clipShape(Circle())
             .accessibilityLabel("Contributor Avatar")
     }

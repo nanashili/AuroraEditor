@@ -66,4 +66,29 @@ extension FileManager {
         let databaseFileURL = databaseFolderURL.appendingPathComponent("preferences.sqlite")
         return databaseFileURL.path
     }
+
+    /// Returns the path to the GitHub SQLite database file used by the Aurora Editor.
+    ///
+    /// - Throws: An `NSError` if the application support directory is not found.
+    /// - Returns: The file path to the preferences SQLite database.
+    static func gitHubDatabasePath() throws -> String {
+        let applicationSupportURLs = FileManager.default.urls(
+            for: .applicationSupportDirectory,
+            in: .userDomainMask
+        )
+        guard let firstURL = applicationSupportURLs.first else {
+            throw NSError(
+                domain: "FileManager",
+                code: 0,
+                userInfo: [NSLocalizedDescriptionKey: "Application support directory not found"]
+            )
+        }
+
+        let databaseFolderURL = firstURL.appendingPathComponent(
+            "com.auroraeditor",
+            isDirectory: true
+        )
+        let databaseFileURL = databaseFolderURL.appendingPathComponent("github.sqlite")
+        return databaseFileURL.path
+    }
 }
