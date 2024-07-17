@@ -19,7 +19,7 @@ jobs:
 
       - name: Build Documentation
         run: |
-          xcodebuild -quiet docbuild \
+          xcodebuild docbuild \
           -scheme "Aurora Editor" \
           CODE_SIGN_IDENTITY="" \
           CODE_SIGNING_REQUIRED=NO \
