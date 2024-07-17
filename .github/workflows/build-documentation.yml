@@ -24,8 +24,7 @@ jobs:
             -destination generic/platform=macOS \
             CODE_SIGN_IDENTITY="" \
             CODE_SIGNING_REQUIRED=NO \
-            DOCC_HOSTING_BASE_PATH="${{ github.event.repository.name }}" \
-            OTHER_DOCC_FLAGS="--transform-for-static-hosting --hosting-base-path ${{ github.event.repository.name }} --output-path docs"
+            OTHER_DOCC_FLAGS="--transform-for-static-hosting --output-path docs"
 
       - name: Configure Git
         run: |
