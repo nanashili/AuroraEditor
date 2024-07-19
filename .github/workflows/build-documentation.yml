@@ -40,7 +40,6 @@ jobs:
           echo "docs.auroraeditor.com" > CNAME
           echo "{\"meta\":{\"title\":\"$DOCURL Documentation\"}}" > theme-settings.json
           echo "<script>window.location.href = (document.location.host == 'auroraeditor.github.io' ? '/AuroraEditor' : '') + '/documentation/$DOCURL/'.toLowerCase();</script>" > index.html
-          echo "<script>window.location.href = (document.location.host == 'auroraeditor.github.io' ? '/AuroraEditor' : '') + '/documentation/$DOCURL/'.toLowerCase();</script>" > 404.html
           git init -b documentation
           git add -A .
           git commit -m "Deploy documentation"
