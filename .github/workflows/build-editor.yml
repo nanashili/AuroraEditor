@@ -24,6 +24,10 @@ jobs:
           rm -rf ./.??* || true
           ls -la ./
 
+      - name: "Install swiftlint"
+        run: |
+          brew install swiftlint
+          
       - name: Runner environment
         run: |
           echo "MacOS Version"
