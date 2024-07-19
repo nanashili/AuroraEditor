@@ -4,7 +4,6 @@ on:
     branches:
       - "development"
   workflow_dispatch:
-
 jobs:
   build-docc:
     runs-on: self-hosted
@@ -13,10 +12,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-
       - name: Create folder for generated documentation
         run: mkdir -p docs
-
       - name: Build Documentation
         run: |
           xcodebuild docbuild \
@@ -25,12 +22,10 @@ jobs:
             CODE_SIGN_IDENTITY="" \
             CODE_SIGNING_REQUIRED=NO \
             OTHER_DOCC_FLAGS="--transform-for-static-hosting --output-path docs"
-
       - name: Configure Git
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "github-actions@github.com"
-
       - name: Deploy to GitHub Pages
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -44,3 +39,10 @@ jobs:
           git add -A .
           git commit -m "Deploy documentation"
           git push -f "https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git" documentation:documentation
+      - name: Cleanup runner
+        if: always()
+        run: |
+          if [ -d "${{ github.workspace }}" ]; then
+            cd "${{ github.workspace }}"
+            rm -rf *
+          fi
