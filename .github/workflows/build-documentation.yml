@@ -8,7 +8,7 @@ on:
 
 jobs:
   build-docc:
-    runs-on: self-hosted
+    runs-on: macos-14
     permissions:
       contents: write
     steps:
