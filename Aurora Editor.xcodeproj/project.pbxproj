@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 60;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -548,6 +548,7 @@
 		A073E1342C4C64CF0081140D /* RepoRulesMetadataFailureList.swift in Sources */ = {isa = PBXBuildFile; fileRef = A073E1332C4C64CD0081140D /* RepoRulesMetadataFailureList.swift */; };
 		A073E1372C4C6A0E0081140D /* CommitChangesView+CommitRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = A073E1362C4C69FB0081140D /* CommitChangesView+CommitRules.swift */; };
 		A073E1392C4D78310081140D /* Debouncer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A073E1382C4D78300081140D /* Debouncer.swift */; };
+		A073E13C2C4D8B210081140D /* Version-Control in Frameworks */ = {isa = PBXBuildFile; productRef = A073E13B2C4D8B210081140D /* Version-Control */; };
 		A07C1CD42AE4518900E8B17D /* NotificationIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07C1CD32AE4518900E8B17D /* NotificationIcon.swift */; };
 		A080945D2C34A2B000EDDA59 /* Version-Control in Frameworks */ = {isa = PBXBuildFile; productRef = A080945C2C34A2B000EDDA59 /* Version-Control */; };
 		A08E00812AD48C2A0091725D /* LoaderState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08E00802AD48C2A0091725D /* LoaderState.swift */; };
@@ -1287,6 +1288,7 @@
 				200AA21228ED88B30068C7C6 /* Version-Control in Frameworks */,
 				A080945D2C34A2B000EDDA59 /* Version-Control in Frameworks */,
 				A073E12B2C4B45920081140D /* Version-Control in Frameworks */,
+				A073E13C2C4D8B210081140D /* Version-Control in Frameworks */,
 				A0C008902C459B5100B990D2 /* Version-Control in Frameworks */,
 				A0142EFE2ACB64AA0002F95D /* ZIPFoundation in Frameworks */,
 			);
@@ -3716,6 +3718,7 @@
 				2B56E1482C3DB8E200A80B6C /* DynamicUI */,
 				A0C0088F2C459B5100B990D2 /* Version-Control */,
 				A073E12A2C4B45920081140D /* Version-Control */,
+				A073E13B2C4D8B210081140D /* Version-Control */,
 			);
 			productName = AuroraEditor;
 			productReference = B658FB2C27DA9E0F00EA4DBD /* Aurora Editor.app */;
@@ -3808,7 +3811,7 @@
 				2BA8F0872C1DADD4005A06A3 /* XCRemoteSwiftPackageReference "AuroraEditorTextView" */,
 				A0DD4EEF2C30BEFB007E4124 /* XCRemoteSwiftPackageReference "GRDB" */,
 				2B56E1472C3DB8E200A80B6C /* XCRemoteSwiftPackageReference "DynamicUI" */,
-				A073E1292C4B45920081140D /* XCLocalSwiftPackageReference "../Version-Control-Kit" */,
+				A073E13A2C4D8B210081140D /* XCRemoteSwiftPackageReference "Version-Control-Kit" */,
 			);
 			productRefGroup = B658FB2D27DA9E0F00EA4DBD /* Products */;
 			projectDirPath = "";
@@ -5205,13 +5208,6 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCLocalSwiftPackageReference section */
-		A073E1292C4B45920081140D /* XCLocalSwiftPackageReference "../Version-Control-Kit" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = "../Version-Control-Kit";
-		};
-/* End XCLocalSwiftPackageReference section */
-
 /* Begin XCRemoteSwiftPackageReference section */
 		200AA21028ED88B30068C7C6 /* XCRemoteSwiftPackageReference "Version-Control-Kit" */ = {
 			isa = XCRemoteSwiftPackageReference;
@@ -5267,6 +5263,14 @@
 			requirement = {
 				kind = exactVersion;
 				version = 1.2.5;
+			};
+		};
+		A073E13A2C4D8B210081140D /* XCRemoteSwiftPackageReference "Version-Control-Kit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AuroraEditor/Version-Control-Kit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.4;
 			};
 		};
 		A0C038682ACF1C1E00DACE3F /* XCRemoteSwiftPackageReference "sentry-cocoa" */ = {
@@ -5329,6 +5333,11 @@
 		};
 		A073E12A2C4B45920081140D /* Version-Control */ = {
 			isa = XCSwiftPackageProductDependency;
+			productName = "Version-Control";
+		};
+		A073E13B2C4D8B210081140D /* Version-Control */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A073E13A2C4D8B210081140D /* XCRemoteSwiftPackageReference "Version-Control-Kit" */;
 			productName = "Version-Control";
 		};
 		A080945C2C34A2B000EDDA59 /* Version-Control */ = {

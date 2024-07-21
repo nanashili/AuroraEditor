@@ -1,5 +1,5 @@
 {
-  "originHash" : "c2e1031cf24a66647ceb66b8a19c4ca5ab18e09db0755a015cac0eca97f7ce44",
+  "originHash" : "b4a09012bca674630f0c9b3cc7f40d56dfb9ec8251442879daa9caf82054c71a",
   "pins" : [
     {
       "identity" : "aeextensionkit",
@@ -116,6 +116,15 @@
       "state" : {
         "revision" : "8dc9148b46fcf93b08ea9d4ef9bdb5e4f700e008",
         "version" : "0.9.0"
+      }
+    },
+    {
+      "identity" : "version-control-kit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/AuroraEditor/Version-Control-Kit",
+      "state" : {
+        "revision" : "95f4f3d7b892ef635f769a89893d552e65e48bdd",
+        "version" : "1.0.4"
       }
     },
     {
