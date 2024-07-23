@@ -23,8 +23,8 @@ struct RenameBranchView: View {
     @State
     var newBranchName: String = "main"
 
-    @ObservedObject
-    private var versionControl: VersionControlModel = .shared
+    @EnvironmentObject
+    private var versionControl: VersionControlModel
 
     @State
     private var ruleErrorMessage: String = ""
@@ -33,7 +33,7 @@ struct RenameBranchView: View {
     private var ruleErrorTypeIsWarning: Bool = false
 
     @State
-    private var hasError: Bool = false
+    private var branchExists: Bool = false
 
     private let debouncer = Debouncer()
 
@@ -60,9 +60,9 @@ struct RenameBranchView: View {
                 Text("To:")
                 TextField("", text: $newBranchName)
                     .onChange(of: newBranchName) { newValue in
-                        hasError = !branchAlreadyExists(branchName: newValue)
+                        branchExists = !branchAlreadyExists(branchName: newValue)
 
-                        if hasError {
+                        if branchExists {
                             // We don't want to call the GitHub API every time a change
                             // happens in the text field so we debounce for half a second
                             // to register that the user has stopped typing before making
@@ -108,9 +108,16 @@ struct RenameBranchView: View {
             .padding([.bottom], 5)
 
             if !ruleErrorMessage.isEmpty {
-                errorMessage(
+                BranchErrorMessageView(
                     isWarning: ruleErrorTypeIsWarning,
-                    message: ruleErrorMessage
+                    errorMessage: ruleErrorMessage
+                )
+            }
+
+            if branchExists {
+                BranchErrorMessageView(
+                    isWarning: false,
+                    errorMessage: "A branch named \(newBranchName) already exists."
                 )
             }
 
@@ -134,7 +141,7 @@ struct RenameBranchView: View {
                     || newBranchName.isEmpty
                     || newBranchName.count < 3
                     || newBranchName.count > 250
-                    || !branchAlreadyExists(branchName: newBranchName) {
+                    || branchExists {
                     Button {} label: {
                         Text("Rename")
                             .foregroundColor(.gray)
@@ -165,22 +172,7 @@ struct RenameBranchView: View {
     }
 
     private func branchAlreadyExists(branchName: String) -> Bool {
-        let doesExist = versionControl.workspaceBranches.contains(where: { $0.name == branchName })
-        return doesExist
-    }
-
-    @ViewBuilder
-    private func errorMessage(isWarning: Bool, message: String) -> some View {
-        HStack {
-            Image(systemName: isWarning ? "exclamationmark.triangle.fill" : "exclamationmark.octagon.fill")
-                .symbolRenderingMode(.multicolor)
-                .accessibilityHidden(true)
-
-            Text(message)
-                .font(.system(size: 11))
-                .lineLimit(2)
-                .multilineTextAlignment(.leading)
-        }
+        return versionControl.workspaceBranches.contains(where: { $0.name == branchName })
     }
 
     @ViewBuilder
@@ -195,9 +187,9 @@ struct RenameBranchView: View {
             AnyView(EmptyView())
         }
 
-        errorMessage(
+        BranchErrorMessageView(
             isWarning: true,
-            message: "A branch named **\(sanitizedName)** already exists on the remote."
+            errorMessage: "A branch named **\(sanitizedName)** already exists on the remote."
         )
     }
 }

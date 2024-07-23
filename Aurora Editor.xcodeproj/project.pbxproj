@@ -550,6 +550,7 @@
 		A073E1392C4D78310081140D /* Debouncer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A073E1382C4D78300081140D /* Debouncer.swift */; };
 		A073E13C2C4D8B210081140D /* Version-Control in Frameworks */ = {isa = PBXBuildFile; productRef = A073E13B2C4D8B210081140D /* Version-Control */; };
 		A07C1CD42AE4518900E8B17D /* NotificationIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07C1CD32AE4518900E8B17D /* NotificationIcon.swift */; };
+		A07E896D2C4E73D900E58D40 /* BranchErrorMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07E896C2C4E73D900E58D40 /* BranchErrorMessageView.swift */; };
 		A080945D2C34A2B000EDDA59 /* Version-Control in Frameworks */ = {isa = PBXBuildFile; productRef = A080945C2C34A2B000EDDA59 /* Version-Control */; };
 		A08E00812AD48C2A0091725D /* LoaderState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08E00802AD48C2A0091725D /* LoaderState.swift */; };
 		A08E00832AD48C740091725D /* Loader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08E00822AD48C740091725D /* Loader.swift */; };
@@ -1195,6 +1196,7 @@
 		A073E1362C4C69FB0081140D /* CommitChangesView+CommitRules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CommitChangesView+CommitRules.swift"; sourceTree = "<group>"; };
 		A073E1382C4D78300081140D /* Debouncer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debouncer.swift; sourceTree = "<group>"; };
 		A07C1CD32AE4518900E8B17D /* NotificationIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationIcon.swift; sourceTree = "<group>"; };
+		A07E896C2C4E73D900E58D40 /* BranchErrorMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BranchErrorMessageView.swift; sourceTree = "<group>"; };
 		A08E00802AD48C2A0091725D /* LoaderState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderState.swift; sourceTree = "<group>"; };
 		A08E00822AD48C740091725D /* Loader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loader.swift; sourceTree = "<group>"; };
 		A08E00842AD48D660091725D /* LoaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderView.swift; sourceTree = "<group>"; };
@@ -1586,6 +1588,7 @@
 				A045C4712C39A900008B5C28 /* Toolbar */,
 				2096A82328CF76D400F6ED39 /* CreateNewBranchView.swift */,
 				207D295C28CCE72F00D31530 /* RenameBranchView.swift */,
+				A07E896C2C4E73D900E58D40 /* BranchErrorMessageView.swift */,
 			);
 			path = Branch;
 			sourceTree = "<group>";
@@ -4305,6 +4308,7 @@
 				2B04574828E6FFE300024F2D /* HighlightThemeSetting.swift in Sources */,
 				2089C57128F015A900FE2155 /* HighlightThemeTrieElement.swift in Sources */,
 				20EBB503280C327C00F3A5DA /* HistoryInspector.swift in Sources */,
+				A07E896D2C4E73D900E58D40 /* BranchErrorMessageView.swift in Sources */,
 				2072FA13280D74ED00C7F8D4 /* HistoryInspectorModel.swift in Sources */,
 				20EBB505280C329800F3A5DA /* HistoryItem.swift in Sources */,
 				20FACFA02AB615E900B09012 /* HStackToggle.swift in Sources */,
