@@ -59,9 +59,10 @@ jobs:
 
       - name: Push to GitHub
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PAT_TOKEN: ${{ secrets.PAT }}
         run: |
           echo "Current branch: $GITHUB_HEAD_REF"
+          git remote set-url origin https://x-access-token:${PAT_TOKEN}@github.com/${{ github.repository }}.git
           if [ -n "$(git status --porcelain)" ]; then
             git add . --all
             git commit -m "Cleaned Up Xcode Project File"
