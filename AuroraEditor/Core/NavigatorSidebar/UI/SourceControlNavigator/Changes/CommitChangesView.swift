@@ -29,7 +29,7 @@ struct CommitChangesView: View {
     var workspace: WorkspaceDocument
 
     @EnvironmentObject
-    private var versionControl: VersionControlModel
+    var versionControl: VersionControlModel
 
     /// Whether to stage all changes.
     @State
@@ -64,9 +64,10 @@ struct CommitChangesView: View {
     // MARK: - Repository GitHub Rule Variables
 
     @State
-    private var repoRulesEnabled: Bool = true
-    @State
-    var repoRuleCommitMessageFailures: RepoRulesMetadataFailures
+    var repoRulesEnabled: Bool = false
+    @State var repoRuleCommitMessageFailures: RepoRulesMetadataFailures
+    @State var repoRuleCommitAuthorFailures: RepoRulesMetadataFailures
+    @State var repoRuleBranchNameFailures: RepoRulesMetadataFailures
 
     /// The view body.
     /// 
@@ -75,6 +76,8 @@ struct CommitChangesView: View {
         self.workspace = workspace
         self.gitClient = workspace.fileSystemClient?.model?.gitClient
         self.repoRuleCommitMessageFailures = RepoRulesMetadataFailures()
+        self.repoRuleCommitAuthorFailures = RepoRulesMetadataFailures()
+        self.repoRuleBranchNameFailures = RepoRulesMetadataFailures()
     }
 
     /// The view body.
@@ -114,12 +117,13 @@ struct CommitChangesView: View {
             .animation(.smooth(), value: height)
 
             CommitButton(
-                summaryText: summaryText,
-                descriptionText: descriptionText,
-                branchName: versionControl.currentWorkspaceBranch,
-                addedCoAuthors: addedCoAuthors,
-                addCoAuthors: addCoAuthors,
-                workspaceFolder: workspace.folderURL
+                workspaceFolder: workspace.folderURL,
+                summaryText: $summaryText,
+                descriptionText: $descriptionText,
+                branchName: $versionControl.currentWorkspaceBranch,
+                addedCoAuthors: $addedCoAuthors,
+                addCoAuthors: $addCoAuthors,
+                repoRuleBranchNameFailures: $repoRuleBranchNameFailures
             )
         }
         .padding(10)
@@ -128,6 +132,10 @@ struct CommitChangesView: View {
         .animation(.easeInOut, value: isExpanded)
         .onAppear {
             suggestions = versionControl.githubRepositoryMentionables
+
+            Task {
+                await updateRepoRuleFailures(forceUpdate: true)
+            }
         }
     }
 
@@ -155,9 +163,9 @@ struct CommitChangesView: View {
 
                 CommitMessageView(
                     workspace: workspace,
-                    summaryText: summaryText,
-                    repoRulesEnabled: repoRulesEnabled,
-                    repoRuleCommitMessageFailures: repoRuleCommitMessageFailures
+                    summaryText: $summaryText,
+                    repoRulesEnabled: $repoRulesEnabled,
+                    repoRuleCommitMessageFailures: $repoRuleCommitMessageFailures
                 )
             }
         }

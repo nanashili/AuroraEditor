@@ -52,7 +52,7 @@ struct CreateNewBranchView: View {
                 Text("To:")
                 TextField("", text: $branchName)
                     .onChange(of: branchName) { newValue in
-                        branchExists = !branchAlreadyExists(branchName: newValue)
+                        branchExists = branchAlreadyExists(branchName: newValue)
                     }
             }
 
@@ -80,7 +80,7 @@ struct CreateNewBranchView: View {
             if branchExists {
                 BranchErrorMessageView(
                     isWarning: false,
-                    errorMessage: "A branch named \(branchName) already exists."
+                    errorMessage: "A branch named **\(branchName)** already exists."
                 )
             }
 

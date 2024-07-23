@@ -10,20 +10,15 @@ import SwiftUI
 
 struct CommitMessageView: View {
 
-    @State
-    var workspace: WorkspaceDocument
+    @State var workspace: WorkspaceDocument
 
-    @State
-    var summaryText: String
+    @Binding var summaryText: String
 
     // MARK: - Repository GitHub Rule Variables
 
-    @State
-    var repoRulesEnabled: Bool
-    @State
-    var repoRuleCommitMessageFailures: RepoRulesMetadataFailures
-    @State
-    private var isRuleFailurePopoverOpen: Bool = false
+    @Binding var repoRulesEnabled: Bool
+    @Binding var repoRuleCommitMessageFailures: RepoRulesMetadataFailures
+    @State private var isRuleFailurePopoverOpen: Bool = false
 
     public var body: some View {
         HStack(spacing: 0) {

@@ -60,6 +60,7 @@ struct RepoBranchRules {
 
                 // there are no relevant rules for this branch name, so return
                 if toCheck.isEmpty {
+                    print("No relevant rules for this branch name")
                     return
                 }
 

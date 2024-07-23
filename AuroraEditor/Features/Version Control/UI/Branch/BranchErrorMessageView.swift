@@ -2,7 +2,7 @@
 //  BranchErrorMessageView.swift
 //  Aurora Editor
 //
-//  Created by Tihan-Nico Paxton on 2024/07/22.
+//  Created by Nanashi Li on 2024/07/22.
 //  Copyright © 2024 Aurora Company. All rights reserved.
 //
 

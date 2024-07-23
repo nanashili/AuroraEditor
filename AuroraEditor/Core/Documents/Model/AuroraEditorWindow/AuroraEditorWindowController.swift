@@ -95,6 +95,7 @@ final class AuroraEditorWindowController: NSWindowController, ObservableObject {
         // Workspace (Main Content)
         let workspaceView = WorkspaceView()
             .environmentObject(workspace)
+            .environmentObject(versionControl)
         let workspaceViewController = NSHostingController(
             rootView: workspaceView
         )

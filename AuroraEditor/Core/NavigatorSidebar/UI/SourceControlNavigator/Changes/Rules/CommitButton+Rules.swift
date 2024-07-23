@@ -8,8 +8,10 @@
 
 import Foundation
 import SwiftUI
+import Version_Control
 
 extension CommitButton {
+
     @ViewBuilder
     internal func renderBranchProtectionsRepoRulesCommitWarning() -> some View { // swiftlint:disable:this function_body_length line_length
         let repoRuleWarningToDisplay = determineRepoRuleWarningToDisplay()
@@ -185,16 +187,19 @@ One or more rules apply to the branch **\(branchName)** that
         return canBypass
     }
 
-    private func hasRepoRuleFailure() -> Bool {
+    /// Whether the user will be prevented from pushing this commit due to a repo rule failure.
+    internal func hasRepoRuleFailure() {
         if !repoRulesEnabled {
-            return false
+            hasFailedRules = false
         }
 
-        return repoRulesInfo?.basicCommitWarning == .enforced(true) ||
-        repoRulesInfo?.signedCommitsRequired == .enforced(true) ||
-        repoRulesInfo?.pullRequestRequired == .enforced(true) ||
-        (aheadBehind == nil && repoRulesInfo?.creationRestricted == .enforced(true) ||
-         repoRuleBranchNameFailures.status == .fail)
+        let result = (repoRulesInfo?.basicCommitWarning == .enforced(true) ||
+                      repoRulesInfo?.signedCommitsRequired == .enforced(true) ||
+                      repoRulesInfo?.pullRequestRequired == .enforced(true) ||
+                      (aheadBehind == nil && (repoRulesInfo?.creationRestricted == .enforced(true) ||
+                                              repoRuleBranchNameFailures.status == .fail)))
+
+        hasFailedRules = result
     }
 
     /// If true, then rules exist for the branch but the user is bypassing all of them.

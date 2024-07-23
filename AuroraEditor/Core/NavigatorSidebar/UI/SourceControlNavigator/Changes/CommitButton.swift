@@ -18,50 +18,27 @@ enum WarningToDisplay: String {
 
 struct CommitButton: View {
 
-    @State
-    var summaryText: String
-
-    @State
-    var descriptionText: String
-
-    @State
-    var branchName: String
-
-    @State
-    var commitToAmend: Commit?
-
-    @State
-    var showNoWriteAccess: Bool = false
-
-    @State
-    var showBranchProtected: Bool = false
-
-    @State
-    var repoRulesInfo: RepoRulesInfo?
-
-    @State
-    var aheadBehind: IAheadBehind?
-
-    @State
-    var repoRuleBranchNameFailures: RepoRulesMetadataFailures = RepoRulesMetadataFailures()
-
-    @State
-    var repoRulesEnabled: Bool = false
-
-    @State
-    var isCommitting: Bool = false
-
-    @State
-    var addedCoAuthors: String
-
-    @State
-    var addCoAuthors: Bool
-
-    @State
     var workspaceFolder: URL
 
+    @Binding var summaryText: String
+    @Binding var descriptionText: String
+    @Binding var branchName: String
+    @Binding var addedCoAuthors: String
+    @Binding var addCoAuthors: Bool
+    @Binding var repoRuleBranchNameFailures: RepoRulesMetadataFailures
+
+    @State var hasFailedRules: Bool = false
+    @State var commitToAmend: Commit?
+    @State var showNoWriteAccess: Bool = false
+    @State var showBranchProtected: Bool = false
+    @State var repoRulesInfo: RepoRulesInfo?
+    @State var aheadBehind: IAheadBehind?
+    @State var repoRulesEnabled: Bool = false
+    @State var isCommitting: Bool = false
+    @State var shouldDisableCommit = false
+
     @EnvironmentObject
-    private var versionControl: VersionControlModel
+    var versionControl: VersionControlModel
 
     var body: some View {
         VStack {
@@ -97,8 +74,11 @@ struct CommitButton: View {
             Spacer()
         }
         .buttonStyle(.borderedProminent)
-        .frame(width: .infinity)
-        .disabled(buttonEnabled)
+        .frame(maxWidth: .infinity)
+        .disabled(!buttonEnabled)
+        .onChange(of: summaryText) { _ in
+            hasRepoRuleFailure()
+        }
     }
 
     @ViewBuilder
@@ -176,11 +156,13 @@ Your changes will modify your **most recent commit**\n
     }
 
     private func canCommit() -> Bool {
-        return summaryText.isEmpty
+        return !summaryText.isEmpty && !hasFailedRules
     }
 
     private func canAmend() -> Bool {
-        return commitToAmend != nil && summaryText.isEmpty
+        return commitToAmend != nil
+        && !summaryText.isEmpty
+        && !hasFailedRules
     }
 
     /// Commits the changes.
@@ -188,10 +170,31 @@ Your changes will modify your **most recent commit**\n
         if shouldWarnForRepoRuleBypass() &&
             versionControl.workspaceProvider == .github &&
             !branchName.isEmpty {
-            // TODO: showRepoRulesCommitBypassWarning sheet
-
+            showRepoRulesCommitBypassWarning()
         } else {
             createCommit()
+        }
+    }
+
+    private func showRepoRulesCommitBypassWarning() {
+        let alert = NSAlert()
+        alert.messageText = "Bypass Repository Rules"
+        alert.informativeText = "This commit will bypass one or more repository rules for \(versionControl.currentWorkspaceBranch). Are you sure you want to continue?" // swiftlint:disable:this line_length
+        alert.alertStyle = .critical
+        alert.addButton(withTitle: "Bypass Rules and Commit")
+        alert.addButton(withTitle: "Cancel")
+
+        if let window = NSApplication.shared.mainWindow {
+            alert.beginSheetModal(for: window) { response in
+                if response == .alertFirstButtonReturn {
+                    self.createCommit()
+                }
+            }
+        } else {
+            let response = alert.runModal()
+            if response == .alertFirstButtonReturn {
+                createCommit()
+            }
         }
     }
 

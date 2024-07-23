@@ -60,7 +60,7 @@ struct RenameBranchView: View {
                 Text("To:")
                 TextField("", text: $newBranchName)
                     .onChange(of: newBranchName) { newValue in
-                        branchExists = !branchAlreadyExists(branchName: newValue)
+                        branchExists = branchAlreadyExists(branchName: newValue)
 
                         if branchExists {
                             // We don't want to call the GitHub API every time a change
@@ -117,7 +117,7 @@ struct RenameBranchView: View {
             if branchExists {
                 BranchErrorMessageView(
                     isWarning: false,
-                    errorMessage: "A branch named \(newBranchName) already exists."
+                    errorMessage: "A branch named **\(newBranchName)** already exists."
                 )
             }
 

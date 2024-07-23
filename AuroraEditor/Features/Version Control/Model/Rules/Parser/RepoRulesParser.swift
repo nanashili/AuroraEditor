@@ -14,6 +14,18 @@ import Foundation
 /// encapsulated by the `RepoRulesInfo` structure.
 struct RepoRulesParser {
 
+    /// Returns whether repo rules could potentially exist for the provided account and repository.
+    /// This only performs client-side checks, such as whether the user is on a free plan
+    /// and the repo is public.
+    public func useRepoRulesLogic(versionControl: VersionControlModel) -> Bool {
+        if versionControl.workspaceProvider != .github {
+            return false
+        }
+
+        // TODO: We need to check the users plan, login and if the repo is private
+        return true
+    }
+
     /// Parses the given repository rules and their associated rulesets into a `RepoRulesInfo` object.
     ///
     /// - Parameters:

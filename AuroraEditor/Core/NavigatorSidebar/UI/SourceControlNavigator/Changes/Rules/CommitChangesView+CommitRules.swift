@@ -10,8 +10,26 @@ import Version_Control
 
 extension CommitChangesView {
 
-    internal func updateRepoRulesCommitMessageFailues(
-        forceUpdate: Bool
+    internal func updateRepoRuleFailures(
+        forceUpdate: Bool = false
+    ) async {
+        if forceUpdate {
+            repoRulesEnabled = RepoRulesParser().useRepoRulesLogic(
+                versionControl: versionControl
+            )
+        }
+
+        if !repoRulesEnabled {
+            return
+        }
+
+        updateRepoRulesCommitMessageFailues(forceUpdate: forceUpdate)
+        updateRepoRulesCommitAuthorFailures(forceUpdate: forceUpdate)
+        updateRepoRulesBranchNameFailures(forceUpdate: forceUpdate)
+    }
+
+    private func updateRepoRulesCommitMessageFailues(
+        forceUpdate: Bool = false
     ) {
         if forceUpdate {
             let commitContext: CommitContext = CommitContext(
@@ -35,6 +53,41 @@ extension CommitChangesView {
             }
 
             repoRuleCommitMessageFailures = failures
+        }
+    }
+
+    private func updateRepoRulesCommitAuthorFailures(
+        forceUpdate: Bool = false
+    ) {
+        if forceUpdate {
+            let email = versionControl.workspaceEmail
+            var failures: RepoRulesMetadataFailures
+
+            if email.isEmpty {
+                failures = RepoRulesMetadataFailures()
+            } else {
+                failures = repoRulesInfo?.commitAuthorEmailPatterns.getFailedRules(email) ?? RepoRulesMetadataFailures()
+            }
+
+            repoRuleCommitAuthorFailures = failures
+        }
+    }
+
+    private func updateRepoRulesBranchNameFailures(
+        forceUpdate: Bool = false
+    ) {
+        if forceUpdate {
+            let branch = versionControl.currentWorkspaceBranch
+            var failures: RepoRulesMetadataFailures
+
+            if branch.isEmpty {
+                failures = RepoRulesMetadataFailures()
+            } else {
+                failures = repoRulesInfo?.branchNamePatterns.getFailedRules(branch)
+                ?? RepoRulesMetadataFailures()
+            }
+
+            repoRuleBranchNameFailures = failures
         }
     }
 }
