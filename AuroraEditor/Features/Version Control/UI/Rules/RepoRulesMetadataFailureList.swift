@@ -22,8 +22,8 @@ struct RepoRulesMetadataFailureList: View {
     var leadingText: String
 
     /// The shared version control model.
-    @StateObject
-    private var versionControl: VersionControlModel = .shared
+    @EnvironmentObject
+    private var versionControl: VersionControlModel
 
     var body: some View {
         VStack(

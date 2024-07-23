@@ -60,8 +60,8 @@ struct CommitButton: View {
     @State
     var workspaceFolder: URL
 
-    @ObservedObject
-    private var versionControl: VersionControlModel = .shared
+    @EnvironmentObject
+    private var versionControl: VersionControlModel
 
     var body: some View {
         VStack {

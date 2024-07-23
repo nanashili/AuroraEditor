@@ -21,8 +21,8 @@ struct BranchCell: View {
     @State
     var branch: GitBranch
 
-    @ObservedObject
-    private var versionControl: VersionControlModel = .shared
+    @EnvironmentObject
+    private var versionControl: VersionControlModel
 
     @ObservedObject
     private var workspace: WorkspaceDocument

@@ -74,6 +74,7 @@ final class AuroraEditorWindowController: NSWindowController, ObservableObject {
         // Navigator Sidebar
         let navigatorView = NavigatorSidebar()
             .environmentObject(workspace)
+            .environmentObject(versionControl)
         let navigationViewController = NSHostingController(
             rootView: navigatorView
         )

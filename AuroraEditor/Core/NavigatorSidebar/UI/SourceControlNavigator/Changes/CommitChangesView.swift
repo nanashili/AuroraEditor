@@ -28,8 +28,8 @@ struct CommitChangesView: View {
     @State
     var workspace: WorkspaceDocument
 
-    @ObservedObject
-    private var versionControl: VersionControlModel = .shared
+    @EnvironmentObject
+    private var versionControl: VersionControlModel
 
     /// Whether to stage all changes.
     @State
@@ -92,8 +92,7 @@ struct CommitChangesView: View {
                         addedCoAuthors: $addedCoAuthors,
                         suggestions: $suggestions,
                         showSuggestions: $showSuggestions,
-                        filteredSuggestions: $filteredSuggestions,
-                        versionControl: versionControl
+                        filteredSuggestions: $filteredSuggestions
                     )
                     .onDisappear {
                         addedCoAuthors = ""

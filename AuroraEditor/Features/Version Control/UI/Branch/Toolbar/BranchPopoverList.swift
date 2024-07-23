@@ -13,8 +13,8 @@ import Version_Control
 struct BranchPopoverList: View {
     // MARK: - Properties
 
-    @ObservedObject
-    var versionControl: VersionControlModel = .shared
+    @EnvironmentObject
+    var versionControl: VersionControlModel
 
     @ObservedObject
     var workspace: WorkspaceDocument

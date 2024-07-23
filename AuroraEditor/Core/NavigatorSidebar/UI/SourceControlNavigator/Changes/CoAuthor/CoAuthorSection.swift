@@ -14,6 +14,8 @@ struct CoAuthorSection: View {
     @Binding var suggestions: [IAPIMentionableUser]
     @Binding var showSuggestions: Bool
     @Binding var filteredSuggestions: [IAPIMentionableUser]
+
+    @EnvironmentObject
     var versionControl: VersionControlModel
 
     var body: some View {
