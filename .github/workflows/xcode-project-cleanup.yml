@@ -17,7 +17,7 @@ jobs:
     env:
       xcodeproj: "Aurora Editor.xcodeproj/project.pbxproj"
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Check if we need to empty DEVELOPMENT_TEAM.
         id: needs-removal
@@ -54,10 +54,12 @@ jobs:
 
       - name: Setup GitHub Environment
         run: |
-          git config --global user.name '${{github.actor}}'
-          git config --global user.email '${{github.actor}}@users.noreply.github.com'
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
 
       - name: Push to GitHub
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           echo "Current branch: $GITHUB_HEAD_REF"
           if [ -n "$(git status --porcelain)" ]; then
