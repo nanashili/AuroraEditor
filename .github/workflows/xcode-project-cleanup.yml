@@ -59,7 +59,7 @@ jobs:
 
       - name: Push to GitHub
         env:
-          PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
+          PAT_TOKEN: ${{ secrets.PAT }}
         run: |
           echo "Current branch: $GITHUB_HEAD_REF"
           git remote set-url origin https://x-access-token:${PAT_TOKEN}@github.com/${{ github.repository }}.git
