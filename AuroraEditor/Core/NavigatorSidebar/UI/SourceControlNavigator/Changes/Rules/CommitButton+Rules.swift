@@ -36,10 +36,6 @@ extension CommitButton {
             )
         } else if showBranchProtected {
             if branchName.isEmpty {
-                // If the branch is empty that means we haven't loaded the tip yet or
-                // we're on a detached head. We shouldn't ever end up here with
-                // showBranchProtected being true without a branch but who knows
-                // what fun and exciting edge cases the future might hold
                 EmptyView()
             }
 

@@ -9,8 +9,11 @@
 import Version_Control
 import ObjectiveC
 import SwiftUI
+import OSLog
 
 struct RepoBranchRules {
+
+    let logger = Logger(subsystem: "com.auroraeditor", category: "RepoBranchRules")
 
     /// Checks repo rules to see if the provided branch name is valid for the
     /// current user and repository. The "get all rules for a branch" endpoint
@@ -32,7 +35,7 @@ struct RepoBranchRules {
         let splitRepository = versionControl.repository.split(separator: "/")
 
         guard splitRepository.count == 2 else {
-            print("Error: Repository string is not in the expected format 'owner/name'.")
+            logger.error("Error: Repository string is not in the expected format 'owner/name'.")
             return
         }
 
@@ -60,7 +63,7 @@ struct RepoBranchRules {
 
                 // there are no relevant rules for this branch name, so return
                 if toCheck.isEmpty {
-                    print("No relevant rules for this branch name")
+                    logger.debug("No relevant rules for this branch name")
                     return
                 }
 
@@ -70,16 +73,12 @@ struct RepoBranchRules {
                     workspaceURL: workspaceURL
                 )
 
-                print("Parsed Rules: \(parsedRules)")
-
                 // Make sure user branch name hasn't changed during parsing of repo rules
                 if versionControl.currentWorkspaceBranch != branchName {
                     return
                 }
 
                 let failedRules = parsedRules.branchNamePatterns.getFailedRules(branchName)
-
-                print("Failed Rules: \(failedRules)")
 
                 // Only possible kind of failures is branch name pattern failures and creation restriction
                 if parsedRules.creationRestricted != .enforced(true) && failedRules.status == .pass {
@@ -98,11 +97,9 @@ struct RepoBranchRules {
                 }
 
                 if cannotBypass {
-                    print("Failed Rules: Can not bypass")
                     ruleErrorMessage.wrappedValue = "Branch name \(branchName) is restricted by repo rules."
                     ruleErrorIsWarning.wrappedValue = false
                 } else {
-                    print("Failed Rules: Can bypass")
                     ruleErrorMessage.wrappedValue = "Branch name \(branchName) is restricted by repo rules, but you can bypass them. Proceed with caution!"
                     ruleErrorIsWarning.wrappedValue = true
                 }
