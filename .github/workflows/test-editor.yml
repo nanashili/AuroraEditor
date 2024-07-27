@@ -10,8 +10,13 @@ concurrency:
 jobs:
   tests:
     runs-on: self-hosted
-    timeout-minutes: 10 # If a action exceeds 10 mins, it probably isn't ever going to complete.
+    timeout-minutes: 10 # If an action exceeds 10 mins, it probably isn't ever going to complete.
     steps:
+      - name: Fetch Xcode Project Packages
+        run: |
+          xcodebuild -resolvePackageDependencies \
+          -workspace "Aurora Editor.xcworkspace"
+          
       - uses: actions/checkout@v3
 
       - name: Runner environment
@@ -31,3 +36,10 @@ jobs:
           CODE_SIGN_IDENTITY="" \
           CODE_SIGNING_REQUIRED=NO \
           test
+
+      - name: Clean up
+        if: always()
+        run: |
+          echo "Cleaning up derived data"
+          rm -rf ~/Library/Developer/Xcode/DerivedData/*
+          echo "Clean up complete"
