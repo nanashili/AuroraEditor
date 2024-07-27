@@ -15,8 +15,8 @@ jobs:
       - name: Clean up
         if: always()
         run: |
-          echo "Cleaning up derived data"
-          rm -rf ~/Library/Developer/Xcode/DerivedData/*
+          echo "Cleaning up Swift package cache"
+          rm -rf ~/Library/Caches/org.swift.swiftpm/*
           echo "Clean up complete"
 
       - uses: actions/checkout@v3
