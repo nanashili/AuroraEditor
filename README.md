@@ -8,7 +8,10 @@
 
 Aurora Editor is an innovative Integrated Development Environment (IDE) meticulously crafted in Swift, designed to deliver exceptional native performance on macOS. Envision all the capabilities of Xcode, but enhanced with multi-language support, seamless Git integration, and a suite of your favorite built-in development tools. Aurora Editor is built by the community, for the community, aiming to be the go-to choice for developers seeking a robust and efficient coding environment.
 
+<!--
 <img width="1012" alt="github-banner" src="https://user-images.githubusercontent.com/63672227/187914690-2277654c-6cab-4738-b151-1c85947bea8b.jpg">
+-->
+<img width="1112" alt="image" src="https://github.com/user-attachments/assets/b4bb371f-381b-4044-9531-64d09c334ca8">
 
 ## 🚀 Why Choose Aurora Editor?
 
