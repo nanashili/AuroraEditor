@@ -36,9 +36,6 @@ struct GeneralPreferences: Codable, FetchableRecord, PersistableRecord, Database
     /// The style for file icons
     public var fileIconStyle: FileIconStyle = .color
 
-    /// Choose between native-styled tab bar and Xcode-liked tab bar.
-    public var tabBarStyle: TabBarStyle = .xcode
-
     /// Choose between Xcode-like and VSCode-like sidebar mode selection
     public var sidebarStyle: SidebarStyle = .xcode
 
@@ -166,17 +163,6 @@ enum FileIconStyle: String, Codable, FetchableRecord, PersistableRecord {
     case color
     /// File icons appear monochromatic
     case monochrome
-}
-
-/// The style for tab bar
-/// - **native**: Native-styled tab bar (like Finder)
-/// - **xcode**: Xcode-liked tab bar
-enum TabBarStyle: String, Codable, FetchableRecord, PersistableRecord {
-    /// Native-styled tab bar (like Finder)
-    case native
-
-    /// Xcode-liked tab bar
-    case xcode
 }
 
 /// The style for the sidebar's mode selection
