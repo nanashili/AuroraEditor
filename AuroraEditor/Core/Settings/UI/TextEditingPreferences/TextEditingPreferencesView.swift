@@ -31,6 +31,17 @@ public struct TextEditingPreferencesView: View {
     public var body: some View {
         PreferencesContent {
             GroupBox {
+                floatingStatusBar()
+                    .padding(.horizontal)
+
+                Divider()
+
+                if prefs.preferences.textEditing.showFloatingStatusBar {
+                    hideFloatingStatusBarAfter()
+                        .padding(.horizontal)
+                    Divider()
+                }
+
                 HStack {
                     Text("settings.text.editing.tab.width")
                     Spacer()
@@ -45,7 +56,6 @@ public struct TextEditingPreferencesView: View {
                         Text("spaces")
                     }
                 }
-                .padding(.top, 5)
                 .padding(.horizontal)
 
                 Divider()
@@ -78,6 +88,43 @@ public struct TextEditingPreferencesView: View {
                 enableTypeOverCompletion
                     .padding(.horizontal)
             }
+        }
+    }
+
+    private func floatingStatusBar() -> some View {
+        HStack {
+            Text("Show Floating Status Bar")
+            Spacer()
+            Toggle("", isOn: $prefs.preferences.textEditing.showFloatingStatusBar)
+                .toggleStyle(.switch)
+                .labelsHidden()
+        }
+    }
+
+    private func hideFloatingStatusBarAfter() -> some View {
+        HStack {
+            Text("Hide Floating Status Bar After (seconds):")
+            Spacer()
+            Picker(
+                "",
+                selection: $prefs.preferences.textEditing.hideFloatingStatusBarAfter
+            ) {
+                ForEach(
+                    Array(
+                        stride(
+                            from: 10,
+                            through: 60,
+                            by: 10
+                        )
+                    ),
+                    id: \.self
+                ) { second in
+                    Text("\(second) sec").tag(second)
+                }
+                Text("Never").tag(0)
+            }
+            .pickerStyle(.automatic)
+            .frame(maxWidth: 100)
         }
     }
 

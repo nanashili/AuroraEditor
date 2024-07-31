@@ -502,6 +502,7 @@
 		93F0066928A757670038E5B7 /* FileSystemClient+FileIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F0066828A757670038E5B7 /* FileSystemClient+FileIndex.swift */; };
 		93F73D0D28A0D9FD00E67DDE /* WorkspaceDocument+Tabs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F73D0C28A0D9FD00E67DDE /* WorkspaceDocument+Tabs.swift */; };
 		9C3E1A07284E8E020042BEC0 /* WelcomeModuleExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C3E1A06284E8E020042BEC0 /* WelcomeModuleExtensions.swift */; };
+		A00C30542C5AE46E00FAE685 /* StatusBarFloatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00C30532C5AE46E00FAE685 /* StatusBarFloatingView.swift */; };
 		A0142EF62ACB4E490002F95D /* UpdateEditorRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0142EF52ACB4E490002F95D /* UpdateEditorRepository.swift */; };
 		A0142EFE2ACB64AA0002F95D /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = A0142EFD2ACB64AA0002F95D /* ZIPFoundation */; };
 		A0142F012ACB6AC90002F95D /* UpdateLoadingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0142F002ACB6AC90002F95D /* UpdateLoadingState.swift */; };
@@ -1154,6 +1155,7 @@
 		93F0066828A757670038E5B7 /* FileSystemClient+FileIndex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileSystemClient+FileIndex.swift"; sourceTree = "<group>"; };
 		93F73D0C28A0D9FD00E67DDE /* WorkspaceDocument+Tabs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WorkspaceDocument+Tabs.swift"; sourceTree = "<group>"; };
 		9C3E1A06284E8E020042BEC0 /* WelcomeModuleExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeModuleExtensions.swift; sourceTree = "<group>"; };
+		A00C30532C5AE46E00FAE685 /* StatusBarFloatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarFloatingView.swift; sourceTree = "<group>"; };
 		A0142EF52ACB4E490002F95D /* UpdateEditorRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateEditorRepository.swift; sourceTree = "<group>"; };
 		A0142F002ACB6AC90002F95D /* UpdateLoadingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateLoadingState.swift; sourceTree = "<group>"; };
 		A0142F022ACB6ADF0002F95D /* UpdateErrorState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateErrorState.swift; sourceTree = "<group>"; };
@@ -1844,6 +1846,7 @@
 		20D83721289A7ACD00D91D05 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				A00C30532C5AE46E00FAE685 /* StatusBarFloatingView.swift */,
 				20D8372B289A7ACD00D91D05 /* StatusBarDrawer */,
 				20D83723289A7ACD00D91D05 /* StatusBarItems */,
 				20D83722289A7ACD00D91D05 /* StatusBar.swift */,
@@ -4503,6 +4506,7 @@
 				2093CDCC289AA4F4003A88DD /* StatusBarTabType.swift in Sources */,
 				2093CC95289A9FF5003A88DD /* StatusBarToggleDrawerButton.swift in Sources */,
 				934D2F0828C4EC7E0034E5C8 /* StatusItem.swift in Sources */,
+				A00C30542C5AE46E00FAE685 /* StatusBarFloatingView.swift in Sources */,
 				D7E201AE27E8B3C000CB86D0 /* String+Ranges.swift in Sources */,
 				20212683289BF84B00246DD7 /* String.swift in Sources */,
 				2093CDD2289AA507003A88DD /* SwiftTerm+Color+Init.swift in Sources */,

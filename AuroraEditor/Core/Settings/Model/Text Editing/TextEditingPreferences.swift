@@ -20,6 +20,12 @@ struct TextEditingPreferences: Codable, FetchableRecord, PersistableRecord, Data
     /// Indicates whether or not to show scopes
     public var showScopes: Bool = false
 
+    /// A boolean that allows enabling or disabling floating status bar
+    public var showFloatingStatusBar: Bool = true
+
+    /// An integer that allows hiding the floating status bar after a set time
+    public var hideFloatingStatusBarAfter: Int = 0
+
     /// Indicates whether or not to enable type over completion
     public var enableTypeOverCompletion: Bool = true
 

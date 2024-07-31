@@ -112,78 +112,90 @@ public struct CodeEditorViewWrapper: View {
 
     /// The view body
     public var body: some View {
-        AuroraEditorSourceEditor(
-            $codeFile.content,
-            language: getLanguage(),
-            theme: editorTheme,
-            font: font,
-            tabWidth: 4, // TODO: Add this in settings
-            indentOption: .spaces(count: 4), // TODO: Add this in settings
-            lineHeight: 1.45, // TODO: Add this in settings
-            wrapLines: true, // TODO: Add this in settings
-            cursorPositions: $cursorPosition,
-            useThemeBackground: true,
-            highlightProvider: nil,
-            isSyntaxHighlightingDisabled: isSyntaxHighlightingDisabled,
-            contentInsets: nil, // TODO: Add this in settings
-            isEditable: true,
-            letterSpacing: 1, // TODO: Add this in settings
-            bracketPairHighlight: nil,
-            undoManager: undoManager,
-            coordinators: []
-        )
-        .onAppear {
-            self.editorTheme = ThemeModel.shared
-                .getTheme(theme, with: colorScheme == .dark ? .darkAqua : .aqua)
-                .editorTheme()
-        }
-        .onChange(of: colorScheme) { value in
-            logger.debug("Color scheme did change.")
-            switch value {
-            case .dark:
+        ZStack {
+            AuroraEditorSourceEditor(
+                $codeFile.content,
+                language: getLanguage(),
+                theme: editorTheme,
+                font: font,
+                tabWidth: 4, // TODO: Add this in settings
+                indentOption: .spaces(count: 4), // TODO: Add this in settings
+                lineHeight: 1.45, // TODO: Add this in settings
+                wrapLines: true, // TODO: Add this in settings
+                cursorPositions: $cursorPosition,
+                useThemeBackground: true,
+                highlightProvider: nil,
+                isSyntaxHighlightingDisabled: isSyntaxHighlightingDisabled,
+                contentInsets: nil, // TODO: Add this in settings
+                isEditable: true,
+                letterSpacing: 1, // TODO: Add this in settings
+                bracketPairHighlight: nil,
+                undoManager: undoManager,
+                coordinators: []
+            )
+            .onAppear {
                 self.editorTheme = ThemeModel.shared
-                    .getTheme(theme, with: value == .dark ? .darkAqua : .aqua)
+                    .getTheme(theme, with: colorScheme == .dark ? .darkAqua : .aqua)
                     .editorTheme()
-            case .light:
-                self.editorTheme = ThemeModel.shared
-                    .getTheme(theme, with: value == .dark ? .darkAqua : .aqua)
-                    .editorTheme()
-            @unknown default:
-                break
             }
-        }
-        .onChange(of: themeModel.selectedTheme, perform: { newTheme in
-            logger.debug("Theme did change")
-            guard let newTheme = newTheme else { return }
-            self.theme = newTheme
-            self.editorTheme = newTheme.editorTheme()
-        })
-        .onChange(of: cursorPosition) { newValue in
-            logger.debug("Did change caret position")
-            if !newValue.isEmpty {
-                self.workspace.data.caretPos = .init(
-                    line: newValue[0].line,
-                    column: newValue[0].column
+            .onChange(of: colorScheme) { value in
+                logger.debug("Color scheme did change.")
+                switch value {
+                case .dark:
+                    self.editorTheme = ThemeModel.shared
+                        .getTheme(theme, with: value == .dark ? .darkAqua : .aqua)
+                        .editorTheme()
+                case .light:
+                    self.editorTheme = ThemeModel.shared
+                        .getTheme(theme, with: value == .dark ? .darkAqua : .aqua)
+                        .editorTheme()
+                @unknown default:
+                    break
+                }
+            }
+            .onChange(of: themeModel.selectedTheme, perform: { newTheme in
+                logger.debug("Theme did change")
+                guard let newTheme = newTheme else { return }
+                self.theme = newTheme
+                self.editorTheme = newTheme.editorTheme()
+            })
+            .onChange(of: cursorPosition) { newValue in
+                logger.debug("Did change caret position")
+                if !newValue.isEmpty {
+                    self.workspace.data.caretPos = .init(
+                        line: newValue[0].line,
+                        column: newValue[0].column
+                    )
+                }
+            }
+            .onChange(of: codeFile.content) { _ in
+                logger.debug("File contents did changed")
+                NotificationCenter.default.post(
+                    name: .didBeginEditing,
+                    object: $codeFile,
+                    userInfo: [:]
+                )
+
+                ExtensionsManager.shared.sendEvent(
+                    event: "didBeginEditing",
+                    parameters: [
+                        "workspace": String(workspace.fileURL?.relativeString ?? "Unknown"),
+                        "file": String(codeFile.fileURL?.relativeString ?? "Unknown"),
+                        "contents": codeFile.content,
+                        "isEdited": codeFile.isDocumentEdited
+                    ]
                 )
             }
-        }
-        .onChange(of: codeFile.content) { _ in
-            logger.debug("File contents did changed")
-            NotificationCenter.default.post(
-                name: .didBeginEditing,
-                object: $codeFile,
-                userInfo: [:]
-            )
 
-            ExtensionsManager.shared.sendEvent(
-                event: "didBeginEditing",
-                parameters: [
-                    "workspace": String(workspace.fileURL?.relativeString ?? "Unknown"),
-                    "file": String(codeFile.fileURL?.relativeString ?? "Unknown"),
-                    "contents": codeFile.content,
-                    "isEdited": codeFile.isDocumentEdited
-                ]
-            )
+            if prefs.preferences.textEditing.showFloatingStatusBar {
+                VStack {
+                    Spacer()
+                    HStack {
+                        Spacer()
+                        StatusBarFloatingView()
+                    }
+                }
+            }
         }
     }
 

@@ -15,26 +15,15 @@ internal struct StatusBarCursorLocationLabel: View {
     @Environment(\.controlActiveState)
     private var controlActive
 
-    /// The model of the status bar.
-    @ObservedObject
-    private var model: StatusBarModel
-
     /// The workspace document.
     @EnvironmentObject
     private var workspace: WorkspaceDocument
 
-    /// Initialize with model.
-    /// 
-    /// - Parameter model: The statusbar model.
-    internal init(model: StatusBarModel) {
-        self.model = model
-    }
-
     /// The view body.
     internal var body: some View {
-        Text("Line: \(workspace.data.caretPos.line)  Col: \(workspace.data.caretPos.column)")
-            .font(model.toolbarFont)
-            .foregroundColor(foregroundColor)
+        Text("Ln: \(workspace.data.caretPos.line)  Col: \(workspace.data.caretPos.column)")
+            .font(.system(size: 11))
+            .foregroundColor(.secondary)
             .fixedSize()
             .lineLimit(1)
             .onHover { isHovering($0) }

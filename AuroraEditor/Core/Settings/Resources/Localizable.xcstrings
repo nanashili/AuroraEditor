@@ -81,6 +81,9 @@
         }
       }
     },
+    "%lld sec" : {
+
+    },
     "%lld Spaces" : {
 
     },
@@ -5822,13 +5825,13 @@
     "Help" : {
 
     },
-    "Hi" : {
-
-    },
     "Hide" : {
 
     },
     "Hide Details" : {
+
+    },
+    "Hide Floating Status Bar After (seconds):" : {
 
     },
     "History" : {
@@ -5921,18 +5924,18 @@
     "Line Endings" : {
 
     },
-    "Line: %lld  Col: %lld" : {
+    "List View" : {
+
+    },
+    "Ln: %lld  Col: %lld" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "Line: %1$lld  Col: %2$lld"
+            "value" : "Ln: %1$lld  Col: %2$lld"
           }
         }
       }
-    },
-    "List View" : {
-
     },
     "Loading" : {
       "comment" : "Loading"
@@ -5992,6 +5995,9 @@
 
     },
     "Needs Implementation" : {
+
+    },
+    "Never" : {
 
     },
     "New Branch from \"%@\"..." : {
@@ -44029,6 +44035,9 @@
     "Show Details" : {
 
     },
+    "Show Floating Status Bar" : {
+
+    },
     "Show in Finder" : {
 
     },
@@ -44135,9 +44144,6 @@
 
     },
     "Tap for information about ideal commit summary length" : {
-
-    },
-    "Test" : {
 
     },
     "Text" : {
@@ -46291,9 +46297,6 @@
 
     },
     "What's New" : {
-
-    },
-    "Whats up?" : {
 
     },
     "Which area are you seeing an issue with?" : {

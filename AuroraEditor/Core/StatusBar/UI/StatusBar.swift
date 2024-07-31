@@ -31,6 +31,9 @@ public struct StatusBarView: View {
     @EnvironmentObject
     private var workspace: WorkspaceDocument
 
+    @ObservedObject
+    private var prefs: AppPreferencesModel = .shared
+
     /// Initialize with model
     /// 
     /// - Parameter model: The statusbar model
@@ -70,10 +73,12 @@ public struct StatusBarView: View {
                 if let selectedId = workspace.selectionState.selectedId,
                    selectedId.id.contains("codeEditor_") {
                     StatusBarBracketCountLabel(model: model)
-                    StatusBarCursorLocationLabel(model: model)
-                    StatusBarIndentSelector(model: model)
-                    StatusBarEncodingSelector(model: model)
-                    StatusBarLineEndSelector(model: model)
+                    if !prefs.preferences.textEditing.showFloatingStatusBar {
+                        StatusBarCursorLocationLabel()
+                        StatusBarIndentSelector()
+                        StatusBarEncodingSelector()
+                        StatusBarLineEndSelector()
+                    }
                     StatusBarToggleDrawerButton(model: model)
                 }
             }

@@ -47,6 +47,32 @@ struct AppPreferencesDatabase { // swiftlint:disable:this convenience_type type_
             }
         }
 
+        migrator.registerMigration("0.3") { database in
+            if !columnExists(
+                in: database,
+                tableName: TextEditingPreferences.databaseTableName,
+                columnName: "showFloatingStatusBar"
+            ) {
+                try database.alter(table: TextEditingPreferences.databaseTableName) { table in
+                    table.add(column: "showFloatingStatusBar", .boolean).defaults(
+                        to: true
+                    )
+                }
+            }
+
+            if !columnExists(
+                in: database,
+                tableName: TextEditingPreferences.databaseTableName,
+                columnName: "hideFloatingStatusBarAfter"
+            ) {
+                try database.alter(table: TextEditingPreferences.databaseTableName) { table in
+                    table.add(column: "hideFloatingStatusBarAfter", .integer).defaults(
+                        to: 15
+                    )
+                }
+            }
+        }
+
         return migrator
     }
 
@@ -212,6 +238,15 @@ struct AppPreferencesDatabase { // swiftlint:disable:this convenience_type type_
             )
             table.column("showScopes", .boolean).defaults(
                 to: false
+            )
+            table.column("isSyntaxHighlightingDisabled", .boolean).defaults(
+                to: false
+            )
+            table.column("showFloatingStatusBar", .boolean).defaults(
+                to: true
+            )
+            table.column("hideFloatingStatusBarAfter", .integer).defaults(
+                to: 0
             )
             table.column("enableTypeOverCompletion", .boolean).defaults(
                 to: true
